@@ -107,6 +107,7 @@ html, body {
     > label {
       width:120px;
       float:left;
+      min-height: 18px;
     }
 
     > span {
@@ -114,6 +115,7 @@ html, body {
       width:120px;
       float:left;
       text-align:right;
+      min-height: 18px;
     }
 
     &:after {
