@@ -1,0 +1,69 @@
+/**
+ * Print styles
+ */
+@import "compass/css3";
+
+@media print {
+  @page
+  {
+    size:A4; /* Set A4 format to be default one */
+    margin:0; /* This affects the margin in the printer settings (ignored by Safari) */
+  }
+
+  html {
+    background: none !important;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  body
+  {
+    background: none !important;
+    margin:0 !important; /* This affects the margin on the content before sending to printer */
+    width:820px !important; /* With fixed width most of the cross browsers printing issues are solved */
+    @include box-shadow(none !important);
+    -webkit-print-color-adjust:exact !important;
+  }
+  
+  [contenteditable="true"] {
+    outline:none !important;
+  }
+
+  .ib_invoicebus_fineprint {
+    display: block;
+    margin-top:-60px;
+  }
+  
+  /* Hide all this elements for printing */
+  .ib_drop_zone,
+  .ib_offline,
+  .ib_invoice_commands_wrap,
+  .ib_invoicebus_love,
+  .ib_remove_logo_overlay,
+  .ib_remove_logo,
+  .ib_row_commands,
+  .ib_add_new_row_link,
+  .ib_show_hide_columns_link,
+  .ib_show_hide_columns,
+  .ib_currency_position,
+  .ib_date_format,
+  .tooltip,
+  .datepicker,
+  .typeahead
+  {
+    display:none !important;
+  }
+  
+  input {
+    &::-webkit-input-placeholder, &:-moz-placeholder {
+      color:transparent !important;
+    }
+  }
+  
+  textarea {
+    &::-webkit-input-placeholder, &:-moz-placeholder {
+      color:transparent !important;
+    }
+  }
+}

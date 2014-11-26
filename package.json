@@ -1,0 +1,36 @@
+{
+  "name": "invoice-generator",
+  "version": "1.0.0",
+  "description": "Invoice Template Generator",
+  "private": true,
+  "keywords": [
+    "invoice",
+    "invoicing"
+  ],
+  "author": {
+    "name": "Invoicebus",
+    "email": "info@invoicebus.com",
+    "web": "https://invoicebus.com"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-cloudfiles": "^0.3.0",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-compass": "^1.0.1",
+    "grunt-contrib-compress": "^0.12.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-rename": "0.0.3",
+    "grunt-contrib-uglify": "^0.5.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-replace": "^0.8.0",
+    "jshint-stylish": "^0.4.0",
+    "load-grunt-tasks": "^0.6.0",
+    "time-grunt": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  }
+}

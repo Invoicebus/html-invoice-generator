@@ -1,0 +1,774 @@
+@import "partials/bootstrap", "partials/datepicker";
+
+@import "compass";
+
+/**
+ * Default Invoice styles
+ */
+
+$background: url("data:image/png;base64,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");
+
+$blank-gif: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+
+$selection-backgroud: #2BA6CB;
+$selection-color: #fff;
+
+::selection {
+  background:$selection-backgroud;
+  color:$selection-color;
+}
+
+::-moz-selection {
+  background:$selection-backgroud;
+  color:$selection-color;
+}
+
+/**
+ * FontAwesome icons subset
+ */
+@include font-face("FontAwesome", 
+                  font-files("fontawesome-webfont-subset.woff2",
+                             "fontawesome-webfont-subset.woff",
+                             "fontawesome-webfont-subset.ttf",
+                             "fontawesome-webfont-subset.otf",
+                             "fontawesome-webfont-subset.svg#FontAwesome"),
+                  "fontawesome-webfont-subset.eot");
+
+/**
+ * Open Sans
+ */
+@include font-face("Open Sans", 
+                  font-files("opensans-regular.woff2",
+                             "opensans-regular.woff",
+                             "opensans-regular.ttf",
+                             "opensans-regular.otf",
+                             "opensans-regular.svg#Open-Sans-Regular"),
+                  "opensans-regular.eot",
+                  normal,
+                  normal);
+
+@include font-face("Open Sans", 
+                  font-files("opensans-bold.woff2",
+                             "opensans-bold.woff",
+                             "opensans-bold.ttf",
+                             "opensans-bold.otf",
+                             "opensans-bold.svg#Open-Sans-Bold"),
+                  "opensans-bold.eot",
+                  bold,
+                  normal);
+
+
+$width: 820px; /* the width must be '820px' to comply with the Invoicebus and wkhtmltopdf maximum width */
+$font-stack: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-serif;
+
+
+/**
+ * Define custom elements
+ */
+ib-span {
+  display:inline;
+}
+
+ib-div {
+  display:block;
+}
+
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-save,
+.fa-print,
+.fa-spinner {
+  margin-right: 3px;
+}
+
+.fa-save:before {
+  content: "\f0c7";
+}
+
+.fa-print:before {
+  content: "\f02f";
+}
+
+.fa-plus:before {
+  content: "\f067";
+}
+
+.fa-minus:before {
+  content: "\f068";
+}
+
+.fa-sort:before {
+  content: "\f0dc";
+}
+
+.fa-question-circle:before {
+  content: "\f059";
+}
+
+.fa-times-circle:before {
+  content: "\f057";
+}
+
+.fa-spinner:before {
+  content: "\f110";
+}
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+
+@include keyframes(fa-spin) {
+  0% {
+    @include transform(rotate(0deg));
+  }
+  100% {
+    @include transform(rotate(359deg));
+  }
+}
+
+
+html {
+  background:$background;
+  font-family:$font-stack;
+
+  body {
+    font-family:$font-stack;
+    background:white;
+    width:$width;
+    // Minimum height must be 1158px so with the required 820px width they are in proportion of A4 paper format
+    min-height:1158px;
+    margin:105px auto 55px auto;
+    @include box-shadow(0px 0px 20px rgba(80, 80, 80, .7));
+  }
+
+  input, button, textarea, select {
+    outline:none !important;
+  }
+}
+
+.relative {
+  position: relative;
+}
+
+/* Overridden Bootstrap styles */
+.tooltip {
+  font: 11px bold $font-stack;
+
+  .tooltip-inner {
+    max-width: none;
+    padding:8px;
+  }
+}
+
+.datepicker {
+  th {
+    font-weight:bold;
+    vertical-align:middle;
+  }
+
+  td {
+    vertical-align:middle;
+  }
+}
+
+.modal {
+  font:normal 14px/1.4em $font-stack;
+}
+
+.modal-body {
+  height:420px;
+  padding:0;
+}
+
+.modal-open {
+  padding:0 !important;
+}
+
+.modal-title {
+  font-size:20px;
+}
+
+.modal-backdrop {
+  z-index:1010;
+}
+
+/* Bootstrap typeahead styles */
+.typeahead {
+  z-index: 1051;
+
+  a {
+    text-decoration:none;
+  }
+}
+
+/**
+ * Main Invoice Editor styles
+ */
+
+// Special case for IE
+ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
+  display:block;
+  width:100%;
+  height:100%;
+
+  &.hidden {
+    display: none !important;
+    width:0 !important;
+  }
+}
+
+[contenteditable="true"] {
+  cursor:text;
+
+  &:hover  {
+    outline:2px solid lighten(rgb(94, 158, 215), 25%);
+  }
+
+  &:focus {
+    outline:2px solid rgb(94, 158, 215);
+  }
+}
+
+.ib_row_commands {
+  z-index: 10;
+  position:absolute;
+  width:100px;
+  height:20px;
+  top:0;
+  left:-100px;
+
+  .ib_commands {
+    display:none;
+    width:95px;
+    position: relative;
+    left:0;
+    text-indent: 0 !important;
+    font-size:14px;
+    font-style:normal;
+    font-weight: bold;
+    line-height: 1.4em;
+
+    > ib-span {
+      opacity:.6;
+
+      &:hover {
+        opacity:1;
+      }
+    }
+
+    &:after {
+      display:block;
+      content:'';
+      clear:both;
+    }
+
+    .row_command_icon {
+      display:block;
+      height:12px;
+      width:12px;
+      float:left;
+      background:white;
+      border-radius:50%;
+      padding:7px;
+      cursor:pointer;
+      @include box-shadow(#919191 0 0 10px);
+
+      .fa {
+        position: relative;
+        top: -3px;
+        left: 1px;
+      }
+    }
+
+    .ib_add {
+      @extend .row_command_icon;
+      color:shade(limegreen, 30%);
+      margin-right: 5px;
+    }
+
+    .ib_delete {
+      @extend .row_command_icon;
+      color:shade(red, 30%);
+      margin-right: 5px;
+    }
+
+    .ib_move {
+      @extend .row_command_icon;
+      color:shade(gray, 30%);
+      cursor:move;
+
+      .fa {
+        top: -4px;
+        left: 2px;
+      }
+    }
+  }
+}
+
+.ib_dragrow {
+  background:tint(mix(blue, green), 92.5%) !important;
+  border-color:tint(mix(blue, green), 92.5%) !important;
+  @include box-shadow(none !important);
+}
+
+.ib_remove_logo_overlay {
+  display:none;
+  position:absolute !important;
+}
+
+.ib_remove_logo {
+  font-size:16px;
+  color:white;
+  background:#333;
+  display:block;
+  position:relative;
+  top:10px;
+  right:10px;
+  float:right;
+  width:8px;
+  height:8px;
+  z-index:15;
+  cursor:pointer;
+  overflow:visible;
+
+  &:hover {
+    background:shade(red, 30%);
+  }
+
+  i.fa {
+    position:relative;
+    top: -5px;
+    left: -2px;
+  }
+}
+
+.ib_logo_base64 {
+  border:none;
+  resize:none;
+  width:100%;
+  height:100%;
+  padding:20px;
+  overflow: auto;
+  @include box-sizing(border-box);
+}
+
+// Use the default Invoicebus dimensions
+[data-logo="logo_url"] {
+  width:150px;
+  height:100px;
+}
+
+.ib_drop_zone {
+  display:block;
+  background:url($blank-gif) repeat;
+  font: 14px/1.4em bold $font-stack;
+  color:#bbb;
+  border: 2px dashed #ddd;
+  @include box-sizing(border-box);
+
+  > ib-span {
+    display:table-cell;
+    text-align:center;
+    vertical-align:middle;
+    position:relative;
+    overflow:hidden;
+    width:inherit;
+    height:inherit;
+    @include box-sizing(border-box);
+  }
+
+  > ib-span > ib-span {
+    font-size:12px;
+  }
+}
+
+input[type="file"] {
+  background:transparent;
+  width:inherit;
+  height:inherit;
+  position:absolute;
+  top:0;
+  left:0;
+  opacity:0 !important;
+}
+
+.ib_border_hover {
+  border:2px dashed #999 !important;
+}
+
+.ib_currency_position,
+.ib_date_format {
+  position:absolute !important;
+  display:none;
+  background:white;
+  padding:5px 10px;
+
+  @include box-shadow(6px 0 10px 0 #ccc);
+  @include border-top-right-radius(3px);
+  @include border-bottom-right-radius(3px);
+
+  select {
+    border:none;
+  }
+
+  input[type="radio"] {
+    top:1px;
+    position:relative;
+    margin-left:10px;
+  }
+}
+
+.ib_currencies_item {
+  display:block;
+  min-width:150px;
+
+  ib-span {
+    &:first-child {
+      display:block;
+      font-size: 12px;
+      font-weight: bold;
+      white-space: normal;
+      word-wrap: break-word;
+      float: left;
+      width: 45px;
+      text-align: left;
+      margin-bottom: 5px;
+    }
+
+    &:nth-child(2) {
+      display:block;
+      float: left;
+      clear: right;
+      width: 30px;
+    }
+
+    &:last-child {
+      display:block;
+      clear: both;
+      color: #888;
+      font-size: 11px;
+    }
+  }
+}
+
+.active .ib_currencies_item ib-span {
+  color:white;
+}
+
+.ib_hide_column {
+  width:0 !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:none !important;
+
+  [data-row-number="item_row_number"] {
+    display: block !important;
+    width:0 !important;
+    padding:0 !important;
+    overflow: hidden !important;
+  }
+}
+
+.ib_bottom_row_commands {
+  position: absolute;
+  margin-top:20px;
+
+  .ib_add_new_row_link,
+  .ib_show_hide_columns_link {
+    color:#069;
+    font:normal 14px/1.4em $font-stack;
+    display:inline-block;
+    cursor:pointer;
+    text-decoration:underline;
+
+    &:hover {
+      color:#09c;
+    }
+
+    &:first-child {
+      margin-right: 15px;
+    }
+  }
+
+  .ib_show_hide_columns {
+    display: none;
+    position: relative;
+    z-index: 8;
+    top:-1px;
+    left: 95px;
+    padding:10px;
+    padding-top:15px;
+    @include box-shadow(0 7px 10px 0 #ccc);
+    @include border-bottom-left-radius(3px);
+    @include border-bottom-right-radius(3px);
+
+    > ib-span {
+      display: block;
+      margin:2px 0;
+
+      > input[type="checkbox"] {
+        margin:0 10px 0 0;
+      }
+
+      > ib-span {
+        cursor: default;
+        position: relative;
+        top: -1px;
+      }
+    }
+  }
+}
+
+.ib_default_button {
+  font:normal 14px/1 $font-stack;
+  border:1px solid;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  background-repeat: repeat-x;
+  @include border-radius(4px);
+  @include box-shadow(inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05));
+  @include background-image(linear-gradient(to bottom, #ffffff, #e6e6e6));
+
+  &:hover,
+  &:focus,
+  &:active,
+  &[disabled] {
+    color: #333333;
+    background-color: #e6e6e6;
+  }
+
+  &:active
+   {
+    background-color: #cccccc \9;
+    background-image: none;
+    outline: 0;
+    @include box-shadow(inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05));
+  }
+
+  &:hover,
+  &:focus {
+    color: #333333;
+    text-decoration: none;
+    background-position: 0 -15px;
+    @include transition(background-position 0.1s linear);
+  }
+
+  &:focus {
+    outline: thin dotted #333;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+  }
+}
+
+.ib_success_button {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #5bb75b;
+  background-repeat: repeat-x;
+  @include background-image(linear-gradient(to bottom, #62c462, #51a351));
+
+  &:hover,
+  &:focus,
+  &:active,
+  &[disabled] {
+    color: #ffffff;
+    background-color: #51a351;
+  }
+}
+
+.ib_disabled_button
+{
+  cursor: not-allowed;
+  pointer-events: none;
+  @include opacity(.65);
+  @include box-shadow(none);
+}
+
+.ib_invoice_commands_wrap {
+  position: fixed;
+  width: 100%;
+  background:$background;
+  z-index:1000;
+  @include transition(all 0.3s ease-in);
+
+  &.ib_commands_shadow {
+    @include box-shadow(0px 0px 30px rgba(142, 142, 142, 0.7));
+  }
+
+  .ib_invoice_commands {
+    display:block;
+    width:$width;
+    margin:0 auto;
+    clear:both;
+    padding: 30px 0 20px 0;
+
+    .ib_default_button {
+      float: left;
+      margin-right: 20px;
+      padding:5px 30px;
+    }
+
+    .ib_success_button {
+      margin-right: 0;
+    }
+
+    .ib_save_info {
+      display: none;
+      float: left;
+      position:relative;
+      top:8px;
+      color:#888;
+      opacity: .7;
+      cursor: help;
+      margin-left: 20px;
+      width:18px;
+      text-align:center;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+
+    .ib_how_to_link {
+      font:normal 13px/1.4em $font-stack;
+      color:#777;
+      float:right;
+      cursor:pointer;
+      position:relative;
+      top:6px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &:after {
+      content:'';
+      clear:both;
+      display:block;
+    }
+  }
+}
+
+[data-ibcl-id="tax_value"]:before {
+  content: "(" attr(data-ib-value) "%)";
+  font-size: 12px;
+  color: #999;
+  margin-right: 5px;
+}
+
+.ib_invoicebus_love {
+  clear:both;
+  display:block;
+  font:normal 13px/1.5em $font-stack;
+  text-align:center;
+  margin:35px 0 50px 0;
+  color:#8f8f8f;
+
+  ib-span {
+    font:normal 13px/1.5em $font-stack;
+    color:#555;
+    text-decoration:none;
+    cursor:pointer;
+
+    &:hover {
+      text-decoration:underline;
+    }
+  }
+}
+
+.ib_invoicebus_fineprint {
+  display:none;
+  font:normal 12px/1.4em $font-stack;
+  color:#777;
+  text-align:center;
+  position:relative;
+  margin-top:-120px;
+  padding:30px 0;
+
+  ib-span {
+    cursor:pointer;
+  }
+}
+
+.ib_how_to_container {
+  @extend .modal-body;
+  overflow: auto;
+
+  .ib_how_to {
+    font-size:13px;
+    line-height:1.6em;
+    padding: 15px;
+
+    .ib_a {
+      color: #428bca;
+      text-decoration: none;
+      cursor:pointer;
+
+      &:hover,
+      &:focus {
+        color: #2a6496;
+        text-decoration: underline;
+      }
+
+      &:focus {
+        outline: thin dotted;
+        outline: 5px auto -webkit-focus-ring-color;
+        outline-offset: -2px;
+      }
+    }
+
+    .ib_b {
+      font-weight: bold;
+    }
+
+    .ib_h3 {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    .ib_p {
+      margin-bottom: 15px;
+    }
+
+    .ib_ul {
+      .ib_li {
+        margin:0 0 5px 10px;
+
+        &:before {
+          content: '-';
+        }
+      }
+    }
+
+    .ib_code {
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      padding: 2px 4px;
+      font-size: 90%;
+      color: #c7254e;
+      background-color: #f9f2f4;
+      border-radius: 4px;
+    }
+  }
+}
+
+@import "partials/invoice.print";

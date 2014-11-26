@@ -1,0 +1,7 @@
+node_modules
+.sass-cache
+
+dist
+config.json
+
+*.sublime-workspace
