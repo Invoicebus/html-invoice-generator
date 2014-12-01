@@ -391,7 +391,7 @@ module.exports = function(grunt) {
       },
       tpl_html: {
         files: '<%= tpl_dir %>/*.html',
-        tasks: ['replace:dev']
+        tasks: ['copy:tpl', 'replace:dev']
       },
       tpl_js: {
         files: '<%= tpl_dir %>/*.js',

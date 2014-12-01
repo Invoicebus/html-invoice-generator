@@ -591,29 +591,33 @@
         notEditableByIE = "TABLE,COL,COLGROUP,TBODY,TD,TFOOT,TH,THEAD,TR".split(',');
 
     var elements = $('*:contains("' + id + '")');
-    var el = $(elements[elements.length - 1]);
-
-    if(ib_isIE() && notEditableByIE.indexOf(el.prop("tagName")) > -1 && !not_editable)
+    for(var i = 0; i < elements.length; i++)
     {
-      var tmp_el = $('<ib-span class="ibcl_ie_contenteditable" contenteditable="true"></ib-span>');
-      
-      el.html(tmp_el);
-      el = tmp_el;
-    }
+      if($(elements[i]).children().length === 0 && $(elements[i]).prop('firstChild').nodeType == 3 /* TEXT NODE */)
+      {
+        var el = $(elements[i]);
 
-    el.attr('data-ibcl-id', data_id)
-      .addClass('ibcl_' + data_id)
-      .attr('data-tooltip', 'tooltip')
-      .attr('data-placement', 'top')
-      .attr('title', ib_data[id].tooltip)
-      .html(ib_data[id].default_text);
-    
-    if(attr)
-      el.attr(attr);
-    
-    if(!not_editable)
-    {
-      el.attr('contenteditable', 'true');
+        if(ib_isIE() && notEditableByIE.indexOf(el.prop("tagName")) > -1 && !not_editable)
+        {
+          var tmp_el = $('<ib-span class="ibcl_ie_contenteditable" contenteditable="true"></ib-span>');
+          
+          el.html(tmp_el);
+          el = tmp_el;
+        }
+
+        el.attr('data-ibcl-id', data_id)
+          .addClass('ibcl_' + data_id)
+          .attr('data-tooltip', 'tooltip')
+          .attr('data-placement', 'top')
+          .attr('title', ib_data[id].tooltip)
+          .html(ib_data[id].default_text);
+        
+        if(attr)
+          el.attr(attr);
+        
+        if(!not_editable)
+          el.attr('contenteditable', 'true');
+      }
     }
   };
 
