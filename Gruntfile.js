@@ -23,6 +23,9 @@ module.exports = function(grunt) {
     clean: {
       build: {
         src: ['dist']
+      },
+      fonts:  {
+        src: ['dist/fonts']
       }
     },
 
@@ -443,12 +446,7 @@ module.exports = function(grunt) {
   grunt.registerTask('pub', [
     'clean',
 
-    // Fonts shouldn't be uploaded everytime,
-    // so if there are changes upload them manually and
-    // set header 'Access-Control-Allow-Origin': * to all font files
-    // and proper 'Content-Type' header
-
-    //'copy:fonts',
+    'copy:fonts',
 
     'jshint',
 
@@ -475,6 +473,12 @@ module.exports = function(grunt) {
     'replace:pubdev',
     
     'copy:print_css',
+
+    // Fonts shouldn't be uploaded everytime,
+    // so if there are changes upload them manually and
+    // set header 'Access-Control-Allow-Origin': * to all font files
+    // and proper 'Content-Type' header
+    'clean:fonts',
 
     'cloudfiles:publish'
   ]);
