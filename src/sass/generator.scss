@@ -145,7 +145,7 @@ html {
     width:$width;
     // Minimum height must be 1158px so with the required 820px width they are in proportion of A4 paper format
     min-height:1158px;
-    margin:105px auto 55px auto;
+    margin:105px auto 30px auto;
     @include box-shadow(0px 0px 20px rgba(80, 80, 80, .7));
   }
 
@@ -290,19 +290,19 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 
     .ib_add {
       @extend .row_command_icon;
-      color:shade(limegreen, 30%);
+      color:shade(limegreen, 30%) !important;
       margin-right: 5px;
     }
 
     .ib_delete {
       @extend .row_command_icon;
-      color:shade(red, 30%);
+      color:shade(red, 30%) !important;
       margin-right: 5px;
     }
 
     .ib_move {
       @extend .row_command_icon;
-      color:shade(gray, 30%);
+      color:shade(gray, 30%) !important;
       cursor:move;
 
       .fa {
@@ -367,12 +367,13 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 }
 
 .ib_drop_zone {
-  display:block;
-  background:url($blank-gif) repeat;
-  font: 14px/1.4em bold $font-stack;
-  color:#bbb;
-  border: 2px dashed #ddd;
-  @include box-sizing(border-box);
+  display:block !important;
+  background:url($blank-gif) repeat !important;
+  font: 14px/1.4em bold $font-stack !important;
+  color:#bbb !important;
+  border: 2px dashed #ddd !important;
+  overflow: hidden !important;
+  @include box-sizing(border-box !important);
 
   > ib-span {
     display:table-cell;
@@ -388,16 +389,16 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   > ib-span > ib-span {
     font-size:12px;
   }
-}
 
-input[type="file"] {
-  background:transparent;
-  width:inherit;
-  height:inherit;
-  position:absolute;
-  top:0;
-  left:0;
-  opacity:0 !important;
+  input[type="file"] {
+    background:transparent !important;
+    width:inherit !important;
+    height:inherit !important;
+    position:absolute !important;
+    top:-2px !important;
+    left:-2px !important;
+    opacity:0 !important;
+  }
 }
 
 .ib_border_hover {
@@ -410,6 +411,8 @@ input[type="file"] {
   display:none;
   background:white;
   padding:5px 10px;
+  text-indent: 0 !important;
+  color: black !important;
 
   @include box-shadow(6px 0 10px 0 #ccc);
   @include border-top-right-radius(3px);
@@ -429,8 +432,13 @@ input[type="file"] {
 .ib_currencies_item {
   display:block;
   min-width:150px;
+  text-indent: 0 !important;
+  color: black !important;
 
   ib-span {
+    text-indent: 0 !important;
+    color: black !important;
+
     &:first-child {
       display:block;
       font-size: 12px;
@@ -480,10 +488,11 @@ input[type="file"] {
 .ib_bottom_row_commands {
   position: absolute;
   margin-top:20px;
+  text-indent: 0 !important;
 
   .ib_add_new_row_link,
   .ib_show_hide_columns_link {
-    color:#069;
+    color:#069 !important;
     font:normal 14px/1.4em $font-stack;
     display:inline-block;
     cursor:pointer;
@@ -680,7 +689,7 @@ input[type="file"] {
   display:block;
   font:normal 13px/1.5em $font-stack;
   text-align:center;
-  margin:35px 0 50px 0;
+  margin-bottom:50px;
   color:#8f8f8f;
 
   ib-span {
@@ -700,9 +709,9 @@ input[type="file"] {
   font:normal 12px/1.4em $font-stack;
   color:#777;
   text-align:center;
-  position:relative;
-  margin-top:-120px;
-  padding:30px 0;
+  position:absolute;
+  bottom:30px;
+  width: 100%;
 
   ib-span {
     cursor:pointer;

@@ -339,6 +339,7 @@ module.exports = function(grunt) {
     compress: {
       tpl: {
         options: {
+          level: 9,
           archive: '<%= build_dir %>template.zip'
         },
         files: [
@@ -352,6 +353,7 @@ module.exports = function(grunt) {
       },
       gen: {
         options: {
+          level: 9,
           archive: '<%= build_dir %>generator.zip'
         },
         files: [
@@ -441,7 +443,11 @@ module.exports = function(grunt) {
   grunt.registerTask('pub', [
     'clean',
 
-    // Fonts shouldn't be uploaded everytime, so if there are changes upload them manually and set header 'Access-Control-Allow-Origin': * to all font files
+    // Fonts shouldn't be uploaded everytime,
+    // so if there are changes upload them manually and
+    // set header 'Access-Control-Allow-Origin': * to all font files
+    // and proper 'Content-Type' header
+
     //'copy:fonts',
 
     'jshint',
@@ -470,7 +476,8 @@ module.exports = function(grunt) {
     
     'copy:print_css',
 
-    'cloudfiles:publish']);
+    'cloudfiles:publish'
+  ]);
 
 
   // Default task(s).

@@ -56,7 +56,7 @@ html, body {
 
 #memo {
   .logo {
-    float:left;   
+    float:left;
     margin-right:20px;
 
     img {
@@ -176,7 +176,7 @@ table {
 #items {
 
   .first-cell {
-    width:4%;
+    width:18px;
     text-align:right;
   }
 
@@ -250,7 +250,7 @@ table {
         text-align:left;
       }
 
-      &.amount_total {
+      &.amount-total {
         th {
           text-transform: uppercase;
 

@@ -720,6 +720,7 @@
         {
           logo_img
             .attr('src', ib_data['{company_logo}'])
+            .css('display', 'block')
             .hide()
             .show();
 
@@ -807,6 +808,7 @@
         
         logo_img
           .attr('src', dataurl)
+          .css('display', 'block')
           .hide()
           .fadeIn();
 
