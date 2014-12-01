@@ -414,6 +414,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 
 .ib_currency_position,
 .ib_date_format {
+  font:normal 14px/1.4em $font-stack !important;
   position:absolute !important;
   display:none;
   background:white;
@@ -443,6 +444,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   min-width:150px;
   text-indent: 0 !important;
   color: black !important;
+  font:normal 14px/1.4em $font-stack !important;
 
   ib-span {
     text-indent: 0 !important;
@@ -524,6 +526,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
     left: 95px;
     padding:10px;
     padding-top:15px;
+    font:normal 14px/1.4em $font-stack !important;
     @include box-shadow(0 0 5px 0 #999);
     @include border-radius(3px);
 
