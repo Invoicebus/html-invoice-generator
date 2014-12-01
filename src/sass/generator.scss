@@ -374,7 +374,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 }
 
 .ib_drop_zone {
-  display:block !important;
+  display:block;
   background:url($blank-gif) repeat !important;
   font: 14px/1.4em bold $font-stack !important;
   color:#bbb !important;
