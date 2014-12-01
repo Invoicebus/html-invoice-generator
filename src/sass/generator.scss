@@ -13,6 +13,8 @@ $blank-gif: "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABA
 $selection-backgroud: #2BA6CB;
 $selection-color: #fff;
 
+$contenteditable-color: rgb(94, 158, 215);
+
 ::selection {
   background:$selection-backgroud;
   color:$selection-color;
@@ -229,12 +231,17 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   cursor:text;
 
   &:hover  {
-    outline:2px solid lighten(rgb(94, 158, 215), 25%);
+    outline:2px solid lighten($contenteditable-color, 25%);
   }
 
   &:focus {
-    outline:2px solid rgb(94, 158, 215);
+    outline:2px solid $contenteditable-color;
   }
+}
+
+.ib_editable_outline {
+  outline:1px solid lighten($contenteditable-color, 30%);
+  background: lighten($contenteditable-color, 35%);
 }
 
 .ib_row_commands {
@@ -414,18 +421,20 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   text-indent: 0 !important;
   color: black !important;
 
-  @include box-shadow(6px 0 10px 0 #ccc);
-  @include border-top-right-radius(3px);
-  @include border-bottom-right-radius(3px);
+  @include box-shadow(0 0 5px 0 #999);
+  @include border-radius(3px);
 
   select {
     border:none;
   }
 
   input[type="radio"] {
-    top:1px;
+    top:2px;
     position:relative;
-    margin-left:10px;
+
+    &[value="right"] {
+      margin-left:10px;
+    }
   }
 }
 
@@ -485,26 +494,26 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   }
 }
 
+.ib_blue_link {
+  color:#069 !important;
+  text-indent: 0 !important;
+  font:normal 14px/1.4em $font-stack;
+  display:inline-block;
+  cursor:pointer;
+  text-decoration:underline;
+
+  &:hover {
+    color:#09c;
+  }
+}
+
 .ib_bottom_row_commands {
   position: absolute;
   margin-top:20px;
   text-indent: 0 !important;
 
-  .ib_add_new_row_link,
-  .ib_show_hide_columns_link {
-    color:#069 !important;
-    font:normal 14px/1.4em $font-stack;
-    display:inline-block;
-    cursor:pointer;
-    text-decoration:underline;
-
-    &:hover {
-      color:#09c;
-    }
-
-    &:first-child {
-      margin-right: 15px;
-    }
+  .ib_add_new_row_link {
+    margin-right: 15px;
   }
 
   .ib_show_hide_columns {
@@ -515,9 +524,8 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
     left: 95px;
     padding:10px;
     padding-top:15px;
-    @include box-shadow(0 7px 10px 0 #ccc);
-    @include border-bottom-left-radius(3px);
-    @include border-bottom-right-radius(3px);
+    @include box-shadow(0 0 5px 0 #999);
+    @include border-radius(3px);
 
     > ib-span {
       display: block;
@@ -543,7 +551,6 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   display: inline-block;
   padding: 4px 12px;
   margin-bottom: 0;
-  font-size: 14px;
   line-height: 20px;
   color: #333333;
   text-align: center;
@@ -611,6 +618,16 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   @include box-shadow(none);
 }
 
+.ib_gray_link {
+  font:normal 13px/1.4em $font-stack;
+  color:#777;
+  cursor:pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .ib_invoice_commands_wrap {
   position: fixed;
   width: 100%;
@@ -656,17 +673,15 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
       }
     }
 
-    .ib_how_to_link {
-      font:normal 13px/1.4em $font-stack;
-      color:#777;
+    .ib_how_to_link,
+    .ib_highlight_editable {
       float:right;
-      cursor:pointer;
       position:relative;
       top:6px;
+    }
 
-      &:hover {
-        text-decoration: underline;
-      }
+    .ib_highlight_editable {
+      margin-right: 20px;
     }
 
     &:after {
@@ -687,13 +702,13 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 .ib_invoicebus_love {
   clear:both;
   display:block;
-  font:normal 13px/1.5em $font-stack;
+  font:normal 14px/1.5em $font-stack;
   text-align:center;
   margin-bottom:50px;
   color:#8f8f8f;
 
   ib-span {
-    font:normal 13px/1.5em $font-stack;
+    font:normal 14px/1.5em $font-stack;
     color:#555;
     text-decoration:none;
     cursor:pointer;
@@ -723,7 +738,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   overflow: auto;
 
   .ib_how_to {
-    font-size:13px;
+    font-size:14px;
     line-height:1.6em;
     padding: 15px;
 

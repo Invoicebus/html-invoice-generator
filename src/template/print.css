@@ -30,6 +30,11 @@ body
 [contenteditable="true"] {
   outline:none !important;
 }
+
+.ib_editable_outline {
+  outline:none !important;
+  background: transparent;
+}
   
 /* Hide all this elements for printing */
 .ib_drop_zone,

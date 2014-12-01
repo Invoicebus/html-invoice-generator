@@ -30,6 +30,11 @@
     outline:none !important;
   }
 
+  .ib_editable_outline {
+    outline:none !important;
+    background: transparent;
+  }
+
   .ib_invoicebus_fineprint {
     display: block;
     margin-top:-60px;

@@ -252,8 +252,21 @@
       .prepend('<link rel="stylesheet" href="' + PATH + 'generator' + MIN + '.css" media="all" />');
 
     $(document.body)
-      .before($('<ib-span class="ib_invoice_commands_wrap"><ib-span class="ib_invoice_commands"><ib-span onclick="window.print();" class="ib_default_button"><i class="fa fa-print"></i> Print</ib-span><ib-span class="ib_default_button ib_success_button"><i class="fa fa-save"></i> Save</ib-span><ib-span class="ib_save_info" data-tooltip="tooltip" data-placement="right" title="You\'ll need Invoicebus account to save this invoice"><i class="fa fa-question-circle"></i></ib-span><ib-span class="ib_how_to_link" data-toggle="modal" data-target="#ib_howToModal">How to use this template?</ib-span></ib-span></ib-span>'))
+      .before($('<ib-span class="ib_invoice_commands_wrap">' +
+                  '<ib-span class="ib_invoice_commands">' +
+                    '<ib-span onclick="window.print();" class="ib_default_button"><i class="fa fa-print"></i> Print</ib-span>' +
+                    '<ib-span class="ib_default_button ib_success_button"><i class="fa fa-save"></i> Save</ib-span>' +
+                    '<ib-span class="ib_save_info" data-tooltip="tooltip" data-placement="right" title="You\'ll need Invoicebus account to save this invoice"><i class="fa fa-question-circle"></i></ib-span>' +
+                    '<ib-span class="ib_gray_link ib_how_to_link" data-toggle="modal" data-target="#ib_howToModal">How to use this template?</ib-span>' +
+                    '<ib-span class="ib_gray_link ib_highlight_editable">Hihglight editable fields</ib-span>' +
+                  '</ib-span>' +
+                '</ib-span>'))
       .after($('<ib-span class="ib_invoicebus_love">Crafted with &#x2764; by<br><ib-span onclick="window.open(\'https://invoicebus.com/team/\', \'_blank\')">The Invoicebus Mechanics</ib-span></ib-span>'));
+
+    $('.ib_highlight_editable').click(function() {
+      $('[contenteditable="true"], [data-ibcl-id="issue_date"], [data-ibcl-id="due_date"]')
+        .toggleClass('ib_editable_outline');
+    });
 
     $(document).scroll(function(e) {
       if(document.body.scrollTop === 0 && document.documentElement.scrollTop === 0)
@@ -270,7 +283,7 @@
 
     $('.ib_success_button').click(ib_saveInvoice);
     
-    $('[data-iterate="item"]:last').after($('<ib-span class="ib_bottom_row_commands"><ib-span class="ib_add_new_row_link">Add new row</ib-span><ib-span class="ib_show_hide_columns_link">Configure Columns</ib-span></ib-span>'));
+    $('[data-iterate="item"]:last').after($('<ib-span class="ib_bottom_row_commands"><ib-span class="ib_blue_link ib_add_new_row_link">Add new row</ib-span><ib-span class="ib_blue_link ib_show_hide_columns_link">Configure Columns</ib-span></ib-span>'));
 
     $('.ib_add_new_row_link').click(function(e) {
       ib_addRow(this, e);
@@ -1134,45 +1147,67 @@
               if(isNaN(self.textContent.getNumber()))
                 self.textContent = '';
 
-              if(!isNaN(self.textContent.getNumber()) && self.textContent.indexOf('%') == -1)
+              if(!isNaN(self.textContent.getNumber()))
               {
-                var l = self.textContent.length;
-                self.textContent = self.textContent + '%';
+                var pos = window.getSelection().extentOffset;
+                if(self.textContent.indexOf('%') == -1) {
+                  self.textContent = self.textContent + '%';
+                }
+                else {
+                  self.textContent = (self.textContent.indexOf('-') != -1 ? '-' : '') + self.textContent.getNumber() + '%';
+                }
 
-                window.getSelection().collapse(self.firstChild, l);
+                if(pos == self.textContent.length)
+                  pos--;
+                else if(pos === 0 && self.textContent.indexOf('-') != -1)
+                  pos = 1;
+
+                window.getSelection().collapse(self.firstChild, pos);
+              }
+            }, 0);
+            break;
+
+          case 'amount_paid':
+            setTimeout(function() {
+              if(isNaN(self.textContent.getNumber()))
+                self.textContent = '';
+
+              if(!isNaN(self.textContent.getNumber()))
+              {
+                var pos = window.getSelection().extentOffset;
+                if(self.textContent.indexOf('-') != -1)
+                {
+                  self.textContent = '-' + self.textContent.getNumber().toFixed(2);
+                }
+                
+                if(pos === 0 && self.textContent.indexOf('-') != -1)
+                  pos = 1;
+
+                window.getSelection().collapse(self.firstChild, pos);
               }
             }, 0);
             break;
         }
 
       } else {
-        var l = self.textContent.length + 1;
-        
         switch($(this).data('ibcl-id'))
         {
-          case 'item_price':
           case 'amount_paid':
           case 'item_discount':
             // Allow minus (-) sign
-            if((e.keyCode == 189 || e.keyCode == 109 ||  e.key == '-') && $(this).text().indexOf('-') == -1)
+            if((e.keyCode == 189 || e.keyCode == 109 || e.key == '-') && $(this).text().indexOf('-') == -1)
             {
-              if($(this).data('ibcl-id') == 'item_discount')
-                l--;
+              var pos = window.getSelection().extentOffset + 1;
 
               this.textContent = '-' + this.textContent;
 
-              window.getSelection().collapse(self.firstChild, l);
+              window.getSelection().collapse(self.firstChild, pos);
             }
             break;
         }
 
         e.preventDefault();
       }
-
-      setTimeout(function () {
-        if(self.textContent.indexOf('-') != -1)
-          self.textContent = '-' + self.textContent.replace('-', '');
-      }, 0);
 
       // if a decimal has been added, disable the "."-button
       if($(this).text().indexOf('.') != -1 && (e.keyCode == 190 || e.keyCode == 110))
