@@ -742,7 +742,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   overflow: auto;
 
   .ib_how_to {
-    font-size:14px;
+    font-size:13px;
     line-height:1.6em;
     padding: 15px;
 
@@ -780,11 +780,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 
     .ib_ul {
       .ib_li {
-        margin:0 0 5px 10px;
-
-        &:before {
-          content: '-';
-        }
+        margin:0 0 5px 20px;
       }
     }
 
