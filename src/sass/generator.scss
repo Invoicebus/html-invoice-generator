@@ -257,6 +257,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
     width:95px;
     position: relative;
     left:0;
+    top:3px;
     text-indent: 0 !important;
     font-size:14px;
     font-style:normal;
@@ -684,7 +685,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
     }
 
     .ib_highlight_editable {
-      margin-right: 20px;
+      margin-right: 10px;
     }
 
     &:after {

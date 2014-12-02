@@ -257,8 +257,9 @@
                     '<ib-span onclick="window.print();" class="ib_default_button"><i class="fa fa-print"></i> Print</ib-span>' +
                     '<ib-span class="ib_default_button ib_success_button"><i class="fa fa-save"></i> Save</ib-span>' +
                     '<ib-span class="ib_save_info" data-tooltip="tooltip" data-placement="right" title="You\'ll need Invoicebus account to save this invoice"><i class="fa fa-question-circle"></i></ib-span>' +
-                    '<ib-span class="ib_gray_link ib_how_to_link" data-toggle="modal" data-target="#ib_howToModal">How to use this template?</ib-span>' +
-                    '<ib-span class="ib_gray_link ib_highlight_editable">Hihglight editable fields</ib-span>' +
+                    '<ib-span class="ib_gray_link ib_how_to_link" data-toggle="modal" data-target="#ib_howToModal">Need help?</ib-span>' +
+                    '<ib-span class="ib_highlight_editable">|</ib-span>' +
+                    '<ib-span class="ib_gray_link ib_highlight_editable">Show editable</ib-span>' +
                   '</ib-span>' +
                 '</ib-span>'))
       .after($('<ib-span class="ib_invoicebus_love">Crafted with &#x2764; by<br><ib-span onclick="window.open(\'https://invoicebus.com/team/\', \'_blank\')">The Invoicebus Mechanics</ib-span></ib-span>'));
@@ -467,7 +468,7 @@
       'default_discount'        : '0',
       'default_tax'             : '0',
       'default_number_rows'     : 3,
-      'auto_calulate_dates'     : true,
+      'auto_calculate_dates'     : true,
       'load_items'              : true,
       'invoicebus_fineprint'    : true,
 
@@ -1166,7 +1167,9 @@
                 else if(pos === 0 && self.textContent.indexOf('-') != -1)
                   pos = 1;
 
-                window.getSelection().collapse(self.firstChild, pos);
+
+                if(e.keyCode != 9)
+                  window.getSelection().collapse(self.firstChild, pos);
               }
             }, 0);
             break;
@@ -1187,7 +1190,8 @@
                 if(pos === 0 && self.textContent.indexOf('-') != -1)
                   pos = 1;
 
-                window.getSelection().collapse(self.firstChild, pos);
+                if(e.keyCode != 9)
+                  window.getSelection().collapse(self.firstChild, pos);
               }
             }, 0);
             break;
@@ -1346,7 +1350,7 @@
         if($(this).data('ibcl-id') == 'issue_date')
         {
           ib_issue_date = new Date(e.date);
-          if(ib_data.auto_calulate_dates)
+          if(ib_data.auto_calculate_dates)
           {
             ib_due_date = new Date(e.date.setDate(ib_issue_date.getDate() + net_term));
           
@@ -1357,7 +1361,7 @@
         {
           ib_due_date = new Date(e.date);
 
-          if(ib_data.auto_calulate_dates)
+          if(ib_data.auto_calculate_dates)
           {
             ib_issue_date = new Date(e.date.setDate(ib_due_date.getDate() - net_term));
           
@@ -1396,7 +1400,7 @@
       net_term = parseInt($('[data-ibcl-id="net_term"]').text());
 
     // Only auto calculate dates if it is enabled
-    if(ib_data.auto_calulate_dates)
+    if(ib_data.auto_calculate_dates)
     {
       ib_due_date = new Date(new Date(ib_issue_date).setDate(ib_issue_date.getDate() + net_term));
 
