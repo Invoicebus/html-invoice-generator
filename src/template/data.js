@@ -1,5 +1,12 @@
 /**
  * Data and settings for the company
+ *
+ * How to properly enter your data:
+ * Be sure when entering your information to enclose that data with double quotes. When entering numbers they
+ * don't need to be enclosed with quotes, in general the sample data below should be used as general guide on
+ * how to properly enter your data. And if you have double (or single) quotes in your data (like My "Awesome" Company)
+ * than you should use something we call escaping special characters with the backslash sign (\) so the final
+ * company name will be "My \"Awesome\" Company".
  */
 
 var ib_invoice_data = {
@@ -68,7 +75,7 @@ var ib_invoice_data = {
   "default_discount"        : "0",
   "default_tax"             : "0",
   "default_number_rows"     : 3,
-  "auto_calulate_dates"     : true,
+  "auto_calculate_dates"    : true,
   "load_items"              : true,
   "invoicebus_fineprint"    : true,
 
