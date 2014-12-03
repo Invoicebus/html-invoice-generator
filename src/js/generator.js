@@ -257,9 +257,9 @@
                     '<ib-span onclick="window.print();" class="ib_default_button"><i class="fa fa-print"></i> Print</ib-span>' +
                     '<ib-span class="ib_default_button ib_success_button"><i class="fa fa-save"></i> Save</ib-span>' +
                     '<ib-span class="ib_save_info" data-tooltip="tooltip" data-placement="right" title="You\'ll need Invoicebus account to save this invoice"><i class="fa fa-question-circle"></i></ib-span>' +
-                    '<ib-span class="ib_gray_link ib_how_to_link" data-toggle="modal" data-target="#ib_howToModal">Need help?</ib-span>' +
-                    '<ib-span class="ib_highlight_editable">|</ib-span>' +
-                    '<ib-span class="ib_gray_link ib_highlight_editable">Show editable</ib-span>' +
+                    '<ib-span class="ib_gray_link ib_how_to_link" data-toggle="modal" data-target="#ib_howToModal">Help?</ib-span>' +
+                    '<ib-span class="ib_top_separator">|</ib-span>' +
+                    '<ib-span class="ib_gray_link ib_highlight_editable">Highlight editable fields</ib-span>' +
                   '</ib-span>' +
                 '</ib-span>'))
       .after($('<ib-span class="ib_invoicebus_love">Crafted with &#x2764; by<br><ib-span onclick="window.open(\'https://invoicebus.com/team/\', \'_blank\')">The Invoicebus Mechanics</ib-span></ib-span>'));
