@@ -247,6 +247,16 @@
     }, 200);
   };
 
+  var ib_highlighted = false;
+
+  var ib_highlightEditable = function() {
+    var fields = $('[contenteditable="true"], [data-ibcl-id="issue_date"], [data-ibcl-id="due_date"]');
+    if(ib_highlighted)
+      fields.addClass('ib_editable_outline');
+    else
+      fields.removeClass('ib_editable_outline');
+  };
+
   var ib_initStylesAndActions = function() {
     $('head')
       .prepend('<link rel="stylesheet" href="' + PATH + 'generator' + MIN + '.css" media="all" />');
@@ -265,8 +275,9 @@
       .after($('<ib-span class="ib_invoicebus_love">Crafted with &#x2764; by<br><ib-span onclick="window.open(\'https://invoicebus.com/team/\', \'_blank\')">The Invoicebus Mechanics</ib-span></ib-span>'));
 
     $('.ib_highlight_editable').click(function() {
-      $('[contenteditable="true"], [data-ibcl-id="issue_date"], [data-ibcl-id="due_date"]')
-        .toggleClass('ib_editable_outline');
+      ib_highlighted = !ib_highlighted;
+
+      ib_highlightEditable();
     });
 
     $(document).scroll(function(e) {
@@ -1058,6 +1069,8 @@
     $('[data-ibcl-id="amount_subtotal"]').text(sum_total);
     $('[data-ibcl-id="amount_total"]').text(amount_total);
     $('[data-ibcl-id="amount_due"]').text(amount_due);
+
+    ib_highlightEditable();
   };
 
   /**
@@ -1167,9 +1180,10 @@
                 else if(pos === 0 && self.textContent.indexOf('-') != -1)
                   pos = 1;
 
-
                 if(e.keyCode != 9)
-                  window.getSelection().collapse(self.firstChild, pos);
+                  try {
+                    window.getSelection().collapse(self.firstChild, pos);
+                  } catch(err) {}
               }
             }, 0);
             break;
@@ -1191,7 +1205,9 @@
                   pos = 1;
 
                 if(e.keyCode != 9)
-                  window.getSelection().collapse(self.firstChild, pos);
+                  try {
+                    window.getSelection().collapse(self.firstChild, pos);
+                  } catch(err) {}
               }
             }, 0);
             break;
@@ -1209,7 +1225,9 @@
 
               this.textContent = '-' + this.textContent;
 
-              window.getSelection().collapse(self.firstChild, pos);
+              try {
+                window.getSelection().collapse(self.firstChild, pos);
+              } catch(err) {}
             }
             break;
         }
@@ -1262,6 +1280,8 @@
     $('.ib_show_hide_columns > ib-span > input:checkbox').each(function(idx, chk) {
       $('.ib_show_hide_columns > ib-span > input:checkbox:nth(' + idx + ')').change();
     });
+
+    ib_highlightEditable();
   };
 
   var ib_deleteRow = function(el, e) {
