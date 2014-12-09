@@ -418,7 +418,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   font:normal 14px/1.4em $font-stack !important;
   position:absolute !important;
   display:none;
-  background:white;
+  background:white !important;
   padding:5px 10px;
   text-indent: 0 !important;
   color: black !important;
@@ -521,6 +521,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 
   .ib_show_hide_columns {
     display: none;
+    background: white !important;
     position: relative;
     z-index: 8;
     top:-1px;

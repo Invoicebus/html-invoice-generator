@@ -442,7 +442,7 @@
       '{client_email}'          : { default_text: 'fred@slaterockgravel.bed', tooltip: 'Enter client email' },
       '{client_other}'          : { default_text: 'Contact: Fred Flintstone', tooltip: 'Enter other client info' },
       '{invoice_title}'         : { default_text: 'INVOICE', tooltip: 'Enter invoice title' },
-      '{invoice_number}'        : { default_text: '1', tooltip: 'Enter invoice number' },
+      '{invoice_number}'        : { default_text: '#1', tooltip: 'Enter invoice number' },
       '{item_row_number_label}' : { default_text: '', tooltip: '' },
       '{item_description_label}': { default_text: 'Item', tooltip: 'Enter item header' },
       '{item_quantity_label}'   : { default_text: 'Quantity', tooltip: 'Enter quantity header' },
@@ -1698,6 +1698,7 @@
   var ib_getInvoiceData = function() {
     var data = {
       'hash'                   : '',
+      'type'                   : 'invoice',
       'company_logo'           : '',
       'company_name'           : '',
       'company_address'        : '',
@@ -1754,6 +1755,8 @@
     };
 
     data.hash = $('meta[name="template-hash"]').attr('content') || data.hash;
+
+    data.type = $('meta[name="document-type"]').attr('content') || data.type;
 
     if($('[data-logo="company_logo"]').is(':visible'))
       data.company_logo = $('[data-logo="company_logo"]').attr('src') || data.company_logo;

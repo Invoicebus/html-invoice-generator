@@ -39,7 +39,7 @@ var ib_invoice_data = {
   "{client_email}"          : "fred@slaterockgravel.bed",
   "{client_other}"          : "Contact: Fred Flintstone",
   "{invoice_title}"         : "INVOICE",
-  "{invoice_number}"        : "1",
+  "{invoice_number}"        : "#1",
   "{item_row_number_label}" : "",
   "{item_description_label}": "Item",
   "{item_quantity_label}"   : "Quantity",
