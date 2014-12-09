@@ -1351,6 +1351,8 @@
           }
         );
 
+    $(document.body).after(date_format);
+
     $('[data-ibcl-id="issue_date"], [data-ibcl-id="due_date"]')
       .datepicker({
         format: ib_data.date_format
@@ -1391,7 +1393,6 @@
         
         $(this).datepicker('hide');
       })
-      .after(date_format)
       .hover(
         function() {
           var offset = $(this).offset(), width = $(this).width();
@@ -1615,6 +1616,8 @@
             $(this).hide();
           }
         );
+
+    $(document.body).after(currency_position);
     
     $('[data-ibcl-id="currency"]')
       .typeahead({
@@ -1671,7 +1674,6 @@
           }
         });
       })
-      .after(currency_position)
       .hover(
         function() {
           var offset = $(this).offset(), width = $(this).width();

@@ -543,6 +543,8 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
         cursor: default;
         position: relative;
         top: -1px;
+        text-indent: 0 !important;
+        color:black !important;
       }
     }
   }

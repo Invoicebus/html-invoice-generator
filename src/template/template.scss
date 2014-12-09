@@ -234,31 +234,29 @@ table {
 #sums {
   float:right;
   margin-top:30px;
-  width:280px;
 
   table {
-    width:100%;
 
     tr {
       th, td {
-        width:50%;
-        padding: 10px;
+        min-width:100px;
+        padding:10px;
         text-align:right;
       }
       
       th {
         text-align:left;
+        padding-right:25px;
       }
 
       &.amount-total {
         th {
           text-transform: uppercase;
-
         }
 
         th, td {
           font-weight:bold;
-          border-bottom:1px solid $line-color;
+          border-top:1px solid $line-color;
         }
       }
 
