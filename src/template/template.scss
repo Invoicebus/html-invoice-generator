@@ -108,12 +108,13 @@ html, body {
 
     > span {
       display:block;
-      min-width:120px;
+      min-width:100px;
       min-height:18px;
       margin-bottom:3px;
     }
 
     &:last-child {
+      margin-left: 10px;
       text-align:right;
     }
   }
