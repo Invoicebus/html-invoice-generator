@@ -104,26 +104,24 @@ html, body {
   margin-top:50px;
 
   > div {
-    > label {
-      width:120px;
-      float:left;
-      min-height: 18px;
-    }
+    float: left;
 
     > span {
       display:block;
-      width:120px;
-      float:left;
-      text-align:right;
-      min-height: 18px;
-    }
-
-    &:after {
-      content:'';
-      display:block;
-      clear:both;
+      min-width:120px;
+      min-height:18px;
       margin-bottom:3px;
     }
+
+    &:last-child {
+      text-align:right;
+    }
+  }
+
+  &:after {
+    content:'';
+    display:block;
+    clear:both;
   }
 }
 
