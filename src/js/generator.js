@@ -242,6 +242,7 @@
     setTimeout(function() {
       $(document).tooltip({
         selector: '[data-tooltip="tooltip"]',
+        html: true,
         container: 'body'
       });
     }, 200);
@@ -730,7 +731,7 @@
 
       logo_img
         .hide()
-        .before($('<ib-span class="ib_drop_zone" data-tooltip="tooltip" data-placement="top" title="Drop image or click to upload your logo"><ib-span>Drop your logo here<br /><ib-span>(max 2MB)</ib-span><input type="file" accept="image/*" /></ib-span></ib-span>').width(ib_logo_width).height(ib_logo_height));
+        .before($('<ib-span class="ib_drop_zone" data-tooltip="tooltip" data-placement="top" title="Drop image or click to upload your logo (max 2MB).<br>For better print resolution use larger image,<br>as it\'s automatically scaled down."><ib-span>Drop your logo here<br /><ib-span>(' + ib_logo_width + ' x ' + ib_logo_height + 'px)</ib-span><input type="file" accept="image/*" /></ib-span></ib-span>').width(ib_logo_width).height(ib_logo_height));
       
       // Setup the D&D listeners
       $('.ib_drop_zone')
