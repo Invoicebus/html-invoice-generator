@@ -377,9 +377,9 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 .ib_drop_zone {
   display:block;
   background:url($blank-gif) repeat !important;
-  font: 14px/1.4em bold $font-stack !important;
-  color:#bbb !important;
-  border: 2px dashed #ddd !important;
+  font:normal 14px/1.4em $font-stack !important;
+  color:#bbb;
+  border: 2px dashed #ddd;
   overflow: hidden !important;
   @include box-sizing(border-box !important);
 
@@ -395,7 +395,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   }
 
   > ib-span > ib-span {
-    font-size:12px;
+    font-size:12px !important;
   }
 
   input[type="file"] {
