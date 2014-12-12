@@ -278,7 +278,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
       clear:both;
     }
 
-    .row_command_icon {
+    %row_command_icon {
       display:block;
       height:12px;
       width:12px;
@@ -288,6 +288,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
       padding:7px;
       cursor:pointer;
       @include box-shadow(#919191 0 0 10px);
+      text-align: left !important;
 
       .fa {
         position: relative;
@@ -297,19 +298,19 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
     }
 
     .ib_add {
-      @extend .row_command_icon;
+      @extend %row_command_icon;
       color:shade(limegreen, 30%) !important;
       margin-right: 5px;
     }
 
     .ib_delete {
-      @extend .row_command_icon;
+      @extend %row_command_icon;
       color:shade(red, 30%) !important;
       margin-right: 5px;
     }
 
     .ib_move {
-      @extend .row_command_icon;
+      @extend %row_command_icon;
       color:shade(gray, 30%) !important;
       cursor:move;
 
