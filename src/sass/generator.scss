@@ -245,7 +245,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 }
 
 .ib_row_commands {
-  z-index: 10;
+  z-index: 900;
   position:absolute;
   width:100px;
   height:20px;
@@ -343,7 +343,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   float:right;
   width:8px;
   height:8px;
-  z-index:15;
+  z-index:900;
   cursor:pointer;
   overflow:visible;
 
@@ -422,6 +422,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   padding:5px 10px;
   text-indent: 0 !important;
   color: black !important;
+  z-index: 900;
 
   @include box-shadow(0 0 5px 0 #999);
   @include border-radius(3px);
@@ -522,13 +523,13 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   .ib_show_hide_columns {
     display: none;
     background: white !important;
-    position: relative;
-    z-index: 8;
-    top:-1px;
+    position: absolute;
+    z-index: 900;
+    top: 18px;
     left: 95px;
-    padding:10px;
-    padding-top:15px;
+    padding:15px 10px 10px 10px !important;
     font:normal 14px/1.4em $font-stack !important;
+    width: 165px;
     @include box-shadow(0 0 5px 0 #999);
     @include border-radius(3px);
 
