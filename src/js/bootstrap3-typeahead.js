@@ -67,7 +67,7 @@ var ib_loadBootstrapTypeahead = function() {
     },
 
     show: function () {
-      var pos = $.extend({}, this.$element.position(), {
+      var pos = $.extend({}, this.$element.offset(), {
         height: this.$element[0].offsetHeight
       }), scrollHeight;
 
@@ -76,7 +76,8 @@ var ib_loadBootstrapTypeahead = function() {
           this.options.scrollHeight;
 
       this.$menu
-        .insertAfter(this.$element)
+        //.insertAfter(this.$element)
+        .appendTo(document.body)
         .css({
           top: pos.top + pos.height + scrollHeight,
           left: pos.left
