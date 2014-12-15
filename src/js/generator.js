@@ -255,9 +255,15 @@
   var ib_highlightEditable = function() {
     var fields = $('[contenteditable="true"], [data-ibcl-id="issue_date"], [data-ibcl-id="due_date"]');
     if(ib_highlighted)
+    {
       fields.addClass('ib_editable_outline');
+      $('.ib_highlight_editable').css('font-weight', 'bold');
+    }
     else
+    {
       fields.removeClass('ib_editable_outline');
+      $('.ib_highlight_editable').css('font-weight', 'normal');
+    }
   };
 
   var ib_initStylesAndActions = function() {
