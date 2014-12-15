@@ -37,7 +37,7 @@ var ib_invoice_data = {
   "{client_city_zip_state}" : "30000 Bedrock, Cobblestone County",
   "{client_phone_fax}"      : "+555 7 123-5555",
   "{client_email}"          : "fred@slaterockgravel.bed",
-  "{client_other}"          : "Contact: Fred Flintstone",
+  "{client_other}"          : "Attn: Fred Flintstone",
   "{invoice_title}"         : "INVOICE",
   "{invoice_number}"        : "#1",
   "{item_row_number_label}" : "",

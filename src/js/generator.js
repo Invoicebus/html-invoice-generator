@@ -443,7 +443,7 @@
       '{client_city_zip_state}' : { default_text: '30000 Bedrock, Cobblestone County', tooltip: 'Enter client city, zip, country' },
       '{client_phone_fax}'      : { default_text: '+555 7 123-5555', tooltip: 'Enter client pnone & fax' },
       '{client_email}'          : { default_text: 'fred@slaterockgravel.bed', tooltip: 'Enter client email' },
-      '{client_other}'          : { default_text: 'Contact: Fred Flintstone', tooltip: 'Enter other client info' },
+      '{client_other}'          : { default_text: 'Attn: Fred Flintstone', tooltip: 'Enter other client info' },
       '{invoice_title}'         : { default_text: 'INVOICE', tooltip: 'Enter invoice title' },
       '{invoice_number}'        : { default_text: '#1', tooltip: 'Enter invoice number' },
       '{item_row_number_label}' : { default_text: '', tooltip: '' },
