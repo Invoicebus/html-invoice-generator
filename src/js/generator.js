@@ -273,7 +273,7 @@
     $(document.body)
       .before($('<ib-span class="ib_invoice_commands_wrap">' +
                   '<ib-span class="ib_invoice_commands">' +
-                    '<ib-span onclick="window.print();" class="ib_default_button"><i class="fa fa-print"></i> Print</ib-span>' +
+                    '<ib-span id="ib-print-btn" class="ib_default_button"><i class="fa fa-print"></i> Print</ib-span>' +
                     '<ib-span class="ib_default_button ib_success_button"><i class="fa fa-save"></i> Save</ib-span>' +
                     '<ib-span class="ib_save_info" data-tooltip="tooltip" data-placement="right" title="You\'ll need Invoicebus account to save this invoice"><i class="fa fa-question-circle"></i></ib-span>' +
                     '<ib-span class="ib_gray_link ib_how_to_link" data-toggle="modal" data-target="#ib_howToModal">Help?</ib-span>' +
@@ -282,6 +282,13 @@
                   '</ib-span>' +
                 '</ib-span>'))
       .after($('<ib-span class="ib_invoicebus_love">Crafted with &#x2764; by<br><ib-span onclick="window.open(\'https://invoicebus.com/team/\', \'_blank\')">The Invoicebus Mechanics</ib-span></ib-span>'));
+
+    $('#ib-print-btn').click(function() {
+      ib_highlighted = false;
+      ib_highlightEditable();
+
+      window.print();
+    });
 
     $('.ib_highlight_editable').click(function() {
       ib_highlighted = !ib_highlighted;

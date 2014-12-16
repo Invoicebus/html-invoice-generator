@@ -242,6 +242,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 .ib_editable_outline {
   outline:1px solid lighten($contenteditable-color, 30%);
   background: lighten($contenteditable-color, 35%);
+  color: #161616;
 }
 
 .ib_row_commands {
