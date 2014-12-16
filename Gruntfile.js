@@ -347,7 +347,7 @@ module.exports = function(grunt) {
         },
         files: [
           {
-            src: ['template.html', 'template.css', 'data.js', 'fonts/{opensans-*,LICENSES}'],
+            src: ['template.html', 'template.css', 'data.js'],
             cwd: '<%= build_dir %>',
             filter: 'isFile',
             expand: true

@@ -3,27 +3,7 @@
 
 
 /* Invoice styles */
-
-/* Font face */
-@include font-face("Open Sans", 
-                  font-files("opensans-regular.woff2",
-                             "opensans-regular.woff",
-                             "opensans-regular.ttf",
-                             "opensans-regular.otf",
-                             "opensans-regular.svg#Open-Sans-Regular"),
-                  "opensans-regular.eot",
-                  normal,
-                  normal);
-
-@include font-face("Open Sans", 
-                  font-files("opensans-bold.woff2",
-                             "opensans-bold.woff",
-                             "opensans-bold.ttf",
-                             "opensans-bold.otf",
-                             "opensans-bold.svg#Open-Sans-Bold"),
-                  "opensans-bold.eot",
-                  bold,
-                  normal);
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=cyrillic,cyrillic-ext,latin,greek-ext,greek,latin-ext,vietnamese");
 
 /**
  * DON'T override any styles for the <html> and <body> tags, as this may break the layout.
