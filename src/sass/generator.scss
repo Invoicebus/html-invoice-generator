@@ -684,20 +684,16 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
     }
 
     .ib_top_separator {
-      color:#555;
+      font-size: 12px;
+      color: #7E7E7E;
+      top: 9px !important;
+      margin:0 10px;
     }
 
-    .ib_how_to_link,
-    .ib_highlight_editable,
-    .ib_top_separator {
+    .ib_pull_right {
       float:right;
       position:relative;
       top:6px;
-    }
-
-    .ib_highlight_editable,
-    .ib_top_separator {
-      margin-right: 10px;
     }
 
     &:after {
