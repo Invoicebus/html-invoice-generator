@@ -281,21 +281,16 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 
     %row_command_icon {
       display:block;
-      height:12px;
-      width:12px;
+      height:13px !important;
+      width:13px !important;
       float:left;
       background:white;
       border-radius:50%;
       padding:7px;
       cursor:pointer;
       @include box-shadow(#919191 0 0 10px);
-      text-align: left !important;
-
-      .fa {
-        position: relative;
-        top: -3px;
-        left: 1px;
-      }
+      text-align: center !important;
+      line-height: 0.8em !important;
     }
 
     .ib_add {
@@ -314,11 +309,6 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
       @extend %row_command_icon;
       color:shade(gray, 30%) !important;
       cursor:move;
-
-      .fa {
-        top: -4px;
-        left: 2px;
-      }
     }
   }
 }
@@ -685,7 +675,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 
     .ib_top_separator {
       font-size: 12px;
-      color: #7E7E7E;
+      color: #888;
       top: 9px !important;
       margin:0 10px;
     }
