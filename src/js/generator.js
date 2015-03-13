@@ -1357,7 +1357,12 @@
 
   var ib_initDatepickers = function() {
     var date_format = 
-      $('<ib-span class="ib_date_format"><select><option value="dd/mm/yyyy">dd/mm/yyyy</option><option value="dd-mm-yyyy">dd-mm-yyyy</option><option value="mm/dd/yyyy">mm/dd/yyyy</option><option value="mm-dd-yyyy">mm-dd-yyyy</option></select></ib-span>')
+      $('<ib-div class="ib_date_format">' +
+          '<ib-div><input type="radio" id="ib_date_format_radio1" name="ib_date_format_choice" value="dd/mm/yyyy"><label for="ib_date_format_radio1">dd/mm/yyyy</label></ib-div>' +
+          '<ib-div><input type="radio" id="ib_date_format_radio2" name="ib_date_format_choice" value="dd-mm-yyyy"><label for="ib_date_format_radio2">dd-mm-yyyy</label></ib-div>' +
+          '<ib-div><input type="radio" id="ib_date_format_radio3" name="ib_date_format_choice" value="mm/dd/yyyy"><label for="ib_date_format_radio3">mm/dd/yyyy</label></ib-div>' +
+          '<ib-div><input type="radio" id="ib_date_format_radio4" name="ib_date_format_choice" value="mm-dd-yyyy"><label for="ib_date_format_radio4">mm-dd-yyyy</label></ib-div>' +
+        '</ib-div>')
         .hover(
           function() {
             $(this).show();
@@ -1420,8 +1425,8 @@
       );
       
       date_format
-        .find('select')
-        .val(ib_data.date_format)
+        .find('input:radio')
+        .val([ib_data.date_format])
         .change(function(e){
           ib_data.date_format = $(this).val();
           $('[data-ibcl-id="issue_date"], [data-ibcl-id="due_date"]').datepicker('setFormat', ib_data.date_format);

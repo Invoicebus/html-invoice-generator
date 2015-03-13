@@ -433,6 +433,12 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   }
 }
 
+.ib_date_format {
+  ib-div {
+    margin: 2px 0;
+  }
+}
+
 .ib_currencies_item {
   display:block;
   min-width:150px;
