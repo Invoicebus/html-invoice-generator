@@ -1374,10 +1374,22 @@
 
     $(document.body).after(date_format);
 
-    $('[data-ibcl-id="issue_date"], [data-ibcl-id="due_date"]')
+    $('[data-ibcl-id="issue_date"]')
       .datepicker({
         format: ib_data.date_format
       })
+      .data('datepicker');
+
+    $('[data-ibcl-id="due_date"]')
+      .datepicker({
+        format: ib_data.date_format,
+        onRender: function(date) {
+          return date.valueOf() < ib_issue_date.valueOf() ? 'disabled' : '';
+        }
+      })
+      .data('datepicker');
+
+    $('[data-ibcl-id="issue_date"], [data-ibcl-id="due_date"]')
       .on('changeDate', function(e) {
         // Only if it's day selected, proceed with calculations
         if(e.viewMode != "days")
@@ -1396,19 +1408,16 @@
           if(ib_data.auto_calculate_dates)
           {
             ib_due_date = new Date(e.date.setDate(ib_issue_date.getDate() + net_term));
-          
             $('[data-ibcl-id="due_date"]').datepicker('setValue', ib_due_date).text($('[data-ibcl-id="due_date"]').data('date'));
           }
         }
         else if($(this).data('ibcl-id') == 'due_date')
         {
           ib_due_date = new Date(e.date);
-
           if(ib_data.auto_calculate_dates)
           {
-            ib_issue_date = new Date(e.date.setDate(ib_due_date.getDate() - net_term));
-          
-            $('[data-ibcl-id="issue_date"]').datepicker('setValue', ib_issue_date).text($('[data-ibcl-id="issue_date"]').data('date'));
+            net_term = Math.ceil(Math.abs((ib_due_date.getTime() - ib_issue_date.getTime()) / (24 * 60 * 60 * 1000)));
+            $('[data-ibcl-id="net_term"]').text(net_term);
           }
         }
         

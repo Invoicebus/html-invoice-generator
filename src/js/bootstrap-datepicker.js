@@ -108,6 +108,7 @@ var ib_loadBootstrapDatepicker = function() {
         type: 'show',
         date: this.date
       });
+      this.fill();
     },
     
     hide: function(){
