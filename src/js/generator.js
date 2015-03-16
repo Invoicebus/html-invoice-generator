@@ -1384,6 +1384,7 @@
       .datepicker({
         format: ib_data.date_format,
         onRender: function(date) {
+          ib_issue_date.setHours(0,0,0,0);
           return date.valueOf() < ib_issue_date.valueOf() ? 'disabled' : '';
         }
       })
@@ -1409,6 +1410,9 @@
           {
             ib_due_date = new Date(e.date.setDate(ib_issue_date.getDate() + net_term));
             $('[data-ibcl-id="due_date"]').datepicker('setValue', ib_due_date).text($('[data-ibcl-id="due_date"]').data('date'));
+
+            // Also set the issue date picker value
+            $('[data-ibcl-id="issue_date"]').datepicker('setValue', ib_issue_date).text($('[data-ibcl-id="issue_date"]').data('date'));
           }
         }
         else if($(this).data('ibcl-id') == 'due_date')
