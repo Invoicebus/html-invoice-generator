@@ -1227,6 +1227,11 @@
               }
             }, 0);
             break;
+
+          case 'net_term':
+            $('[data-ibcl-id="net_term"], [data-ibcl-id="due_date"]').addClass('ib_highlight_bg');
+            setTimeout(function () { $('[data-ibcl-id="net_term"], [data-ibcl-id="due_date"]').removeClass('ib_highlight_bg'); }, 10);
+            break;
         }
 
       } else {
@@ -1413,6 +1418,9 @@
 
             // Also set the issue date picker value
             $('[data-ibcl-id="issue_date"]').datepicker('setValue', ib_issue_date).text($('[data-ibcl-id="issue_date"]').data('date'));
+
+            $('[data-ibcl-id="issue_date"], [data-ibcl-id="due_date"]').addClass('ib_highlight_bg');
+            setTimeout(function () { $('[data-ibcl-id="issue_date"], [data-ibcl-id="due_date"]').removeClass('ib_highlight_bg'); }, 10);
           }
         }
         else if($(this).data('ibcl-id') == 'due_date')
@@ -1422,6 +1430,9 @@
           {
             net_term = Math.ceil(Math.abs((ib_due_date.getTime() - ib_issue_date.getTime()) / (24 * 60 * 60 * 1000)));
             $('[data-ibcl-id="net_term"]').text(net_term);
+
+            $('[data-ibcl-id="net_term"], [data-ibcl-id="due_date"]').addClass('ib_highlight_bg');
+            setTimeout(function () { $('[data-ibcl-id="net_term"], [data-ibcl-id="due_date"]').removeClass('ib_highlight_bg'); }, 10);
           }
         }
         

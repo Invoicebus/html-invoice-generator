@@ -478,6 +478,17 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   }
 }
 
+.ibcl_issue_date,
+.ibcl_due_date,
+.ibcl_net_term {
+  @include single-transition(background-color, 1.2s, ease-in);
+}
+
+.ib_highlight_bg {
+  background-color: #ffff97;
+  @include single-transition(background-color, 0s !important);
+}
+
 .active .ib_currencies_item ib-span {
   color:white;
 }
@@ -513,6 +524,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   position: absolute;
   margin-top:20px;
   text-indent: 0 !important;
+  z-index: 995;
 
   .ib_add_new_row_link {
     margin-right: 15px;
