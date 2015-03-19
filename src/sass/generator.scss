@@ -243,6 +243,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   outline:1px solid lighten($contenteditable-color, 30%);
   background: lighten($contenteditable-color, 35%);
   color: #161616;
+  @include single-transition(background-color, 0s !important);
 }
 
 .ib_row_commands {
@@ -484,6 +485,10 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   @include single-transition(background-color, 1.2s, ease-in);
 }
 
+.ib_stop_animate {
+  @include single-transition(background-color, 0s !important);
+}
+
 .ib_highlight_bg {
   background-color: #ffff97;
   @include single-transition(background-color, 0s !important);
@@ -524,7 +529,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   position: absolute;
   margin-top:20px;
   text-indent: 0 !important;
-  z-index: 995;
+  z-index: 500;
 
   .ib_add_new_row_link {
     margin-right: 15px;
