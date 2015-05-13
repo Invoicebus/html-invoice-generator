@@ -173,6 +173,7 @@
     'p',
     'pre',
     'section',
+    // 'script', // Allow for debugging, otherwise comment it
     'span',
     'strong',
     'style',
@@ -239,6 +240,24 @@
     return ua.indexOf('MSIE ') > -1 || ua.indexOf('Trident/') > -1;
   };
 
+  var ib_isSafari = function () {
+    // Detect if the browser is Safari
+    var ua = navigator.userAgent;
+    return ua.indexOf('Safari/') > -1 && !(ua.indexOf('Chrome/') > -1 || ua.indexOf('OPR/') > -1);
+  };
+
+  var ib_fixNewlines = function(text) {
+    if(text)
+     return text
+              .replace(/<div>/gi, '<br />')
+              .replace(/<\/div>/gi, '')
+              .replace(/<\/p>(\r*|\n*)<p>/gi, '<br />')
+              .replace(/<(p|\/p)>/gi, '')
+              .replace(/<br\s*(\/|\s*)>/gi, '\n');
+
+    return text;
+  };
+
   var ib_initBootstrapTooltip = function() {
     // Wait a little before init the tooltip
     setTimeout(function() {
@@ -257,12 +276,12 @@
     if(ib_highlighted)
     {
       fields.addClass('ib_editable_outline ib_stop_animate');
-      $('.ib_highlight_editable').css('font-weight', 'bold');
+      $('.ib_highlight_editable').addClass('active active_hover');
     }
     else
     {
       fields.removeClass('ib_editable_outline');
-      $('.ib_highlight_editable').css('font-weight', 'normal');
+      $('.ib_highlight_editable').removeClass('active active_hover');
     }
   };
 
@@ -273,21 +292,66 @@
     $(document.body)
       .before($('<ib-span class="ib_invoice_commands_wrap">' +
                   '<ib-span class="ib_invoice_commands">' +
-                    '<ib-span id="ib-print-btn" class="ib_default_button"><i class="fa fa-print"></i> Print</ib-span>' +
-                    '<ib-span class="ib_default_button ib_success_button"><i class="fa fa-save"></i> Save</ib-span>' +
+                    '<ib-span id="ib-print-btn" class="ib_default_button" data-tooltip="tooltip" data-placement="bottom" title="This command is also used to save<br/>the invoice as PDF. See FAQ for more info."><i class="fa fa-print"></i> Print Invoice</ib-span>' +
+                    '<ib-span class="ib_default_button ib_highlight_editable" data-tooltip="tooltip" data-placement="bottom" title="Highlight editable fields"><i class="fa fa-edit"></i> Highlight Fields</ib-span>' +
+                    '<ib-span id="ib-save-data-btn" class="ib_default_button" data-toggle="modal" data-target="#ib_saveCurrentStateModal" data-tooltip="tooltip" data-placement="bottom" title="Save current invoice data such as<br/>company address, logo, etc., for future re-use"><i class="fa fa-bolt"></i> Save Current State</ib-span>' +
+                    '<iframe id="ib_download_data_frame" class="ib_force_hide"></iframe>' +
+                    '<ib-span class="ib_default_button ib_save_online" data-tooltip="tooltip" data-placement="bottom" title="You\'ll be taken to Invoicebus website<br/>to save this invoice online"><i class="fa fa-cloud-upload"></i> Save Invoice Online</ib-span>' +
                     '<ib-span class="ib_save_info" data-tooltip="tooltip" data-placement="right" title="You\'ll need Invoicebus account to save this invoice"><i class="fa fa-question-circle"></i></ib-span>' +
-                    '<ib-span class="ib_gray_link ib_how_to_link ib_pull_right" data-toggle="modal" data-target="#ib_howToModal">Help</ib-span>' +
+
+                    '<ib-span class="ib_gray_link ib_how_to_link ib_pull_right" data-toggle="modal" data-target="#ib_howToModal">About</ib-span>' +
                     '<ib-span class="ib_top_separator ib_pull_right">●</ib-span>' +
-                    '<ib-span class="ib_gray_link ib_highlight_editable ib_pull_right">Highlight editable fields</ib-span>' +
+                    '<ib-span class="ib_gray_link ib_how_to_link ib_pull_right" onclick="window.open(\'https://groups.google.com/d/forum/html-invoice-generator\', \'_blank\')">FAQ / Ask a question!</ib-span>' +
                   '</ib-span>' +
                 '</ib-span>'))
       .after($('<ib-span class="ib_invoicebus_love">Crafted with &#x2764; by<br><ib-span onclick="window.open(\'https://invoicebus.com/team/\', \'_blank\')">The Invoicebus Mechanics</ib-span></ib-span>'));
+
+      var modal_save = '<ib-div id="ib_saveCurrentStateModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="howToModal" aria-hidden="true">' +
+                   '<ib-div class="modal-dialog">' +
+                    '<ib-div class="modal-content">' +
+                      '<ib-div class="modal-header">' +
+                        '<ib-span type="button" class="close" data-dismiss="modal"><ib-span aria-hidden="true">&times;</ib-span></ib-span>' +
+                        '<ib-div class="modal-title" id="howToModal">Save current state</ib-div>' +
+                      '</ib-div>' +
+                      '<ib-div class="modal-body">' +
+                        '<ib-div class="ib_how_to_container">@@SAVE_STATE</ib-div>' +
+                      '</ib-div>' +
+                    '</ib-div>' +
+                  '</ib-div>' +
+                '</ib-div>';
+
+    $(document.body)
+      .after($(modal_save));
 
     $('#ib-print-btn').click(function() {
       ib_highlighted = false;
       ib_highlightEditable();
 
       window.print();
+    });
+
+    $('#ib-save-data-btn').click(function() {
+      if(ib_isSafari())
+      {
+        var raw_data = ib_getCurrentState();
+        $('#ib-save-current-data').attr('href', 'data:text/plain;charset=UTF-8,' + encodeURIComponent(raw_data));
+
+        $('#ib-safari-save-as').removeClass('ib_hide');
+      }
+    });
+
+    $('#ib-save-current-data').click(function() {
+      var raw_data = ib_getCurrentState();
+
+      if(ib_isIE()) {
+        ib_download_data_frame.document.open('text/html', 'replace');
+        ib_download_data_frame.document.write('<pre>' + raw_data.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre>'); // pre-format the data to preserve newlines when saving
+        ib_download_data_frame.document.close();
+        ib_download_data_frame.focus();
+        ib_download_data_frame.document.execCommand('SaveAs', true, 'data.txt');
+      }
+      else
+        $(this).attr('href', 'data:text/plain;charset=UTF-8,' + encodeURIComponent(raw_data));
     });
 
     $('.ib_highlight_editable').click(function() {
@@ -306,10 +370,10 @@
     $(document.body)
       .after($('<ib-span class="ib_invoicebus_fineprint">Manage your invoices super easy at <ib-span onclick="window.open(\'https://invoicebus.com\', \'_blank\')">invoicebus.com</ib-span></ib-span>'));
 
-    if(!ib_data.invoicebus_fineprint)
+    if(!JSON.parse(ib_data.invoicebus_fineprint))
       $('.ib_invoicebus_fineprint').css('visibility', 'hidden');
 
-    $('.ib_success_button').click(ib_saveInvoice);
+    $('.ib_save_online').click(ib_saveInvoice);
     
     $('[data-iterate="item"]:last').after($('<ib-span class="ib_bottom_row_commands"><ib-span class="ib_blue_link ib_add_new_row_link">Add new row</ib-span><ib-span class="ib_blue_link ib_show_hide_columns_link">Configure Columns</ib-span></ib-span>'));
 
@@ -392,7 +456,7 @@
                     '<ib-div class="modal-content">' +
                       '<ib-div class="modal-header">' +
                         '<ib-span type="button" class="close" data-dismiss="modal"><ib-span aria-hidden="true">&times;</ib-span></ib-span>' +
-                        '<ib-div class="modal-title" id="howToModal">How to use this template?</ib-div>' +
+                        '<ib-div class="modal-title" id="howToModal">About</ib-div>' +
                       '</ib-div>' +
                       '<ib-div class="modal-body">' +
                         '<ib-div class="ib_how_to_container">@@HOWTO</ib-div>' +
@@ -495,7 +559,7 @@
       'default_discount'        : '0',
       'default_tax'             : '0',
       'default_number_rows'     : 3,
-      'auto_calculate_dates'     : true,
+      'auto_calculate_dates'    : true,
       'load_items'              : true,
       'invoicebus_fineprint'    : true,
 
@@ -534,6 +598,12 @@
 
     if(typeof ib_invoice_data !== 'undefined')
     {
+      if(typeof ib_invoice_data == 'function') // new data format
+      {
+        // Make it JSON same as the legacy data format
+        ib_invoice_data = ib_parseData(ib_multiline.stripIndent(ib_invoice_data));
+      }
+
       for(var key in ib_invoice_data)
         if(typeof ib_data[key].default_text !== 'undefined')
           ib_data[key].default_text = ib_invoice_data[key];
@@ -652,12 +722,12 @@
   /**
    * Logo functions
    */
-  var ib_max_width = 820, // Because the maximum template width is 820px the logo should be also maximum 820px wide
-      ib_max_height = 820,
-      ratio = 1,
-      ib_logo_width = 0,
-      ib_logo_height = 0,
-      ib_canvas_width = 820,
+  var ib_max_width     = 820, // Because the maximum template width is 820px the logo should be also maximum 820px wide
+      ib_max_height    = 820,
+      ratio            = 1,
+      ib_logo_width    = 0,
+      ib_logo_height   = 0,
+      ib_canvas_width  = 820,
       ib_canvas_height = 820;
 
   var ib_initLogoTag = function() {
@@ -676,39 +746,8 @@
       e.originalEvent.dataTransfer.dropEffect = 'none';
     });
 
-    var modal = '<ib-div id="ib_base64Modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="base64Modal" aria-hidden="true">' +
-                   '<ib-div class="modal-dialog">' +
-                    '<ib-div class="modal-content">' +
-                      '<ib-div class="modal-header">' +
-                        '<ib-span type="button" class="close" data-dismiss="modal"><ib-span aria-hidden="true">&times;</ib-span></ib-span>' +
-                        '<ib-div class="modal-title" id="howToModal">Base64 Data URI</ib-div>' +
-                      '</ib-div>' +
-                      '<ib-div class="modal-body">' +
-                        '<textarea class="ib_logo_base64" readonly onclick="this.focus();this.select();" onfocus="this.select();"></textarea>' +
-                      '</ib-div>' +
-                      '<ib-div class="modal-footer">' +
-                        '<ib-span class="ib_default_button" data-dismiss="modal">Close</ib-span>' +
-                      '</ib-div>' +
-                    '</ib-div>' +
-                  '</ib-div>' +
-                '</ib-div>';
-
-    $(document.body)
-      .after($(modal));
-
-    $('#ib_base64Modal')
-      .on('show.bs.modal shown.bs.modal', function (e) {
-        try {
-          $('.ib_logo_base64').select();
-        }
-        catch(err) {
-          // For IE
-          $('.ib_logo_base64').focus();
-        }
-      });
-
     logo_img
-      .after($('<ib-div class="ib_remove_logo_overlay" data-tooltip="tooltip" data-placement="top" data-toggle="modal" data-target="#ib_base64Modal" title="Click to see the base64 data URI"><ib-span class="ib_remove_logo" title="Remove logo"><i class="fa fa-times-circle"></i></ib-span></ib-div>')
+      .after($('<ib-div class="ib_remove_logo_overlay" data-tooltip="tooltip" data-placement="top"><ib-span class="ib_remove_logo" title="Remove logo"><i class="fa fa-times-circle"></i></ib-span></ib-div>')
         .hover(
           function() { },
           function() {
@@ -912,7 +951,7 @@
     ib_tax_line = $('[data-iterate="tax"]').hide().clone();
 
     var num = 1;
-    var rows_num = ib_data.default_number_rows;
+    var rows_num = parseInt(ib_data.default_number_rows);
 
     if(typeof ib_invoice_data !== 'undefined' && typeof ib_invoice_data.items !== 'undefined')
       ib_data.items = ib_invoice_data.items;
@@ -1109,7 +1148,7 @@
 
   var ib_setRowData = function() {
     // Check to see if we're going to load dummy items ot not
-    if(!ib_data.load_items)
+    if(!JSON.parse(ib_data.load_items))
       return;
 
     var rows = $('[data-iterate="item"]');
@@ -1119,11 +1158,11 @@
 
     for (var i = 0; i < ib_data.items.length; i++)
     {
-      $(rows[i]).find('[data-ibcl-id="item_description"]').text(ib_data.items[i].item_description);
-      $(rows[i]).find('[data-ibcl-id="item_quantity"]').text(ib_data.items[i].item_quantity);
-      $(rows[i]).find('[data-ibcl-id="item_price"]').text(ib_data.items[i].item_price);
-      $(rows[i]).find('[data-ibcl-id="item_discount"]').text(ib_data.items[i].item_discount);
-      $(rows[i]).find('[data-ibcl-id="item_tax"]').text(ib_data.items[i].item_tax);
+      $(rows[i]).find('[data-ibcl-id="item_description"]').html(ib_data.items[i].item_description);
+      $(rows[i]).find('[data-ibcl-id="item_quantity"]').html(ib_data.items[i].item_quantity);
+      $(rows[i]).find('[data-ibcl-id="item_price"]').html(ib_data.items[i].item_price);
+      $(rows[i]).find('[data-ibcl-id="item_discount"]').html(ib_data.items[i].item_discount);
+      $(rows[i]).find('[data-ibcl-id="item_tax"]').html(ib_data.items[i].item_tax);
     }
   };
 
@@ -1324,7 +1363,7 @@
 
   var ib_initDates = function() {
     ib_issue_date = new Date();
-    ib_due_date = new Date(new Date().setDate(new Date().getDate() + ib_data['{net_term}'].default_text));
+    ib_due_date = new Date(new Date().setDate(new Date().getDate() + parseInt(ib_data['{net_term}'].default_text)));
 
     ib_issue_date_formated = ib_formatDate(ib_issue_date, ib_data.date_format);
     ib_due_date_formated = ib_formatDate(ib_due_date, ib_data.date_format);
@@ -1403,7 +1442,7 @@
 
         $(this).text($(this).data('date'));
 
-        var net_term = ib_data['{net_term}'].default_text || 0;
+        var net_term = parseInt(ib_data['{net_term}'].default_text) || 0;
 
         if(!isNaN(parseInt($('[data-ibcl-id="net_term"]').text())))
           net_term = parseInt($('[data-ibcl-id="net_term"]').text());
@@ -1411,7 +1450,7 @@
         if($(this).data('ibcl-id') == 'issue_date')
         {
           ib_issue_date = new Date(e.date);
-          if(ib_data.auto_calculate_dates)
+          if(JSON.parse(ib_data.auto_calculate_dates))
           {
             ib_due_date = new Date(e.date.setDate(ib_issue_date.getDate() + net_term));
             $('[data-ibcl-id="due_date"]').datepicker('setValue', ib_due_date).text($('[data-ibcl-id="due_date"]').data('date'));
@@ -1426,7 +1465,7 @@
         else if($(this).data('ibcl-id') == 'due_date')
         {
           ib_due_date = new Date(e.date);
-          if(ib_data.auto_calculate_dates)
+          if(JSON.parse(ib_data.auto_calculate_dates))
           {
             net_term = Math.ceil(Math.abs((ib_due_date.getTime() - ib_issue_date.getTime()) / (24 * 60 * 60 * 1000)));
             $('[data-ibcl-id="net_term"]').text(net_term);
@@ -1460,13 +1499,13 @@
   };
 
   var ib_calculateDates = function() {
-    var net_term = ib_data['{net_term}'].default_text || 0;
+    var net_term = parseInt(ib_data['{net_term}'].default_text) || 0;
 
     if(!isNaN(parseInt($('[data-ibcl-id="net_term"]').text())))
       net_term = parseInt($('[data-ibcl-id="net_term"]').text());
 
     // Only auto calculate dates if it is enabled
-    if(ib_data.auto_calculate_dates)
+    if(JSON.parse(ib_data.auto_calculate_dates))
     {
       ib_due_date = new Date(new Date(ib_issue_date).setDate(ib_issue_date.getDate() + net_term));
 
@@ -1808,7 +1847,8 @@
     
     $('[data-ibcl-id]').each(function(idx, val) {
       var el = $(val);
-      data[el.data('ibcl-id')] = $('<div />').html(el.html().replace(/<br\s*(\/|\s*)>/gi, "\n")).text() || data[el.data('ibcl-id')];
+      
+      data[el.data('ibcl-id')] = ib_fixNewlines(el.html()) || data[el.data('ibcl-id')];
     });
 
     if(!data.net_term)
@@ -1831,9 +1871,12 @@
     
     $('[data-iterate="item"]').each(function(idx, val) {
       var item_row = {};
-      $(val).children().each(function(i, v){
+      $(val).children().each(function(i, v) {
         var el = $(v);
-        item_row[el.data('ibcl-id')] = $('<div />').html(el.html().replace(/<br\s*(\/|\s*)>/gi, "\n")).text();
+        if(!el.data('ibcl-id') && ib_isIE()) // For IE get the data from editable spans
+          el = el.find('.ibcl_ie_contenteditable');
+
+        item_row[el.data('ibcl-id')] = ib_fixNewlines(el.html());
       });
 
       item_row.item_quantity       = item_row.item_quantity.getNumber();
@@ -1854,7 +1897,10 @@
       var tax_row = {};
       $(val).children().each(function(i, v){
         var el = $(v);
-        tax_row[el.data('ibcl-id')] = $('<div />').html(el.html().replace(/<br\s*(\/|\s*)>/gi, "\n")).text();
+        if(!el.data('ibcl-id') && ib_isIE()) // For IE get the data from editable spans
+          el = el.find('.ibcl_ie_contenteditable');
+
+        tax_row[el.data('ibcl-id')] = ib_fixNewlines(el.html());
         if(el.attr('data-ib-value'))
           tax_row.tax_percentage = el.attr('data-ib-value').getNumber();
       });
@@ -1897,7 +1943,7 @@
       .addClass('ib_disabled_button')
       .attr('disabled', 'disabled')
       .find('i.fa')
-      .removeClass('fa-save')
+      .removeClass('fa-cloud-upload')
       .addClass('fa-spinner fa-spin');
     
     // Escape the data for sending in form post
@@ -1908,6 +1954,81 @@
     $('<form id="ib_save_tamplate_form" style="display:none !important;" action="' + SAVE_URL + '" method="POST" />')
       .append($('<input type="hidden" name="invoice_data" value="' + data + '" />'))
       .appendTo($(document.body)).submit();
+  };
+
+  /**
+   * Prepare currend data for download
+   */
+  var ib_getCurrentState = function() {
+    var raw_data = '@@RAW_DATA';
+    var invoice_data = ib_getInvoiceData();
+
+    raw_data = raw_data.replace('|item_row_number|', ib_data['{item_row_number}'].default_text);
+    raw_data = raw_data.replace('|item_description|', ib_data['{item_description}'].default_text);
+    raw_data = raw_data.replace('|item_quantity|', ib_data['{item_quantity}'].default_text);
+    raw_data = raw_data.replace('|item_price|', ib_data['{item_price}'].default_text);
+    raw_data = raw_data.replace('|item_discount|', ib_data['{item_discount}'].default_text);
+    raw_data = raw_data.replace('|item_tax|', ib_data['{item_tax}'].default_text);
+    raw_data = raw_data.replace('|item_line_total|', ib_data['{item_line_total}'].default_text);
+    raw_data = raw_data.replace('|tax_name|', ib_data['{tax_name}'].default_text);
+    raw_data = raw_data.replace('|tax_value|', ib_data['{tax_value}'].default_text);
+    raw_data = raw_data.replace('|amount_total|', ib_data['{amount_total}'].default_text);
+    raw_data = raw_data.replace('|amount_due|', ib_data['{amount_due}'].default_text);
+
+    raw_data = raw_data.replace('|default_quantity|', ib_data.default_quantity);
+    raw_data = raw_data.replace('|default_price|', ib_data.default_price);
+    raw_data = raw_data.replace('|default_discount|', ib_data.default_discount);
+    raw_data = raw_data.replace('|default_tax|', ib_data.default_tax);
+    raw_data = raw_data.replace('|default_number_rows|', ib_data.default_number_rows);
+    raw_data = raw_data.replace('|auto_calculate_dates|', ib_data.auto_calculate_dates);
+    raw_data = raw_data.replace('|load_items|', ib_data.load_items);
+    raw_data = raw_data.replace('|invoicebus_fineprint|', ib_data.invoicebus_fineprint);
+
+    for(var key in invoice_data)
+    {
+      var data_key   = '|' + key + '|';
+      var data_value = invoice_data[key].toString().replace(/\n/g, '<br />');
+
+      // special cases
+      switch(key) {
+        case 'issue_date':
+        case 'due_date':
+          raw_data = raw_data.replace(data_key, '');
+          break;
+
+        case 'items_columns':
+          raw_data = raw_data.replace('|default_columns|', invoice_data[key].join(','));
+          break;
+
+        case 'items':
+          data_value = '';
+          var items = invoice_data[key];
+          for(var i = 0; i < items.length; i++)
+          {
+            data_value += (items[i].item_description    || '').toString().replace(/\n/g, '<br />') + '@||@' +
+                          (items[i].item_quantity       || '').toString().replace(/\n/g, '<br />') + '@||@' +
+                          (items[i].item_price          || '').toString().replace(/\n/g, '<br />') + '@||@' +
+                          (items[i].item_discount       || '').toString().replace(/\n/g, '<br />') + '@||@' +
+                          (items[i].item_tax_percentage || '').toString().replace(/\n/g, '<br />') +
+                          '\r\n';
+          }
+          raw_data = raw_data.replace(data_key, data_value);
+          break;
+
+        case 'currency_code':
+          raw_data = raw_data.replace('|currency|', data_value);
+          break;
+
+        default:
+          raw_data = raw_data.replace(data_key, data_value);
+          break;
+      }
+      
+    }
+
+    raw_data = raw_data.replace(/\[crlf\]/g, '\r\n');
+
+    return raw_data;
   };
 
   /**
@@ -1935,8 +2056,20 @@
   // Load the external data if specified in the query params
   var ib_query = ib_getScriptQueryVariables();
 
-  if(ib_getQueryVariable('data', ib_query))
-    ib_loadJavaScript(ib_getQueryVariable('data', ib_query));
+  var ib_data_file = ib_getQueryVariable('data', ib_query);
+
+  if(ib_data_file)
+  {
+    var js = document.createElement('script');
+    js.onerror = function() {
+      js = document.createElement('script');
+      js.src = 'data.js';
+      document.body.appendChild(js);
+    };
+
+    js.src = 'data.txt';
+    document.body.appendChild(js);
+  }
 
   // Start polling...
   ib_checkJQuery(function($) {

@@ -1,10 +1,6 @@
-<ib-div class="ib_how_to">
+<ib-div class="ib_modal_container">
   <ib-div class="ib_p">
-    If you're one-man performer and everything you do for your business you do it by yourself – welcome to the club! You're well familiar with the pain of writing invoices. Word? Excel? Complicated accounting software? Forget about it!
-  </ib-div>
-
-  <ib-div class="ib_p">
-    We specifically created this simple template to address the most boring and time consuming invoicing task – the torture of crafting invoices with all those messy calculations, itemized lists, breakdown of taxes, net terms, etc. We also put special care in its design, so your invoice will always stand out among 100s of others in the pile.
+    If you're one-man performer and everything you do for your business you do it by yourself – welcome to the club! You're well familiar with the pain of writing invoices. Word? Excel? Complicated accounting software? Forget about it and hello you new joy!
   </ib-div>
 
   <ib-div class="ib_h3">What can I do with this template?</ib-div>
@@ -29,7 +25,7 @@
             &#9675; &nbsp; Configure item column visibility.
           </ib-div>
           <ib-div class="ib_li">
-            &#9675; &nbsp; Auto calculate subtotals and totals as you type.
+            &#9675; &nbsp; Auto calculate subtotals, totals, taxes and discounts.
           </ib-div>
           <ib-div class="ib_li">
             &#9675; &nbsp; Save your default company data for future re-use.
@@ -37,51 +33,54 @@
         </ib-div>
       </ib-div>
       <ib-div class="ib_li">
-        &#9679; &nbsp; Restyle it by using simple HTML &amp; CSS.
+        &#9679; &nbsp; Restyle it by using simple HTML &amp; CSS techniques.
       </ib-div>
       <ib-div class="ib_li">
         &#9679; &nbsp; Directly print it out.
+      </ib-div>
+      <ib-div class="ib_li">
+        &#9679; &nbsp; Save it to PDF or save it online.
       </ib-div>
     </ib-div>
   </ib-div>
 
   <ib-div class="ib_h3">How can I save my default company data for future re-use?</ib-div>
   <ib-div class="ib_p">
-    This data is stored in the <ib-span class="ib_code">data.js</ib-span> file so you can easily edit it with any text editor.
-  </ib-div>
-
-  <ib-div class="ib_p">
-    To save your logo, you'll need to supply base64 encoded data URI of it (simply put – text representation of the image). No matter how scary this might sound, the only thing you need to do is drag and drop your logo to this template and then click on it. A popup window will show up with generated base64 data URI (long string of characters) of the logo. You need to copy and paste this string in the <ib-span class="ib_code">data.js</ib-span> file (into the value of the <ib-span class="ib_code">{company_logo}</ib-span> property). That's all.
-  </ib-div>
-
-  <ib-div class="ib_p">
-    The data and the structure of the data.js file is quite simple and self-explanatory. Any questions whatsoever, tell us at our <ib-span class="ib_a" onclick="window.open('https://groups.google.com/d/forum/html-invoice-generator', '_blank')">support forum</ib-span>.
+    Click <ib-span class="ib_b">&quot;Save Current State&quot;</ib-span> button and follow the on-screen instructions.
   </ib-div>
 
   <ib-div class="ib_h3">How to save the invoice?</ib-div>
   <ib-div class="ib_p">
-    This one is a bit tricky. Due to the limitation of how browsers work with local HTML files, we haven't figured out yet how to store any dynamic data you enter, such as items, prices, taxes, etc. However, you have few other alternatives
-  </ib-div>
-
-  <ib-div class="ib_ul">
-    <ib-div class="ib_li">
-      - &nbsp; Use the embedded PDF printer in Google Chrome.
-    </ib-div>
-    <ib-div class="ib_li">
-      - &nbsp; Use free PDF print driver such as <ib-span class="ib_a" onclick="window.open('http://www.foxitsoftware.com', '_blank')">Foxit Reader PDF Printer</ib-span> or <ib-span class="ib_a" onclick="window.open('http://www.bullzip.com', '_blank')">BullZip</ib-span>.
-    </ib-div>
-    <ib-div class="ib_li">
-      - &nbsp; Use the green "Save" button that will take you to our online invoicing service <ib-span class="ib_a" onclick="window.open('https://invoicebus.com', '_blank')">Invoicebus</ib-span> (which happens to be a great tool to automate your invoicing by the way) and securely store it into your personal account.
+    There are two ways to save the invoice:
+    <ib-div class="ib_ul">
+      <ib-div class="ib_li">
+        - &nbsp; Save it to PDF using PDF printer.
+      </ib-div>
+      <ib-div class="ib_li">
+        - &nbsp; Save it online to our online invoicing system Invoicebus.
+      </ib-div>
     </ib-div>
   </ib-div>
 
   <ib-div class="ib_p">
-    While the first two options will generate static PDF version of the invoice (which cannot be modified), the third option will generate live online invoice (<ib-span class="ib_a" onclick="window.open('https://invoicebus.com/demoinvoice', '_blank')">like this</ib-span>) which can be edited on-the-fly, sent by email, tracked, and paid instantly by credit card or PayPal. You will also be able to save and reuse every item, client, and tax in the future.
+    Saving the invoice to PDF can be done by using something called PDF Print Driver. This is also known as printing to PDF because the output from the browser is sent to a file instead to a printer. This functionality is built-in in some browsers (like Google Chrome), while in others (like Firefox or Internet Explorer) you have to install PDF printer manually. A good and free PDF printer is <ib-span class="ib_a" onclick="window.open('http://www.bullzip.com', '_blank')">Bullzip</ib-span>. If you already have your PDF printer installed, <ib-span class="ib_b">click &quot;Print Invoice&quot;, set the destination printer to &quot;Save as PDF&quot; and click Save</ib-span>.
+  </ib-div>
+
+  <ib-div class="ib_p">
+    In order to save the invoice online you'll need to create an Invoicebus account first. You can do this by clicking &quot;Save Invoice Online&quot; button. Then you'll be taken to a secure page where you can complete your registration and save the invoice. Please note that an online invoice is much more powerful than a static PDF invoice. For example, an online invoice can be edited on-the-fly, sent by email, tracked, and paid directly by Credit card, PayPal or Bitcoin. Here's an <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/demoinvoice/', '_blank')">example</ib-span>.
   </ib-div>
 
   <ib-div class="ib_h3">How to restyle the template?</ib-div>
   <ib-div class="ib_p">
-    As the template is completely separate from its logic, you can easily restyle it by using simple HTML and CSS techniques. However, there are few rules which are considered to be good practice when making structural changes (deleting or rearranging elements) of the DOM, so have in mind to follow <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/how-to-create-invoice-template/', '_blank')">this guide</ib-span>.
+    The template is made with simplicity in mind so can be easily customized with your own branding and colors. However, basic knowledge in HTML and CSS is required. 
+  </ib-div>
+
+  <ib-div class="ib_p">
+    For smaller modifications (like changing colors, fonts or element sizes) you only need to modify the <ib-span class="ib_code">template.css</ib-span> file. If you want to make bigger structural changes of the layout (deleting or rearranging elements), you'll need to modify the <ib-span class="ib_code">template.html</ib-span> file. We've made a <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/how-to-create-invoice-template/', '_blank')">guide</ib-span> with best practices on how to create your own template, so feel free to use it as a reference point.
+  </ib-div>
+
+  <ib-div class="ib_p">
+    <ib-span class="ib_b">Note:</ib-span> The template is completely separate from its logic, so you don't need to mess up with any programming or JavaScript code.
   </ib-div>
 
   <ib-div class="ib_h3">Do I have to be connected to internet to use it?</ib-div>
@@ -90,7 +89,7 @@
   </ib-div>
 
   <ib-div class="ib_p">
-    We generally encourage you to use the remote script because any recent updates immediately reflect into the template you're using.
+    We generally encourage you to continue using the remote script because any recent updates immediately reflect into the template you're using.
   </ib-div>
 
   <ib-div class="ib_h3">What about the fonts used?</ib-div>
@@ -106,20 +105,20 @@
 
   <ib-div class="ib_h3">Support our work</ib-div>
   <ib-div class="ib_p">
-    Maintaining this script takes a lot of time and effort to keep it bug free and up to date. All we're asking is a little favor – discrete fine print of our invoicing service at the bottom of the printed document. It would mean the world to us if you put it there. Thanks!
+    Maintaining this script takes a lot of time and effort to keep it bug free and up to date. All we're asking is a little favor – discrete fine print of our invoicing service at the bottom of the printed document. It would mean the world to us if you leave it there. Thanks!
   </ib-div>
 
   <ib-div class="ib_p">
-    It's fine even if you decide to avoid giving us credit, so we made this choice easier to you. In the <ib-span class="ib_code">data.js</ib-span> file we included property called <ib-span class="ib_code">invoicebus_fineprint</ib-span> which can be set to <ib-span class="ib_code">true</ib-span> (to show the fine print) or <ib-span class="ib_code">false</ib-span> (to hide the fine print).
+    It's fine even if you decide to avoid giving us credit, so we made this choice easier to you. In the <ib-span class="ib_code">data.txt</ib-span> file we included property called <ib-span class="ib_code">invoicebus_fineprint</ib-span> which can be set to <ib-span class="ib_code">true</ib-span> (to show the fine print) or <ib-span class="ib_code">false</ib-span> (to hide the fine print).
   </ib-div>
 
   <ib-div class="ib_h3">Found a bug?</ib-div>
   <ib-div class="ib_p">
-    If you encounter any issue or found a bug, please report it at our <ib-span class="ib_a" onclick="window.open('https://github.com/Invoicebus/html-invoice-generator/issues', '_blank')">GitHub repo</ib-span>. Please do not submit general questions here instead use the support forum (see below). Thanks.
+    If you encounter any issue or found a bug, please report it at our <ib-span class="ib_a" onclick="window.open('https://github.com/Invoicebus/html-invoice-generator/issues', '_blank')">GitHub repo</ib-span>. Please do not submit general questions here, instead use the support forum (see below).
   </ib-div>
 
   <ib-div class="ib_h3">Suggestions, questions, criticism?</ib-div>
   <ib-div class="ib_p">
-    Is there anything we can do to improve this template and make it better for you? Good things / bad things? Feel free to write us at our <ib-span class="ib_a" onclick="window.open('https://groups.google.com/d/forum/html-invoice-generator', '_blank')">support forum</ib-span> – we read and respond to every post.
+    Is there anything we can do to improve this template and make it better for you? Good things / bad things? Feel free to find the appropriate topic at our <ib-span class="ib_a" onclick="window.open('https://groups.google.com/d/forum/html-invoice-generator', '_blank')">support forum</ib-span> and hit us up – we read and respond to every post.
   </ib-div>
 </ib-div>

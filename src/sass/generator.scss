@@ -122,6 +122,20 @@ ib-div {
   content: "\f110";
 }
 
+.fa-flash:before,
+.fa-bolt:before {
+  content: "\f0e7";
+}
+
+.fa-cloud-upload:before {
+  content: "\f0ee";
+}
+
+.fa-edit:before,
+.fa-pencil-square-o:before {
+  content: "\f044";
+}
+
 .fa-spin {
   -webkit-animation: fa-spin 2s infinite linear;
   animation: fa-spin 2s infinite linear;
@@ -186,7 +200,7 @@ html {
 }
 
 .modal-body {
-  height:420px;
+  height:450px;
   padding:0;
 }
 
@@ -196,6 +210,11 @@ html {
 
 .modal-title {
   font-size:20px;
+  text-align: center;
+}
+
+.modal-footer {
+  text-align: center;
 }
 
 .modal-backdrop {
@@ -237,6 +256,22 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   &:focus {
     outline:2px solid $contenteditable-color;
   }
+}
+
+.ib_hide {
+  display: none;
+}
+
+.ib_show {
+  display: initial;
+}
+
+.ib_force_hide {
+  display: none !important;
+}
+
+.ib_force_show {
+  display: initial !important;
 }
 
 .ib_editable_outline {
@@ -568,7 +603,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 }
 
 .ib_default_button {
-  font:normal 14px/1 $font-stack;
+  font:normal 13px/1em $font-stack;
   border:1px solid;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   display: inline-block;
@@ -578,6 +613,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   color: #333333;
   text-align: center;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  text-decoration: none;
   vertical-align: middle;
   cursor: pointer;
   background-color: #f5f5f5;
@@ -589,13 +625,15 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   &:hover,
   &:focus,
   &:active,
-  &[disabled] {
+  &[disabled],
+  &.active_hover {
     color: #333333;
     background-color: #e6e6e6;
   }
 
-  &:active
-   {
+  &:active,
+  &.active
+  {
     background-color: #cccccc \9;
     background-image: none;
     outline: 0;
@@ -641,6 +679,18 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   @include box-shadow(none);
 }
 
+.ib_large_button {
+  display: block;
+  width: 150px;
+  margin: 35px auto 0 auto;
+  padding: 7px;
+  font-size: 14px;
+
+  .fa-bolt {
+    margin-right: 3px;
+  }
+}
+
 .ib_gray_link {
   font:normal 13px/1.4em $font-stack;
   color:#777;
@@ -671,8 +721,12 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 
     .ib_default_button {
       float: left;
-      margin-right: 20px;
-      padding:5px 30px;
+      margin-right: 7px;
+      padding:5px 10px;
+
+      .fa {
+        margin-right: 3px;
+      }
     }
 
     .ib_success_button {
@@ -762,7 +816,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   @extend .modal-body;
   overflow: auto;
 
-  .ib_how_to {
+  .ib_modal_container {
     font-size:13px;
     line-height:1.6em;
     padding: 30px 40px;
@@ -812,6 +866,19 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
       color: #c7254e;
       background-color: #f9f2f4;
       border-radius: 4px;
+    }
+
+    .ib_safari_note {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    $notice-color: #fcf8e3;
+    .ib_notice {
+      background: $notice-color;
+      border: 1px solid shade($notice-color, 7%);
+      @include border-radius(5px);
+      padding: 15px;
     }
   }
 }

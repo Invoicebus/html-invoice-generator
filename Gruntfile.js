@@ -96,7 +96,7 @@ module.exports = function(grunt) {
 
     copy: {
       tpl: {
-        src: ['<%= tpl_dir %>/*.{js,html}', 'src/libs/*.js'],
+        src: ['<%= tpl_dir %>/*.html', '<%= tpl_dir %>/data.*', 'src/libs/*.js'],
         dest: '<%= build_dir %>',
         expand: true,
         flatten: true
@@ -141,11 +141,19 @@ module.exports = function(grunt) {
             },
             {
               match: 'SCRIPT',
-              replacement: '<script src="<%= build_js %>?data=data.js"></script>\n<script src="http://localhost:35729/livereload.js"></script>'
+              replacement: '<script src="<%= build_js %>?data=true"></script>\n<script src="http://localhost:35729/livereload.js"></script>'
             },
             {
               match: 'HOWTO',
               replacement: '<%= how_to %>'
+            },
+            {
+              match: 'SAVE_STATE',
+              replacement: '<%= save_state %>'
+            },
+            {
+              match: 'RAW_DATA',
+              replacement: '<%= raw_data %>'
             },
             {
               match: 'TPL_NOTE',
@@ -187,11 +195,19 @@ module.exports = function(grunt) {
             },
             {
               match: 'SCRIPT',
-              replacement: '<script src="<%= cdn_path %><%= build_js %>?data=data.js"></script>'
+              replacement: '<script src="<%= cdn_path %><%= build_js %>?data=true"></script>'
             },
             {
               match: 'HOWTO',
               replacement: '<%= how_to %>'
+            },
+            {
+              match: 'SAVE_STATE',
+              replacement: '<%= save_state %>'
+            },
+            {
+              match: 'RAW_DATA',
+              replacement: '<%= raw_data %>'
             },
             {
               match: 'TPL_NOTE',
@@ -233,11 +249,19 @@ module.exports = function(grunt) {
             },
             {
               match: 'SCRIPT',
-              replacement: '<script src="<%= build_js.replace(".js", ".min.js") %>?data=data.js"></script>'
+              replacement: '<script src="<%= build_js.replace(".js", ".min.js") %>?data=true"></script>'
             },
             {
               match: 'HOWTO',
               replacement: '<%= how_to %>'
+            },
+            {
+              match: 'SAVE_STATE',
+              replacement: '<%= save_state %>'
+            },
+            {
+              match: 'RAW_DATA',
+              replacement: '<%= raw_data %>'
             },
             {
               match: 'TPL_NOTE',
@@ -279,11 +303,19 @@ module.exports = function(grunt) {
             },
             {
               match: 'SCRIPT',
-              replacement: '<script src="<%= cdn_path %><%= build_js.replace(".js", ".min.js") %>?data=data.js"></script>'
+              replacement: '<script src="<%= cdn_path %><%= build_js.replace(".js", ".min.js") %>?data=true"></script>'
             },
             {
               match: 'HOWTO',
               replacement: '<%= how_to %>'
+            },
+            {
+              match: 'SAVE_STATE',
+              replacement: '<%= save_state %>'
+            },
+            {
+              match: 'RAW_DATA',
+              replacement: '<%= raw_data %>'
             },
             {
               match: 'TPL_NOTE',
@@ -309,7 +341,7 @@ module.exports = function(grunt) {
             },
             {
               match: 'SCRIPT',
-              replacement: '<script src="<%= cdn_path %><%= build_js.replace(".js", ".min.js") %>?data=data.js"></script>'
+              replacement: '<script src="<%= cdn_path %><%= build_js.replace(".js", ".min.js") %>?data=true"></script>'
             }
           ]
         },
@@ -347,7 +379,7 @@ module.exports = function(grunt) {
         },
         files: [
           {
-            src: ['template.html', 'template.css', 'data.js'],
+            src: ['template.html', 'template.css', 'data.txt'],
             cwd: '<%= build_dir %>',
             filter: 'isFile',
             expand: true
@@ -382,7 +414,7 @@ module.exports = function(grunt) {
         tasks: ['dev']
       },
       js: {
-        files: ['<%= js_src %>', 'docs/<%= doc_file %>'],
+        files: ['<%= js_src %>', 'docs/*'],
         tasks: ['jshint', 'concat:js', 'replace:dev']
       },
       css: {
@@ -393,8 +425,8 @@ module.exports = function(grunt) {
         files: '<%= tpl_dir %>/*.html',
         tasks: ['copy:tpl', 'replace:dev']
       },
-      tpl_js: {
-        files: '<%= tpl_dir %>/*.js',
+      tpl_data: {
+        files: '<%= tpl_dir %>/data.*',
         tasks: ['copy:tpl', 'replace:dev']
       },
       tpl_css: {
@@ -405,15 +437,17 @@ module.exports = function(grunt) {
         options: {
           livereload: true
         },
-        files: ['src/**/*', 'docs/<%= doc_file %>'],
+        files: ['src/**/*', 'docs/*'],
       }
     },
 
     banner: '/*! <%= pkg.description %> @author: <%= pkg.author.name %> @email: <%= pkg.author.email %> @web: <%= pkg.author.web %> @version: <%= pkg.version %> @updated: <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> @license: <%= pkg.license %> */',
     tpl_note: '<!--\n  Invoice template by invoicebus.com\n  To customize this template consider following this guide https://invoicebus.com/how-to-create-invoice-template/\n  This template is under The MIT License\n-->',
-    how_to: grunt.file.read('docs/how-to.html').replace(/\n/g, ' ').replace(/'/g, "\\'"),
+    how_to: grunt.file.read('docs/how-to.html').replace(/'/g, "\\'").replace(/\r\n|\r|\n/g, ' '),
+    save_state: grunt.file.read('docs/save-state.html').replace(/'/g, "\\'").replace(/\r\n|\r|\n/g, ' '),
+    raw_data: grunt.file.read('docs/raw-data.txt').replace(/'/g, "\\'").replace(/\r\n/g, '[crlf]'),
 
-    js_src: ['src/js/<%= build_js %>', 'src/js/table-dnd.js', 'src/js/bootstrap-datepicker.js', 'src/js/bootstrap3-typeahead.js'],
+    js_src: ['src/js/<%= build_js %>', 'src/js/table-dnd.js', 'src/js/bootstrap-datepicker.js', 'src/js/bootstrap3-typeahead.js', 'src/js/multiline.js', 'src/js/parse-data.js'],
     css_src: 'src/sass',
 
     build_js: 'generator.js',
@@ -422,8 +456,6 @@ module.exports = function(grunt) {
     build_dir: 'dist/',
 
     tpl_dir: 'src/template',
-
-    doc_file: 'how-to.html',
 
     cdn_path: 'http://cdn.invoicebus.com/generator/',
     tracking: '?utm_source=generator&utm_medium=template&utm_campaign=invoicebus_templates',
