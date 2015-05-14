@@ -208,8 +208,8 @@ true
 ### Items (in this order item_description@||@item_quantity@||@item_price@||@item_discount@||@item_tax)
 
 [items]
-Frozen Brontosaurus Ribs@||@2@||@120@||@@||@2
-Mammoth Chops@||@14@||@175@||@-10%@||@5
+Frozen Brontosaurus Ribs@||@2@||@120@||@@||@2%
+Mammoth Chops@||@14@||@175@||@-10%@||@5%
 @||@@||@@||@@||@
 
 

@@ -20,7 +20,7 @@ var ib_parseData = function(data) {
       parsed_data[property] = d[i + 1].replace(/\r|\n/g, ''); // clean the new line characters
     }
 
-    if(line == '[default_columns]') // this is special case for [default_columns] because the value should be array
+    if(line == '[default_columns]') // this is special case for [default_columns] because the value should be an array
     {
       parsed_data.default_columns = parsed_data.default_columns.split(',').map(trim);
     }
@@ -28,7 +28,7 @@ var ib_parseData = function(data) {
     if(line == '[items]') // this is special case for [items] because the value is multiline
     {
       j = i + 1;
-      line = d[j].trim(); // trim will clean the new line characters at the end
+      line = d[j].replace(/\r|\n/g, ''); // clean the new line characters
       while(line !== '')
       {
         var item = line.split('@||@');
