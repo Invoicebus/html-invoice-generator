@@ -1001,7 +1001,19 @@
   };
 
   String.prototype.getNumber = function() {
-    return Math.abs(parseFloat(this.replace(/[^0-9.]/gi, '')));
+    if(this)
+    {
+      return Math.abs(parseFloat(this.replace(/[^0-9.]/gi, '')));
+    }
+    return 0;
+  };
+
+  String.prototype.getValidNumberChars = function() {
+    if(this)
+    {
+      return this.replace(/[^0-9.]/gi, '');
+    }
+    return '';
   };
 
   var ib_calculateTotals = function() {
@@ -1227,7 +1239,7 @@
                   self.textContent = self.textContent + '%';
                 }
                 else {
-                  self.textContent = (self.textContent.indexOf('-') != -1 ? '-' : '') + self.textContent.getNumber() + '%';
+                  self.textContent = (self.textContent.indexOf('-') != -1 ? '-' : '') + self.textContent.getValidNumberChars() + '%';
                 }
 
                 if(pos == self.textContent.length)
