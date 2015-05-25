@@ -169,13 +169,17 @@ var ib_invoice_data = function(){/*
 
 ### Settings
 
-# One of dd/mm/yyyy, dd-mm-yyyy, mm/dd/yyyy, mm-dd-yyyy
+# One of 'dd/mm/yyyy', 'dd-mm-yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy'
 [date_format]
 |date_format|
 
-# One of left or right
+# One of 'left' or 'right'
 [currency_position]
 |currency_position|
+
+# One of '0,000.00', '0000.00', '0.000,00', or '0000,00'
+[number_format]
+|number_format|
 
 [default_columns]
 |default_columns|

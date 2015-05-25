@@ -441,7 +441,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   border:2px dashed #999 !important;
 }
 
-.ib_currency_position,
+.ib_number_settings,
 .ib_date_format {
   font:normal 14px/1.4em $font-stack !important;
   position:absolute !important;
@@ -462,9 +462,21 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   input[type="radio"] {
     top:2px;
     position:relative;
+  }
 
-    &[value="right"] {
-      margin-left:10px;
+  table {
+    table-layout:fixed;
+
+    th, td {
+      vertical-align:top;
+      word-break: keep-all;
+      word-wrap: break-word;
+
+      padding-bottom: 3px;
+    }
+
+    td:first-child {
+      padding-right: 10px;
     }
   }
 }
@@ -769,6 +781,10 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
       display:block;
     }
   }
+}
+
+.ib_item_percentage:after {
+  content: "%";
 }
 
 [data-ibcl-id="tax_value"]:before {

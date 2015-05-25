@@ -551,8 +551,9 @@
       '{terms}'                 : { default_text: 'Fred, thank you very much. We really appreciate your business.<br />Please send payments before the due date.', tooltip: 'Enter invoice terms and notes' },
 
       // Settings
-      'date_format'             : 'mm/dd/yyyy', // One of dd/mm/yyyy, dd-mm-yyyy, mm/dd/yyyy, mm-dd-yyyy
-      'currency_position'       : 'left', // One of left or right
+      'date_format'             : 'mm/dd/yyyy', // One of 'dd/mm/yyyy', 'dd-mm-yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy'
+      'currency_position'       : 'left', // One of 'left' or 'right'
+      'number_format'           : '0,000.00', // One of '0,000.00', '0000.00', '0.000,00', or '0000,00'
       'default_columns'         : ['item_row_number', 'item_description', 'item_quantity', 'item_price', 'item_discount', 'item_tax', 'item_line_total'],
       'default_quantity'        : '1',
       'default_price'           : '0',
@@ -611,6 +612,11 @@
           ib_data[key] = ib_invoice_data[key];
 
       ib_currency_position = ib_invoice_data.currency_position;
+      ib_number_format     = ib_invoice_data.number_format;
+
+      if(ib_number_format)
+        ib_decimal_separator = ib_number_format[ib_number_format.length - 3];
+
       ib_currency_symbol = $(ib_currencies).map(function(idx, val) {
                                                   if(val.code == ib_data['{currency}'].default_text)
                                                     return val.symbol;
@@ -988,7 +994,7 @@
   var ib_getExistingTaxRow = function(tax_rows, tax_value) {
     for(var i = 0; i < tax_rows.length; i++)
     {
-      tax_row = $(tax_rows[i]).find('[data-ib-value="' + tax_value + '"]');
+      tax_row = $(tax_rows[i]).find('[data-ib-value="' + tax_value.getFormatedNumber() + '"]');
       if(tax_row.length)
         return i;
     }
@@ -997,23 +1003,86 @@
   };
 
   var ib_getTaxName = function(tax_value) {
-    return $('[data-iterate="tax"]:visible').find('[data-ib-value="' + tax_value + '"]').closest('[data-iterate="tax"]').find('[data-ibcl-id="tax_name"]').text().replace(/:/gi, '');
+    if(tax_value)
+      return $('[data-iterate="tax"]:visible').find('[data-ib-value="' + tax_value.toString().getFormatedNumber() + '"]').closest('[data-iterate="tax"]').find('[data-ibcl-id="tax_name"]').text().replace(/:/gi, '');
+
+    return '';
+  };
+
+  String.prototype.insertString = function(str, position) {
+    if(this)
+      return [this.slice(0, position), str, this.slice(position)].join('');
+
+    return '';
   };
 
   String.prototype.getNumber = function() {
     if(this)
-    {
-      return Math.abs(parseFloat(this.replace(/[^0-9.]/gi, '')));
-    }
+      return Math.abs(parseFloat(this.replace(/[^0-9.,]/g, '').replace(/,/g, '.')));
+
     return 0;
   };
 
   String.prototype.getValidNumberChars = function() {
     if(this)
-    {
-      return this.replace(/[^0-9.]/gi, '');
-    }
+      return this.replace(/[^0-9.,]/gi, '');
+
     return '';
+  };
+
+  String.prototype.getFormatedNumber = function() {
+    if(this)
+    {
+      var i, counter, number = this.toString();
+
+      if(ib_decimal_separator == '.') {
+        if(ib_number_format == '0,000.00') {
+          counter = 0;
+          for(i = number.lastIndexOf('.') - 1; i >= 0; i--)
+          {
+            if(counter < 2)
+            {
+              counter++;
+              continue;
+            }
+            else {
+              counter = 0;
+              number = number.insertString(',', i);
+            }
+          }
+        }
+        else if(ib_number_format == '0000.00') {
+          // don't do anything, the number is already in this format
+        }
+      }
+      else if(ib_decimal_separator == ',') {
+        if(ib_number_format == '0.000,00') {
+          number = number.replace(/\./g, ',');
+          counter = 0;
+          for(i = number.lastIndexOf(',') - 1; i >= 0; i--)
+          {
+            if(counter < 2)
+            {
+              counter++;
+              continue;
+            }
+            else {
+              counter = 0;
+              number = number.insertString('.', i);
+            }
+          }
+        }
+        else if(ib_number_format == '0000,00') {
+          number = number.replace(/\./g, ',');
+        }
+      }
+
+      if(number[0] == '.' || number[0] == ',')
+        number = number.substring(1);
+
+      return number;
+    }
+    return this;
   };
 
   var ib_calculateTotals = function() {
@@ -1032,9 +1101,21 @@
       var row = $(rows[i]);
 
       var item_quantity = row.find('[data-ibcl-id="item_quantity"]:visible').text().getNumber() || ib_data.default_quantity.getNumber();
-      var item_price    = row.find('[data-ibcl-id="item_price"]:visible').text().getNumber() || ib_data.default_price;
+      var item_price    = row.find('[data-ibcl-id="item_price"]:visible').text().getNumber()    || ib_data.default_price;
       var item_discount = row.find('[data-ibcl-id="item_discount"]:visible').text().getNumber() || ib_data.default_discount.getNumber();
-      var item_tax      = row.find('[data-ibcl-id="item_tax"]:visible').text().getNumber() || ib_data.default_tax.getNumber();
+      var item_tax      = row.find('[data-ibcl-id="item_tax"]:visible').text().getNumber()      || ib_data.default_tax.getNumber();
+
+      // Handle discount percentage (%) sign with pseudo element
+      if(!isNaN(row.find('[data-ibcl-id="item_discount"]').text().getNumber()))
+        row.find('[data-ibcl-id="item_discount"]').addClass('ib_item_percentage').find('br, p, div').remove();
+      else
+        row.find('[data-ibcl-id="item_discount"]').removeClass('ib_item_percentage').find('br, p, div').remove();
+
+      // Handle tax percentage (%) sign with pseudo element
+      if(!isNaN(row.find('[data-ibcl-id="item_tax"]').text().getNumber()))
+        row.find('[data-ibcl-id="item_tax"]').addClass('ib_item_percentage').find('br, p, div').remove();
+      else
+        row.find('[data-ibcl-id="item_tax"]').removeClass('ib_item_percentage').find('br, p, div').remove();
       
       var item_line_total = row.find('[data-ibcl-id="item_line_total"]:visible');
       
@@ -1070,7 +1151,7 @@
           taxes.push(tax_tmp);
       }
 
-      item_line_total.text(line_sum !== 0 ? line_sum.toFixed(2) : '');
+      item_line_total.text(line_sum !== 0 ? line_sum.toFixed(2).getFormatedNumber() : '');
     }
 
     var tax_rows = [], tax_row, tax_value;
@@ -1078,7 +1159,7 @@
     for(j = 0; j < taxes.length; j++)
     {
       tax_value = Object.keys(taxes[j])[0];
-      tax_row = $('[data-iterate="tax"]:visible').find('[data-ib-value="' + tax_value + '"]').closest('[data-iterate="tax"]');
+      tax_row = $('[data-iterate="tax"]:visible').find('[data-ib-value="' + tax_value.getFormatedNumber() + '"]').closest('[data-iterate="tax"]');
       if(tax_row.length)
         tax_rows.push($(tax_row).clone());
     }
@@ -1105,7 +1186,7 @@
 
         tax_name.text(tax_name_text.substring(0, colon) + ' ' + (j + 1) + tax_name_text.substring(colon, tax_name_text.length));
 
-        tax_row.find('[data-ibcl-id="tax_value"]').attr('data-ib-value', Object.keys(taxes[j])[0]);
+        tax_row.find('[data-ibcl-id="tax_value"]').attr('data-ib-value', Object.keys(taxes[j])[0].getFormatedNumber());
         $('[data-iterate="tax"]:hidden').before(tax_row);
       }
     }
@@ -1114,8 +1195,8 @@
     for(j = 0; j < taxes.length; j++)
     {
       tax_value = Object.keys(taxes[j])[0];
-      tax_row = ib_currency_position == 'left' ? ib_currency_symbol + taxes[j][tax_value].toFixed(2) : taxes[j][tax_value].toFixed(2) + ib_currency_symbol;
-      $('[data-iterate="tax"]').find('[data-ib-value="' + tax_value + '"]').html(tax_row);
+      tax_row = ib_currency_position == 'left' ? ib_currency_symbol + taxes[j][tax_value].toFixed(2).getFormatedNumber() : taxes[j][tax_value].toFixed(2).getFormatedNumber() + ib_currency_symbol;
+      $('[data-iterate="tax"]').find('[data-ib-value="' + tax_value.getFormatedNumber() + '"]').html(tax_row);
     }
 
     var amount_total = sum_total + tax_total;
@@ -1123,15 +1204,15 @@
     if(isNaN(amount_paid))
     {
       amount_paid = 0;
-      $('[data-ibcl-id="amount_paid"]').text(amount_paid.toFixed(2));
+      $('[data-ibcl-id="amount_paid"]').text(amount_paid.toFixed(2).getFormatedNumber());
     }
     if(isNaN(amount_due)) amount_due = 0;
     
     amount_due = amount_total - amount_paid;
     
-    sum_total    = ib_currency_position == 'left' ? ib_currency_symbol + sum_total.toFixed(2) : sum_total.toFixed(2) + ib_currency_symbol;
-    amount_total = ib_currency_position == 'left' ? ib_currency_symbol + amount_total.toFixed(2) : amount_total.toFixed(2) + ib_currency_symbol;
-    amount_due   = ib_currency_position == 'left' ? ib_currency_symbol + amount_due.toFixed(2) : amount_due.toFixed(2) + ib_currency_symbol;
+    sum_total    = ib_currency_position == 'left' ? ib_currency_symbol + sum_total.toFixed(2).getFormatedNumber() : sum_total.toFixed(2).getFormatedNumber() + ib_currency_symbol;
+    amount_total = ib_currency_position == 'left' ? ib_currency_symbol + amount_total.toFixed(2).getFormatedNumber() : amount_total.toFixed(2).getFormatedNumber() + ib_currency_symbol;
+    amount_due   = ib_currency_position == 'left' ? ib_currency_symbol + amount_due.toFixed(2).getFormatedNumber() : amount_due.toFixed(2).getFormatedNumber() + ib_currency_symbol;
     
     $('[data-ibcl-id="amount_subtotal"]').text(sum_total);
     $('[data-ibcl-id="amount_total"]').text(amount_total);
@@ -1173,8 +1254,8 @@
       $(rows[i]).find('[data-ibcl-id="item_description"]').html(ib_data.items[i].item_description);
       $(rows[i]).find('[data-ibcl-id="item_quantity"]').html(ib_data.items[i].item_quantity);
       $(rows[i]).find('[data-ibcl-id="item_price"]').html(ib_data.items[i].item_price);
-      $(rows[i]).find('[data-ibcl-id="item_discount"]').html(ib_data.items[i].item_discount);
-      $(rows[i]).find('[data-ibcl-id="item_tax"]').html(ib_data.items[i].item_tax);
+      $(rows[i]).find('[data-ibcl-id="item_discount"]').html(ib_data.items[i].item_discount.replace(/%/g, '')); // remove the percent sign
+      $(rows[i]).find('[data-ibcl-id="item_tax"]').html(ib_data.items[i].item_tax.replace(/%/g, '')); // remove the percent sign
     }
   };
 
@@ -1219,63 +1300,19 @@
           ((e.keyCode >= 48 && e.keyCode <= 57) && !e.shiftKey) || 
           (e.keyCode >= 96 && e.keyCode <= 105) || 
           e.keyCode == 8 || e.keyCode == 9 || 
-          e.keyCode == 46 || e.keyCode == 190 || e.keyCode == 110 || 
+          e.keyCode == 46 || e.keyCode == 190 || e.keyCode == 110 || e.keyCode == 188 ||
           e.keyCode == 116) {
           // Don't do anything
 
         switch($(this).data('ibcl-id'))
         {
-          case 'item_tax':
-          case 'item_discount':
-            // Add automatically percentage (%) sign
-            setTimeout(function() {
-              if(isNaN(self.textContent.getNumber()))
-                self.textContent = '';
-
-              if(!isNaN(self.textContent.getNumber()))
-              {
-                var pos = window.getSelection().extentOffset;
-                if(self.textContent.indexOf('%') == -1) {
-                  self.textContent = self.textContent + '%';
-                }
-                else {
-                  self.textContent = (self.textContent.indexOf('-') != -1 ? '-' : '') + self.textContent.getValidNumberChars() + '%';
-                }
-
-                if(pos == self.textContent.length)
-                  pos--;
-                else if(pos === 0 && self.textContent.indexOf('-') != -1)
-                  pos = 1;
-
-                if(e.keyCode != 9)
-                  try {
-                    window.getSelection().collapse(self.firstChild, pos);
-                  } catch(err) {}
-              }
-            }, 0);
-            break;
-
           case 'amount_paid':
             setTimeout(function() {
               if(isNaN(self.textContent.getNumber()))
                 self.textContent = '';
 
-              if(!isNaN(self.textContent.getNumber()))
-              {
-                var pos = window.getSelection().extentOffset;
-                if(self.textContent.indexOf('-') != -1)
-                {
+              if(!isNaN(self.textContent.getNumber()) && self.textContent.indexOf('-') > 0)
                   self.textContent = '-' + self.textContent.getNumber().toFixed(2);
-                }
-                
-                if(pos === 0 && self.textContent.indexOf('-') != -1)
-                  pos = 1;
-
-                if(e.keyCode != 9)
-                  try {
-                    window.getSelection().collapse(self.firstChild, pos);
-                  } catch(err) {}
-              }
             }, 0);
             break;
 
@@ -1307,11 +1344,22 @@
         e.preventDefault();
       }
 
-      // if a decimal has been added, disable the "."-button
-      if($(this).text().indexOf('.') != -1 && (e.keyCode == 190 || e.keyCode == 110))
+      // if a decimal separator has been added, disable the '.' or ',' keys
+      if(ib_decimal_separator == '.' && $(this).text().indexOf('.') != -1 && (e.keyCode == 190 || e.keyCode == 110))
+        e.preventDefault(); 
+
+      if(ib_decimal_separator == ',' && $(this).text().indexOf(',') != -1 && e.keyCode == 188)
+        e.preventDefault();
+
+      // if decimal separator is '.' than preven the ',' from being typed
+      if(ib_decimal_separator == '.' && e.keyCode == 188)
+        e.preventDefault();
+
+      // if decimal separator is ',' than preven the '.' from being typed
+      if(ib_decimal_separator == ',' && (e.keyCode == 190 || e.keyCode == 110))
         e.preventDefault();
         
-      if($(this).data('ibcl-id') == 'net_term' && ((e.keyCode == 190 || e.keyCode == 110) || ($(this).text().length >= 3 && e.keyCode >= 48 && e.keyCode <= 57 && window.getSelection().isCollapsed)))
+      if($(this).data('ibcl-id') == 'net_term' && ((e.keyCode == 188 || e.keyCode == 190 || e.keyCode == 110) || ($(this).text().length >= 3 && e.keyCode >= 48 && e.keyCode <= 57 && window.getSelection().isCollapsed)))
         e.preventDefault();
 
       setTimeout(ib_calculateTotals, 0);
@@ -1526,11 +1574,13 @@
   };
 
   /**
-   * Currency functions
+   * Currency and number format functions
    */
-  var ib_currencies = [],
-      ib_currency_symbol = '$',
-      ib_currency_position = 'left';
+  var ib_currencies        = [],
+      ib_currency_symbol   = '$',
+      ib_currency_position = 'left',
+      ib_number_format     = '0,000.00',
+      ib_decimal_separator = '.';
 
   var ib_raw_currencies = 
     // name,symbol,code,priority
@@ -1697,13 +1747,53 @@
   var ib_initCurrencies = function() {
     $.each(ib_raw_currencies.split(';'), function(idx, val) {
       var tmp_curr = val.split(',');
-      ib_currencies.push({name: tmp_curr[0], symbol: tmp_curr[1], code: tmp_curr[2], priority: tmp_curr[3] });
+      ib_currencies.push({ name: tmp_curr[0], symbol: tmp_curr[1], code: tmp_curr[2], priority: tmp_curr[3] });
     });
   };
 
   var ib_initTypeahead = function() {
-    var currency_position = 
-      $('<ib-span class="ib_currency_position"><input type="radio" id="ib_currency_left" name="ib_currency" value="left" checked /><label for="ib_currency_left">$100</label><input type="radio" id="ib_currency_right" name="ib_currency" value="right" /><label for="ib_currency_right">100$</label></ib-span>')
+    var number_settings = 
+      $('<ib-span class="ib_number_settings">' +
+          '<table>' +
+            '<tr>' +
+              '<td>' +
+                '<input type="radio" id="ib_currency_left" name="ib_currency" value="left" checked />' +
+                '<label for="ib_currency_left" title="Show currency on left">$100</label>' +
+              '</td>' +
+              '<td>' +
+                '<input type="radio" id="ib_number_format_1" name="ib_number_format" value="0,000.00" checked />' +
+                '<label for="ib_number_format_1">1,234.56</label>' +
+              '</td>' +
+            '</tr>' +
+
+            '<tr>' +
+              '<td>' +
+                '<input type="radio" id="ib_currency_right" name="ib_currency" value="right" />' +
+                '<label for="ib_currency_right" title="Show currency on right">100$</label>' +
+              '</td>' +
+              '<td>' +
+                '<input type="radio" id="ib_number_format_2" name="ib_number_format" value="0000.00" />' +
+                '<label for="ib_number_format_2">1234.56</label>' +
+              '</td>' +
+            '</tr>' +
+
+            '<tr>' +
+              '<td></td>' +
+              '<td>' +
+                '<input type="radio" id="ib_number_format_3" name="ib_number_format" value="0.000,00" />' +
+                '<label for="ib_number_format_3">1.234,56</label>' +
+              '</td>' +
+            '</tr>' +
+
+            '<tr>' +
+              '<td></td>' +
+              '<td>' +
+                '<input type="radio" id="ib_number_format_4" name="ib_number_format" value="0000,00" />' +
+                '<label for="ib_number_format_4">1234,56</label>' +
+              '</td>' +
+            '</tr>' +
+          '</table>' +
+        '</ib-span>')
         .hover(
           function() {
             $(this).show();
@@ -1713,7 +1803,7 @@
           }
         );
 
-    $(document.body).after(currency_position);
+    $(document.body).after(number_settings);
     
     $('[data-ibcl-id="currency"]')
       .typeahead({
@@ -1773,17 +1863,38 @@
       .hover(
         function() {
           var offset = $(this).offset(), width = $(this).width();
-          currency_position.show().offset({ top: offset.top - 5, left: offset.left + width + 1 });
+          number_settings.show().offset({ top: offset.top - 5, left: offset.left + width + 1 });
         },
         function() {
-          currency_position.hide();
+          number_settings.hide();
         }
       );
 
-    $('#ib_currency_left[value="' + ib_currency_position + '"], #ib_currency_right[value="' + ib_currency_position + '"]').attr('checked','checked');
+    $('[name="ib_currency"][value="' + ib_currency_position + '"]').attr('checked','checked');
 
-    $('#ib_currency_left, #ib_currency_right').change(function(e) {
+    $('[name="ib_number_format"][value="' + ib_number_format + '"]').attr('checked','checked');
+
+    $('[name="ib_currency"]').change(function(e) {
       ib_currency_position = $(this).val();
+      ib_calculateTotals();
+    });
+
+    $('[name="ib_number_format"]').change(function(e) {
+      ib_number_format = $(this).val();
+      if(ib_number_format)
+        ib_decimal_separator = ib_number_format[ib_number_format.length - 3];
+
+      var rows = $('[data-iterate="item"]');
+      for(var i = 0; i < rows.length; i++)
+      {
+        var row = $(rows[i]);
+
+        row.find('[data-ibcl-id="item_quantity"]').text(row.find('[data-ibcl-id="item_quantity"]').text().replace(/[.,]/g, ib_decimal_separator));
+        row.find('[data-ibcl-id="item_price"]').text(row.find('[data-ibcl-id="item_price"]').text().replace(/[.,]/g, ib_decimal_separator));
+        row.find('[data-ibcl-id="item_discount"]').text(row.find('[data-ibcl-id="item_discount"]').text().replace(/[.,]/g, ib_decimal_separator));
+        row.find('[data-ibcl-id="item_tax"]').text(row.find('[data-ibcl-id="item_tax"]').text().replace(/[.,]/g, ib_decimal_separator));
+      }
+
       ib_calculateTotals();
     });
   };
@@ -1847,7 +1958,8 @@
       'date_format'            : '',
       'currency_code'          : '',
       'currency_symbol'        : '',
-      'currency_position'      : ''
+      'currency_position'      : '',
+      'number_format'          : ''
     };
 
     data.hash = $('meta[name="template-hash"]').attr('content') || data.hash;
@@ -1891,6 +2003,7 @@
         item_row[el.data('ibcl-id')] = ib_fixNewlines(el.html());
       });
 
+      item_row.item_row_number     = $(item_row.item_row_number).text();
       item_row.item_quantity       = item_row.item_quantity.getNumber();
       item_row.item_price          = item_row.item_price.getNumber();
       item_row.item_tax_percentage = item_row.item_tax.getNumber();
@@ -1931,11 +2044,12 @@
     data.date_format = ib_data.date_format;
 
     // Get currency properties
-    data.currency_code = data.currency;
-    data.currency_symbol = ib_currency_symbol;
-    delete data.currency; // Delete the old currency property
+    data.currency_code     = data.currency;
+    data.currency_symbol   = ib_currency_symbol;
+    delete data.currency;  // Delete the old currency property
 
-    data.currency_position = $('.ib_currency_position input[type="radio"]:checked').val();
+    data.currency_position = $('.ib_number_settings input[name="ib_currency"]:checked').val();
+    data.number_format     = $('.ib_number_settings input[name="ib_number_format"]:checked').val();
 
     return data;
   };
