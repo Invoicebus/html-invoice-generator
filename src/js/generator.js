@@ -5,7 +5,7 @@
 (function () {
 
   /*
-   * Initally hide the html and body elements
+   * Initially hide the html and body elements
    */
   document.getElementsByTagName('html')[0].style.position = 'absolute';
   document.getElementsByTagName('html')[0].style.top = '-100000px';
@@ -13,14 +13,32 @@
   document.body.style.position = 'absolute';
   document.body.style.top = '-100000px';
 
+  // Utility function to get the generator script path
+  var ib_getGeneratorScriptPath = function() {
+    var scripts = document.getElementsByTagName('script');
+    for(var i = 0; i < scripts.length; i++)
+    {
+      var src = scripts[i].src;
+
+      var idx = src.indexOf('generator' + MIN + '.js?');
+      if(idx > -1)
+      {
+        return src.substring(0, idx);
+      }
+    }
+  };
+
   /**
    * Constants
    */
-  var PATH      = '@@PATH',
+  var BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+
       TRACKING  = '@@TRACKING',
       SAVE_URL  = '@@SAVE_URL',
       MIN       = '@@MIN',
-      BLANK_GIF = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+
+      // Get the path of the generator script
+      PATH      = ib_getGeneratorScriptPath(),
       // jQuery and Bootstrap paths
       JQUERY    = PATH + 'jquery.min.js',
       BOOTSTRAP = PATH + 'bootstrap.min.js';

@@ -120,10 +120,6 @@ module.exports = function(grunt) {
         options: {
           patterns: [
             {
-              match: 'PATH',
-              replacement: ''
-            },
-            {
               match: 'TRACKING',
               replacement: '<%= tracking %>'
             },
@@ -173,10 +169,6 @@ module.exports = function(grunt) {
       pubdev: {
         options: {
           patterns: [
-            {
-              match: 'PATH',
-              replacement: '<%= cdn_path %>'
-            },
             {
               match: 'TRACKING',
               replacement: '<%= tracking %>'
@@ -228,10 +220,6 @@ module.exports = function(grunt) {
         options: {
           patterns: [
             {
-              match: 'PATH',
-              replacement: ''
-            },
-            {
               match: 'TRACKING',
               replacement: '<%= tracking %>'
             },
@@ -281,10 +269,6 @@ module.exports = function(grunt) {
       pubprod: {
         options: {
           patterns: [
-            {
-              match: 'PATH',
-              replacement: '<%= cdn_path %>'
-            },
             {
               match: 'TRACKING',
               replacement: '<%= tracking %>'
