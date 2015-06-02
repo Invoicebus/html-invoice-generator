@@ -1036,7 +1036,12 @@
 
   String.prototype.getNumber = function() {
     if(this)
-      return Math.abs(parseFloat(this.replace(/[^0-9.,]/g, '').replace(/,/g, '.')));
+    {
+      if(ib_decimal_separator == '.')
+        return Math.abs(parseFloat(this.replace(/[^0-9.]/g, '')));
+      else if(ib_decimal_separator == ',')
+        return Math.abs(parseFloat(this.replace(/[^0-9,]/g, '').replace(/,/g, '.')));
+    }
 
     return 0;
   };
@@ -2013,12 +2018,15 @@
     
     $('[data-iterate="item"]').each(function(idx, val) {
       var item_row = {};
-      $(val).children().each(function(i, v) {
+      $(val).find('*').each(function(i, v) {
         var el = $(v);
-        if(!el.data('ibcl-id') && ib_isIE()) // For IE get the data from editable spans
-          el = el.find('.ibcl_ie_contenteditable');
+        if(el.data('ibcl-id') && ['item_row_number', 'item_description', 'item_quantity', 'item_price', 'item_tax_percentage', 'item_tax', 'item_discount', 'item_line_total'].indexOf(el.data('ibcl-id')) != -1)
+        {
+          if(!el.data('ibcl-id') && ib_isIE()) // For IE get the data from editable spans
+            el = el.find('.ibcl_ie_contenteditable');
 
-        item_row[el.data('ibcl-id')] = ib_fixNewlines(el.html());
+          item_row[el.data('ibcl-id')] = ib_fixNewlines(el.html());
+        }
       });
 
       item_row.item_row_number     = $(item_row.item_row_number).text();
@@ -2038,21 +2046,24 @@
 
     $('[data-iterate="tax"]:visible').each(function(idx, val) {
       var tax_row = {};
-      $(val).children().each(function(i, v){
+      $(val).find('*').each(function(i, v) {
         var el = $(v);
-        if(!el.data('ibcl-id') && ib_isIE()) // For IE get the data from editable spans
-          el = el.find('.ibcl_ie_contenteditable');
+        if(el.data('ibcl-id') && ['tax_name', 'tax_value'].indexOf(el.data('ibcl-id')) != -1)
+        {
+          if(!el.data('ibcl-id') && ib_isIE()) // For IE get the data from editable spans
+            el = el.find('.ibcl_ie_contenteditable');
 
-        tax_row[el.data('ibcl-id')] = ib_fixNewlines(el.html());
-        if(el.attr('data-ib-value'))
-          tax_row.tax_percentage = el.attr('data-ib-value').getNumber();
+          tax_row[el.data('ibcl-id')] = ib_fixNewlines(el.html());
+          if(el.attr('data-ib-value'))
+            tax_row.tax_percentage = el.attr('data-ib-value').getNumber();
+        }
       });
 
       tax_row.tax_value = tax_row.tax_value.getNumber();
       
       data.taxes.push(tax_row);
     });
-    
+
     data.amount_subtotal = data.amount_subtotal.getNumber();
     data.amount_total    = data.amount_total.getNumber();
     data.amount_paid     = data.amount_paid.getNumber();
