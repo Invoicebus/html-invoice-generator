@@ -20,7 +20,7 @@
     {
       var src = scripts[i].src;
 
-      var idx = src.indexOf('generator' + MIN + '.js?');
+      var idx = src.indexOf('generator' + MIN + '.js');
       if(idx > -1)
       {
         return src.substring(0, idx);
