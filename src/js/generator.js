@@ -648,6 +648,7 @@
 
   var ib_initTemplate = function() {
     ib_processHtml();
+    ib_addFieldListeners();
   };
 
   var ib_processHtml = function() {
@@ -743,6 +744,18 @@
     }
   };
 
+  var ib_addFieldListeners = function() {
+    // This will update all fields for the same placeholder with the typed value
+    $('[data-ibcl-id]').on('keydown keyup', function(e) {
+      var value = $(this).html();
+
+      $('[data-ibcl-id="' + $(this).data('ibcl-id') + '"]').each(function(idx, val) {
+        if($(val).html() !== value) // only update the field if the value is different
+          $(val).html(value);
+      });
+    });
+  };
+
   /**
    * Logo functions
    */
@@ -795,7 +808,7 @@
       function() { }
     );
 
-    // Wait for 10 ms before rendering the drag & drop container, to fix rendering issues
+    // Wait for 100 ms before rendering the drag & drop container, to fix rendering issues
     setTimeout(function() {
       ib_logo_width = $('[data-logo="company_logo"]').width();
       ib_logo_height = $('[data-logo="company_logo"]').height();
