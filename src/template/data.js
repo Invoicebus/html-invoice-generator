@@ -87,14 +87,14 @@ var ib_invoice_data = {
       "item_quantity"    : "2",
       "item_price"       : "120",
       "item_discount"    : "",
-      "item_tax"         : "2%"
+      "item_tax"         : "2"
     },
     {
       "item_description" : "Mammoth Chops",
       "item_quantity"    : "14",
       "item_price"       : "175",
-      "item_discount"    : "-10%",
-      "item_tax"         : "5%"
+      "item_discount"    : "-10",
+      "item_tax"         : "5"
     },
     {
       "item_description" : "",

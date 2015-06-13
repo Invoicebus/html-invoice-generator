@@ -747,12 +747,17 @@
   var ib_addFieldListeners = function() {
     // This will update all fields for the same placeholder with the typed value
     $('[data-ibcl-id]').on('keydown keyup', function(e) {
-      var value = $(this).html();
+      var field = $(this).data('ibcl-id');
+      // Don't apply this for the item fields, they don't need to update their values
+      if(['item_row_number', 'item_description', 'item_quantity', 'item_price', 'item_tax_percentage', 'item_tax', 'item_discount', 'item_line_total'].indexOf(field) == -1)
+      {
+        var value = $(this).html();
 
-      $('[data-ibcl-id="' + $(this).data('ibcl-id') + '"]').each(function(idx, val) {
-        if($(val).html() !== value) // only update the field if the value is different
-          $(val).html(value);
-      });
+        $('[data-ibcl-id="' + field + '"]').each(function(idx, val) {
+          if($(val).html() !== value) // only update the field if the value is different
+            $(val).html(value);
+        });
+      }
     });
   };
 
