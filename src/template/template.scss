@@ -213,6 +213,7 @@ table {
 #sums {
   float:right;
   margin-top:30px;
+  page-break-inside: avoid;
 
   table {
 
@@ -253,6 +254,7 @@ table {
 
 #terms {
   margin-top:100px;
+  page-break-inside: avoid;
 
   > span {
     font-weight:bold;

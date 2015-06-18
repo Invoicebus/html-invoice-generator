@@ -1126,6 +1126,11 @@
     return this;
   };
 
+  // Override the native toFixed function to prevent imprecisions of floating-point arithmetics
+  Number.prototype.toFixed = function(precision) {
+    return (+(Math.round(+(this.toString() + 'e' + precision)).toString() + 'e' + -precision)).toString();
+  };
+
   var ib_calculateTotals = function() {
     var rows = $('[data-iterate="item"]');
 
