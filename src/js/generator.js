@@ -1128,7 +1128,24 @@
 
   // Override the native toFixed function to prevent imprecisions of floating-point arithmetics
   Number.prototype.toFixed = function(precision) {
-    return (+(Math.round(+(this.toString() + 'e' + precision)).toString() + 'e' + -precision)).toString();
+    if(!precision) precision = 0;
+
+    var num = (+(Math.round(+(this.toString() + 'e' + precision)).toString() + 'e' + -precision)).toString();
+
+    if(num.indexOf('.') == -1 && precision > 0)
+      num += '.';
+
+    var counter = 0;
+    for(var i = num.indexOf('.') + 1; i <= num.length; i++)
+    {
+      if(num[i] === undefined && counter < precision)
+      {
+        num += '0';
+      }
+      counter++;
+    }
+
+    return num;
   };
 
   var ib_calculateTotals = function() {
@@ -1448,6 +1465,8 @@
     });
 
     ib_highlightEditable();
+
+    ib_calculateTotals();
   };
 
   var ib_deleteRow = function(el, e) {
@@ -1457,6 +1476,8 @@
     $(el).closest('[data-iterate="item"]').remove();
     
     ib_resetRowNumbers();
+
+    ib_calculateTotals();
   };
 
   /**
