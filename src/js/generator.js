@@ -1056,9 +1056,9 @@
     if(this)
     {
       if(ib_decimal_separator == '.')
-        return Math.abs(parseFloat(this.replace(/[^0-9.]/g, '')));
+        return parseFloat(this.replace(/[^0-9.-]/g, ''));
       else if(ib_decimal_separator == ',')
-        return Math.abs(parseFloat(this.replace(/[^0-9,]/g, '').replace(/,/g, '.')));
+        return parseFloat(this.replace(/[^0-9,-]/g, '').replace(/,/g, '.'));
     }
 
     return 0;
@@ -1066,7 +1066,7 @@
 
   String.prototype.getValidNumberChars = function() {
     if(this)
-      return this.replace(/[^0-9.,]/gi, '');
+      return this.replace(/[^0-9.,-]/gi, '');
 
     return '';
   };
@@ -1074,7 +1074,15 @@
   String.prototype.getFormatedNumber = function() {
     if(this)
     {
-      var i, counter, number = this.toString();
+      var i, counter,
+          number = this.toString(),
+          minus_sign = ''; // initially there's no minus
+
+      if(number.indexOf('-') === 0)
+      {
+        number = number.substring(1);
+        minus_sign = '-'; // set the minus sign
+      }
 
       if(ib_decimal_separator == '.') {
         if(ib_number_format == '0,000.00') {
@@ -1121,7 +1129,7 @@
       if(number[0] == '.' || number[0] == ',')
         number = number.substring(1);
 
-      return number;
+      return minus_sign + number;
     }
     return this;
   };
@@ -1388,8 +1396,10 @@
       } else {
         switch($(this).data('ibcl-id'))
         {
-          case 'amount_paid':
+          case 'item_quantity':
+          case 'item_price':
           case 'item_discount':
+          case 'amount_paid':
             // Allow minus (-) sign
             if((e.keyCode == 189 || e.keyCode == 109 || e.key == '-') && $(this).text().indexOf('-') == -1)
             {
