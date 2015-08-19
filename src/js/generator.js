@@ -255,7 +255,7 @@
   var ib_isIE = function () {
     // Detect if the browser is IE
     var ua = navigator.userAgent;
-    return ua.indexOf('MSIE ') > -1 || ua.indexOf('Trident/') > -1;
+    return ua.indexOf('MSIE ') > -1 || ua.indexOf('Trident/') > -1 || ua.indexOf('Edge/') > -1;
   };
 
   var ib_isSafari = function () {
@@ -362,11 +362,15 @@
       var raw_data = ib_getCurrentState();
 
       if(ib_isIE()) {
-        ib_download_data_frame.document.open('text/html', 'replace');
-        ib_download_data_frame.document.write('<pre>' + raw_data.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre>'); // pre-format the data to preserve newlines when saving
-        ib_download_data_frame.document.close();
+        var iframe_doc = ib_download_data_frame.document || ib_download_data_frame.contentDocument || ib_download_data_frame.contentWindow.document;
+
+        iframe_doc.open('text/html', 'replace');
+        iframe_doc.write('<pre>' + raw_data.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</pre>'); // pre-format the data to preserve newlines when saving
+        iframe_doc.close();
+        
         ib_download_data_frame.focus();
-        ib_download_data_frame.document.execCommand('SaveAs', true, 'data.txt');
+
+        iframe_doc.execCommand('SaveAs', true, 'data.txt');
       }
       else
         $(this).attr('href', 'data:text/plain;charset=UTF-8,' + encodeURIComponent(raw_data));
