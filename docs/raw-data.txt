@@ -169,7 +169,7 @@ var ib_invoice_data = function(){/*
 
 ### Settings
 
-# One of 'dd/mm/yyyy', 'dd-mm-yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy'
+# One of 'dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy'
 [date_format]
 |date_format|
 

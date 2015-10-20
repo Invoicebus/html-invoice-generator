@@ -409,7 +409,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   color:#bbb;
   border: 2px dashed #ddd;
   overflow: hidden !important;
-  @include box-sizing(border-box !important);
+  @include box-sizing('border-box !important');
 
   > ib-span {
     display:table-cell;
