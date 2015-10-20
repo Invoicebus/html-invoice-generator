@@ -573,7 +573,7 @@
       '{terms}'                 : { default_text: 'Fred, thank you very much. We really appreciate your business.<br />Please send payments before the due date.', tooltip: 'Enter invoice terms and notes' },
 
       // Settings
-      'date_format'             : 'mm/dd/yyyy', // One of 'dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy'
+      'date_format'             : 'mm/dd/yyyy', // One of 'dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy', 'yyyy mm dd', 'yyyy-mm-dd', 'yyyy.mm.dd'
       'currency_position'       : 'left', // One of 'left' or 'right'
       'number_format'           : '0,000.00', // One of '0,000.00', '0000.00', '0.000,00', or '0000,00'
       'default_columns'         : ['item_row_number', 'item_description', 'item_quantity', 'item_price', 'item_discount', 'item_tax', 'item_line_total'],
@@ -1542,7 +1542,7 @@
 
   var ib_initDatepickers = function() {
     var radios = '';
-    var date_formats = ['dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy'];
+    var date_formats = ['dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy', 'yyyy mm dd', 'yyyy-mm-dd', 'yyyy.mm.dd'];
     for(var i = 0; i < date_formats.length; i++)
     {
       radios += '<ib-div><input type="radio" id="ib_date_format_radio' + i + '" name="ib_date_format_choice" value="' + date_formats[i] + '"><label for="ib_date_format_radio' + i + '">' + date_formats[i] + '</label></ib-div>';
