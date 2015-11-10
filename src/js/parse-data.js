@@ -1,5 +1,5 @@
 var ib_parseData = function(data) {
-  var d, i, j, line, items = [], parsed_data = {};
+  var d, i, j, line, custom_data, items = [], parsed_data = {};
 
   d = data.split('\n');
 
@@ -45,7 +45,36 @@ var ib_parseData = function(data) {
 
       parsed_data.items = items;
     }
+
+    if(line == '[document_custom]') // this is special case for [document_custom] because the value is multiline
+    {
+      j = i + 1;
+      line = d[j].replace(/\r|\n/g, ''); // clean the new line characters
+      while(line !== '')
+      {
+        custom_data = line.split('@||@');
+        parsed_data['{document_custom_' + custom_data[0] + '}'] = custom_data[1];
+        j++;
+        line = d[j].trim();
+      }
+    }
+
+    if(line == '[client_custom]') // this is special case for [client_custom] because the value is multiline
+    {
+      j = i + 1;
+      line = d[j].replace(/\r|\n/g, ''); // clean the new line characters
+      while(line !== '')
+      {
+        custom_data = line.split('@||@');
+        parsed_data['{client_custom_' + custom_data[0] + '}'] =  custom_data[1];
+        j++;
+        line = d[j].trim();
+      }
+    }
   }
+
+  delete parsed_data.document_custom;
+  delete parsed_data.client_custom;
 
   return parsed_data;
 };

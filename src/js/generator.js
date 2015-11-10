@@ -266,12 +266,19 @@
 
   var ib_fixNewlines = function(text) {
     if(text)
-     return text
+      return text
               .replace(/<div>/gi, '<br />')
               .replace(/<\/div>/gi, '')
               .replace(/<\/p>(\r*|\n*)<p>/gi, '<br />')
               .replace(/<(p|\/p)>/gi, '')
               .replace(/<br\s*(\/|\s*)>/gi, '\n');
+
+    return text;
+  };
+
+  var ib_stripHtml = function(text) {
+    if(text)
+      return $('<div />').html(text).text();
 
     return text;
   };
@@ -628,10 +635,17 @@
       }
 
       for(var key in ib_invoice_data)
+      {
+        if(typeof ib_data[key] === 'undefined')
+        {
+          ib_data[key] = { default_text: ib_invoice_data[key], tooltip: 'Enter ' + key.replace(/{(document|client)_custom_([a-zA-Z0-9_]+)}/gi, '$1 $2').replace(/_/g, ' ') };
+        }
+
         if(typeof ib_data[key].default_text !== 'undefined')
           ib_data[key].default_text = ib_invoice_data[key];
         else
           ib_data[key] = ib_invoice_data[key];
+      }
 
       ib_currency_position = ib_invoice_data.currency_position;
       ib_number_format     = ib_invoice_data.number_format;
@@ -711,6 +725,23 @@
     ib_replacePlaceholder('{amount_due}', true);
     ib_replacePlaceholder('{terms_label}');
     ib_replacePlaceholder('{terms}');
+
+    // Handle custom document and client fields
+    $('*')
+      .filter(function() {
+        var el = $(this);
+        return (/{document_custom_[a-zA-Z0-9_]+}/.test(el.text()) || /{client_custom_[a-zA-Z0-9_]+}/.test(el.text())) && 
+        el.children().length === 0 && 
+        el.prop('firstChild').nodeType == 3;
+      })
+      .each(function(idx, val) {
+        var placeholder = $(val).text();
+        
+        if(typeof ib_data[placeholder] === 'undefined')
+          ib_data[placeholder] = { default_text: '', tooltip: 'Enter ' + placeholder.replace(/{(document|client)_custom_([a-zA-Z0-9_]+)}/gi, '$1 $2').replace(/_/g, ' ') };
+
+        ib_replacePlaceholder(placeholder);
+      });
   };
 
   var ib_replacePlaceholder = function(id, not_editable, attr) {
@@ -2042,7 +2073,9 @@
       'currency_code'          : '',
       'currency_symbol'        : '',
       'currency_position'      : '',
-      'number_format'          : ''
+      'number_format'          : '',
+      'document_custom'        : [],
+      'client_custom'          : []
     };
 
     data.hash = $('meta[name="template-hash"]').attr('content') || data.hash;
@@ -2055,7 +2088,7 @@
     $('[data-ibcl-id]').each(function(idx, val) {
       var el = $(val);
       
-      data[el.data('ibcl-id')] = ib_fixNewlines(el.html()) || data[el.data('ibcl-id')];
+      data[el.data('ibcl-id')] = ib_stripHtml(ib_fixNewlines(el.html())) || data[el.data('ibcl-id')];
     });
 
     if(!data.net_term)
@@ -2085,7 +2118,7 @@
           if(!el.data('ibcl-id') && ib_isIE()) // For IE get the data from editable spans
             el = el.find('.ibcl_ie_contenteditable');
 
-          item_row[el.data('ibcl-id')] = ib_fixNewlines(el.html());
+          item_row[el.data('ibcl-id')] = ib_stripHtml(ib_fixNewlines(el.html()));
         }
       });
 
@@ -2113,7 +2146,7 @@
           if(!el.data('ibcl-id') && ib_isIE()) // For IE get the data from editable spans
             el = el.find('.ibcl_ie_contenteditable');
 
-          tax_row[el.data('ibcl-id')] = ib_fixNewlines(el.html());
+          tax_row[el.data('ibcl-id')] = ib_stripHtml(ib_fixNewlines(el.html()));
           if(el.attr('data-ib-value'))
             tax_row.tax_percentage = el.attr('data-ib-value').getNumber();
         }
@@ -2139,6 +2172,29 @@
 
     data.currency_position = $('.ib_number_settings input[name="ib_currency"]:checked').val();
     data.number_format     = $('.ib_number_settings input[name="ib_number_format"]:checked').val();
+
+    // Properly structure custom document and client fields
+    for(var key in data) {
+      if(/document_custom_[a-zA-Z0-9_]+/.test(key))
+      {
+        data.document_custom.push({
+          name:  key.replace(/document_custom_([a-zA-Z0-9_]+)/, '$1'),
+          type:  'constant',
+          value: data[key]
+        });
+
+        delete data[key];
+      }
+      else if(/client_custom_[a-zA-Z0-9_]+/.test(key))
+      {
+        data.client_custom.push({
+          name:  key.replace(/client_custom_([a-zA-Z0-9_]+)/, '$1'),
+          value: data[key]
+        });
+
+        delete data[key];
+      }
+    }
 
     return data;
   };
@@ -2177,6 +2233,7 @@
   var ib_getCurrentState = function() {
     var raw_data = '@@RAW_DATA';
     var invoice_data = ib_getInvoiceData();
+    var i;
 
     raw_data = raw_data.replace('|item_row_number|', ib_data['{item_row_number}'].default_text);
     raw_data = raw_data.replace('|item_description|', ib_data['{item_description}'].default_text);
@@ -2218,7 +2275,7 @@
         case 'items':
           data_value = '';
           var items = invoice_data[key];
-          for(var i = 0; i < items.length; i++)
+          for(i = 0; i < items.length; i++)
           {
             data_value += (items[i].item_description    || '').toString().replace(/\n/g, '<br />') + '@||@' +
                           (items[i].item_quantity       || '').toString().replace(/\n/g, '<br />') + '@||@' +
@@ -2232,6 +2289,19 @@
 
         case 'currency_code':
           raw_data = raw_data.replace('|currency|', data_value);
+          break;
+
+        case 'document_custom':
+        case 'client_custom':
+          data_value = '';
+          var custom_data = invoice_data[key];
+          for(i = 0; i < custom_data.length; i++)
+          {
+            data_value += (custom_data[i].name  || '').toString().replace(/\n/g, '<br />') + '@||@' +
+                          (custom_data[i].value || '').toString().replace(/\n/g, '<br />') +
+                          '\r\n';
+          }
+          raw_data = raw_data.replace(data_key, data_value);
           break;
 
         default:

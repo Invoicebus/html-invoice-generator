@@ -215,6 +215,17 @@ var ib_invoice_data = function(){/*
 |items|
 
 
+### Custom data (in format field_name@||@field_value)
+
+# Document custom data
+[document_custom]
+|document_custom|
+
+# Client custom data
+[client_custom]
+|client_custom|
+
+
 ### Logo
 
 #base64 encoded data URI of PNG image

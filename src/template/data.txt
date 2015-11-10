@@ -217,6 +217,17 @@ Mammoth Chops@||@14@||@175@||@-10@||@5
 @||@@||@@||@@||@
 
 
+### Custom data (in format field_name@||@field_value)
+
+# Document custom data
+[document_custom]
+
+
+# Client custom data
+[client_custom]
+
+
+
 ### Logo
 
 #base64 encoded data URI of PNG image
