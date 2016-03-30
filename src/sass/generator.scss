@@ -60,7 +60,8 @@ $contenteditable-color: rgb(94, 158, 215);
                   normal);
 
 
-$width: 820px; /* the width must be '820px' to comply with the Invoicebus and wkhtmltopdf maximum width */
+$width:      100%;  /* the width is set to 100% for responsiveness */
+$max-width:  820px; /* the maximun width must be '820px' to comply with the Invoicebus and wkhtmltopdf maximum width */
 $font-stack: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-serif;
 
 
@@ -154,11 +155,13 @@ ib-div {
 html {
   background:$background;
   font-family:$font-stack;
+  @include box-sizing(border-box);
 
   body {
     font-family:$font-stack;
     background:white;
     width:$width;
+    max-width:$max-width;
     // Minimum height must be 1158px so with the required 820px width they are in proportion of A4 paper format
     min-height:1158px;
     margin:105px auto 30px auto;
@@ -715,10 +718,13 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 
 .ib_invoice_commands_wrap {
   position: fixed;
+  left: 0;
+  right: 0;
   width: 100%;
   background:$background;
   z-index:1000;
-  @include transition(all 0.3s ease-in);
+  @include transition(box-shadow 0.3s ease-in);
+  @include box-sizing(border-box);
 
   &.ib_commands_shadow {
     @include box-shadow(0px 0px 30px rgba(142, 142, 142, 0.7));
@@ -727,6 +733,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   .ib_invoice_commands {
     display:block;
     width:$width;
+    max-width:$max-width;
     margin:0 auto;
     clear:both;
     padding: 30px 0 20px 0;
@@ -738,6 +745,10 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 
       .fa {
         margin-right: 3px;
+      }
+
+      &.ib_save_online {
+        margin-right: 0;
       }
     }
 
@@ -895,6 +906,50 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
       border: 1px solid shade($notice-color, 7%);
       @include border-radius(5px);
       padding: 15px;
+    }
+  }
+}
+
+/* Make the generator layout responsive  */
+
+@media only screen and (max-width: 875px) {
+  html,
+  .ib_invoice_commands_wrap {
+    padding: 0 15px !important;
+  }
+
+  .ib_invoice_commands {
+
+    .ib_hide_medium {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 700px) {
+
+  .ib_invoice_commands {
+
+    .ib_hide_small {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 570px) {
+
+  .ib_invoice_commands {
+
+    .ib_hide_xsmall {
+      display: none;
+    }
+
+    .ib_default_button {
+      width: 14px;
+
+      .fa {
+        margin-right: 0 !important;
+      }
     }
   }
 }

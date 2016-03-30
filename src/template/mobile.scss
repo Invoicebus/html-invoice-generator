@@ -1,0 +1,125 @@
+// Make the template responsive
+
+@media only screen and (max-width: 810px) {
+  #memo {
+
+    .company-info {
+      width: auto;
+    }
+
+    .payment-info {
+      float: none;
+      clear: both;
+      text-align: left;
+      padding-top: 15px;
+      width: auto;
+
+      div {
+        display: inline-block;
+        margin-bottom: 0;
+        margin-right:3px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  #items {
+
+    table {
+      tr:after {
+        content: '';
+        display: block;
+        border-top: 1px solid #888;
+      }
+
+      th {
+        display: none !important;
+      }
+
+      td {
+        display: block;
+        width: auto;
+        text-align: left;
+
+        // make the row column collapsed
+        &:first-child {
+          width: 0 !important;
+          height: 0 !important;
+          padding: 0 !important;
+          border: 0 !important;
+          text-indent: -9999px;
+        }
+      }
+    }
+  }
+
+  #sums {
+    float:none;
+    margin-top:30px;
+    page-break-inside: avoid;
+
+    table {
+      width: 100%;
+
+      tr {
+        th, td {
+          min-width:initial;
+          width: 50%;
+        }
+      }
+    }
+  }
+
+  .show-mobile {
+    display: inline !important;
+  }
+}
+
+@media only screen and (max-width: 660px) {
+  #invoice-info {
+    float: none;
+    width: auto;
+
+    > div {
+      width: 48%;
+    }
+  }
+
+  #client-info {
+    float: none;
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #memo {
+    .logo {
+      float: none;
+      margin-right: 0;
+    }
+    
+    .company-info {
+      float: none;
+      padding-top: 15px;
+      width: auto;
+    }
+
+    .payment-info {
+
+      div {
+        display: block;
+        margin-bottom: 3px;
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 380px) {
+  #invoice-info {
+    > div {
+      width: 45%;
+    }
+  }
+}

@@ -3,9 +3,13 @@ module.exports = function(grunt) {
   // Time how long tasks take, can help when optimizing build times
   require('time-grunt')(grunt);
 
-  // If config.json file don't exist create one
-  if(!grunt.file.exists('./config.json'))
-    grunt.file.write('./config.json', '{}');
+  // If rackspace-cloudfiles.json file don't exist create one
+  if(!grunt.file.exists('./rackspace-cloudfiles.json'))
+    grunt.file.write('./rackspace-cloudfiles.json', '{}');
+
+  // If promo.html file don't exist create one
+  if(!grunt.file.exists('./promo.html'))
+    grunt.file.write('./promo.html', '');
 
 
   // Project configuration.
@@ -154,6 +158,10 @@ module.exports = function(grunt) {
             {
               match: 'TPL_NOTE',
               replacement: '<%= tpl_note %>'
+            },
+            {
+              match: 'PROMO',
+              replacement: '<%= promo %>'
             }
           ]
         },
@@ -204,6 +212,10 @@ module.exports = function(grunt) {
             {
               match: 'TPL_NOTE',
               replacement: '<%= tpl_note %>'
+            },
+            {
+              match: 'PROMO',
+              replacement: '<%= promo %>'
             }
           ]
         },
@@ -254,6 +266,10 @@ module.exports = function(grunt) {
             {
               match: 'TPL_NOTE',
               replacement: '<%= tpl_note %>'
+            },
+            {
+              match: 'PROMO',
+              replacement: '<%= promo %>'
             }
           ]
         },
@@ -304,6 +320,10 @@ module.exports = function(grunt) {
             {
               match: 'TPL_NOTE',
               replacement: '<%= tpl_note %>'
+            },
+            {
+              match: 'PROMO',
+              replacement: '<%= promo %>'
             }
           ]
         },
@@ -388,8 +408,8 @@ module.exports = function(grunt) {
 
     // Used for uploading final version on CloudFiles CDN
     cloudfiles: {
-      // In config.json add JSON object as described at https://github.com/rtgibbons/grunt-cloudfiles
-      publish: grunt.file.readJSON('config.json')
+      // In rackspace-cloudfiles.json add JSON object as described at https://github.com/rtgibbons/grunt-cloudfiles
+      publish: grunt.file.readJSON('rackspace-cloudfiles.json')
     },
 
     watch: {
@@ -430,6 +450,7 @@ module.exports = function(grunt) {
     how_to: grunt.file.read('docs/how-to.html').replace(/'/g, "\\'").replace(/\r\n|\r|\n/g, ' '),
     save_state: grunt.file.read('docs/save-state.html').replace(/'/g, "\\'").replace(/\r\n|\r|\n/g, ' '),
     raw_data: grunt.file.read('docs/raw-data.txt').replace(/'/g, "\\'").replace(/\r\n/g, '[crlf]'),
+    promo: grunt.file.read('promo.html').replace(/'/g, "\\'").replace(/"/g, "\\\"").replace(/\r\n|\r|\n/g, '[crlf]'),
 
     js_src: ['src/js/<%= build_js %>', 'src/js/table-dnd.js', 'src/js/bootstrap-datepicker.js', 'src/js/bootstrap3-typeahead.js', 'src/js/multiline.js', 'src/js/parse-data.js'],
     css_src: 'src/sass',

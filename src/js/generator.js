@@ -97,6 +97,12 @@
     ib_total_timeout += ib_timeout;
   };
 
+  var ib_lazyLoadCss = function() {
+    $('link[data-href]').each(function(idx, val) {
+      $(val).attr('href', $(val).data('href'));
+    });
+  };
+
   /**
    * Main init function
    */
@@ -132,8 +138,16 @@
       // Init the main styles and actions
       ib_initStylesAndActions();
 
+      // Add field listeners
+      ib_addFieldListeners();
+
       // Init tooltip at the end when everything is in its place
       ib_initBootstrapTooltip();
+
+      // Init the promo tools
+      ib_initPromo();
+
+      ib_lazyLoadCss();
 
       checkIfCssLoaded();
       
@@ -217,6 +231,7 @@
     'colspan',
     'content',
     'data-hide-on-quote',
+    'data-href',
     'data-iterate',
     'data-logo',
     'dir',
@@ -317,16 +332,16 @@
     $(document.body)
       .before($('<ib-span class="ib_invoice_commands_wrap">' +
                   '<ib-span class="ib_invoice_commands">' +
-                    '<ib-span id="ib-print-btn" class="ib_default_button" data-tooltip="tooltip" data-placement="bottom" title="This command is also used to save<br/>the invoice as PDF. See FAQ for more info."><i class="fa fa-print"></i> Print Invoice</ib-span>' +
-                    '<ib-span class="ib_default_button ib_highlight_editable" data-tooltip="tooltip" data-placement="bottom" title="Highlight editable fields"><i class="fa fa-edit"></i> Highlight Fields</ib-span>' +
-                    '<ib-span id="ib-save-data-btn" class="ib_default_button" data-toggle="modal" data-target="#ib_saveCurrentStateModal" data-tooltip="tooltip" data-placement="bottom" title="Save current invoice data such as<br/>company address, logo, etc., for future re-use"><i class="fa fa-bolt"></i> Save Current State</ib-span>' +
+                    '<ib-span id="ib-print-btn" class="ib_default_button" data-tooltip="tooltip" data-placement="bottom" title="This command is also used to save<br/>the invoice as PDF. See FAQ for more info."><i class="fa fa-print"></i><span class="ib_hide_xsmall"> Print</span><span class="ib_hide_medium"> Invoice</span></ib-span>' +
+                    '<ib-span class="ib_default_button ib_highlight_editable" data-tooltip="tooltip" data-placement="bottom" title="Highlight editable fields"><i class="fa fa-edit"></i><span class="ib_hide_xsmall"> Highlight</span><span class="ib_hide_medium"> Fields</span></ib-span>' +
+                    '<ib-span id="ib-save-data-btn" class="ib_default_button" data-toggle="modal" data-target="#ib_saveCurrentStateModal" data-tooltip="tooltip" data-placement="bottom" title="Save current invoice data such as<br/>company address, logo, etc., for future re-use"><i class="fa fa-bolt"></i><span class="ib_hide_xsmall"> Save</span><span class="ib_hide_medium"> Current</span><span class="ib_hide_xsmall"> State</span></ib-span>' +
                     '<iframe id="ib_download_data_frame" class="ib_force_hide"></iframe>' +
-                    '<ib-span class="ib_default_button ib_save_online" data-tooltip="tooltip" data-placement="bottom" title="You\'ll be taken to Invoicebus website<br/>to save this invoice online"><i class="fa fa-cloud-upload"></i> Save Invoice Online</ib-span>' +
+                    '<ib-span class="ib_default_button ib_save_online" data-tooltip="tooltip" data-placement="bottom" title="You\'ll be taken to Invoicebus website<br>to save this invoice online"><i class="fa fa-cloud-upload"></i><span class="ib_hide_xsmall"> Save</span><span class="ib_hide_medium"> Invoice</span><span class="ib_hide_xsmall"> Online</span></ib-span>' +
                     '<ib-span class="ib_save_info" data-tooltip="tooltip" data-placement="right" title="You\'ll need Invoicebus account to save this invoice"><i class="fa fa-question-circle"></i></ib-span>' +
 
                     '<ib-span class="ib_gray_link ib_how_to_link ib_pull_right" data-toggle="modal" data-target="#ib_howToModal">About</ib-span>' +
                     '<ib-span class="ib_top_separator ib_pull_right">●</ib-span>' +
-                    '<ib-span class="ib_gray_link ib_how_to_link ib_pull_right" onclick="window.open(\'https://groups.google.com/d/forum/html-invoice-generator\', \'_blank\')">FAQ / Ask a question!</ib-span>' +
+                    '<ib-span class="ib_gray_link ib_how_to_link ib_pull_right" onclick="window.open(\'https://groups.google.com/d/forum/html-invoice-generator\', \'_blank\')">FAQ<span class="ib_hide_small"> / Ask a question!</span></ib-span>' +
                   '</ib-span>' +
                 '</ib-span>'))
       .after($('<ib-span class="ib_invoicebus_love">Crafted with &#x2764; by<br><ib-span onclick="window.open(\'https://invoicebus.com/team/\', \'_blank\')">The Invoicebus Mechanics</ib-span></ib-span>'));
@@ -666,7 +681,6 @@
 
   var ib_initTemplate = function() {
     ib_processHtml();
-    ib_addFieldListeners();
   };
 
   var ib_processHtml = function() {
@@ -783,6 +797,7 @@
     // This will update all fields for the same placeholder with the typed value
     $('[data-ibcl-id]').on('keydown keyup', function(e) {
       var field = $(this).data('ibcl-id');
+
       // Don't apply this for the item fields, they don't need to update their values
       if(['item_row_number', 'item_description', 'item_quantity', 'item_price', 'item_tax_percentage', 'item_tax', 'item_discount', 'item_line_total'].indexOf(field) == -1)
       {
@@ -2314,6 +2329,16 @@
     raw_data = raw_data.replace(/\[crlf\]/g, '\r\n');
 
     return raw_data;
+  };
+
+  /**
+   * Initialize the promo banner if found
+   */
+  var ib_initPromo = function() {
+    var promo = '@@PROMO'.replace(/\[crlf\]/g, '\r\n');
+
+    if(promo)
+      $(document.body).before($(promo));
   };
 
   /**

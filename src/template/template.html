@@ -14,6 +14,7 @@
     <meta name="template-hash" content="3ccc044d1e6e3792fcffe3b26fbd1b7a">
 
     <link rel="stylesheet" href="template.css">
+    <link rel="stylesheet" data-href="mobile.css">
   </head>
   <body>
     <div id="container">
@@ -114,12 +115,12 @@
           
           <tr data-iterate="item">
             <td>{item_row_number}</td> <!-- Don't remove this column as it's needed for the row commands -->
-            <td>{item_description}</td>
-            <td>{item_quantity}</td>
-            <td>{item_price}</td>
-            <td>{item_discount}</td>
-            <td>{item_tax}</td>
-            <td>{item_line_total}</td>
+            <td><span class="show-mobile">{item_description_label}</span> <span>{item_description}</span></td>
+            <td><span class="show-mobile">{item_quantity_label}</span> <span>{item_quantity}</span></td>
+            <td><span class="show-mobile">{item_price_label}</span> <span>{item_price}</span></td>
+            <td><span class="show-mobile">{item_discount_label}</span> <span>{item_discount}</span></td>
+            <td><span class="show-mobile">{item_tax_label}</span> <span>{item_tax}</span></td>
+            <td><span class="show-mobile">{item_line_total_label}</span> <span>{item_line_total}</span></td>
           </tr>
           
         </table>
