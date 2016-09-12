@@ -1,3 +1,4 @@
+var ib_how_to_data = function(){/*
 <ib-div class="ib_modal_container">
   <ib-div class="ib_p">
     If you're one-man performer and everything you do for your business you do it by yourself – welcome to the club! You're well familiar with the pain of writing invoices. Word? Excel? Complicated accounting software? Forget about it and hello you new joy!
@@ -122,3 +123,4 @@
     Is there anything we can do to improve this template and make it better for you? Good things / bad things? Feel free to find the appropriate topic at our <ib-span class="ib_a" onclick="window.open('https://groups.google.com/d/forum/html-invoice-generator', '_blank')">support forum</ib-span> and hit us up – we read and respond to every post.
   </ib-div>
 </ib-div>
+*/}

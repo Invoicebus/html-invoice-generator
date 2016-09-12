@@ -1,3 +1,4 @@
+var ib_save_state_data = function(){/*
 <ib-div class="ib_modal_container">
   <ib-div class="ib_p">
     This action will save the current state of the template to a local file called <ib-span class="ib_code">data.txt</ib-span>. The data from this file will be used to pre-populate the template fields in the future. This comes handy when you want to save your default details such as company address, logo, currency, notes, etc., so you don't need to re-enter them every time.
@@ -18,3 +19,4 @@
   <a href="javascript:void(0);" download="data.txt" class="ib_default_button ib_success_button ib_large_button" id="ib-save-current-data"><ib-span class="fa fa-bolt"></ib-span> Save data.txt</a>
   <ib-div id="ib-safari-save-as" class="ib_hide ib_safari_note">Right click the button and choose <ib-span class="ib_b">&quot;Download Linked File As...&quot;</ib-span></ib-div>
 </ib-div>
+*/}

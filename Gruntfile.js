@@ -111,6 +111,18 @@ module.exports = function(grunt) {
         expand: true,
         flatten: true
       },
+      lang: {
+        src: ['<%= lang_dir %>/*'],
+        dest: '<%= build_dir %>/lang',
+        expand: true,
+        flatten: true
+      },
+      docs: {
+        src: ['<%= docs_dir %>/*.js'],
+        dest: '<%= build_dir %>/docs',
+        expand: true,
+        flatten: true
+      },
       print_css: {
         src: ['<%= tpl_dir %>/print.css'],
         dest: '<%= build_dir %>',
@@ -142,18 +154,6 @@ module.exports = function(grunt) {
             {
               match: 'SCRIPT',
               replacement: '<script src="<%= build_js %>?data=true"></script>\n<script src="http://localhost:35729/livereload.js"></script>'
-            },
-            {
-              match: 'HOWTO',
-              replacement: '<%= how_to %>'
-            },
-            {
-              match: 'SAVE_STATE',
-              replacement: '<%= save_state %>'
-            },
-            {
-              match: 'RAW_DATA',
-              replacement: '<%= raw_data %>'
             },
             {
               match: 'TPL_NOTE',
@@ -198,18 +198,6 @@ module.exports = function(grunt) {
               replacement: '<script src="<%= cdn_path %><%= build_js %>?data=true"></script>'
             },
             {
-              match: 'HOWTO',
-              replacement: '<%= how_to %>'
-            },
-            {
-              match: 'SAVE_STATE',
-              replacement: '<%= save_state %>'
-            },
-            {
-              match: 'RAW_DATA',
-              replacement: '<%= raw_data %>'
-            },
-            {
               match: 'TPL_NOTE',
               replacement: '<%= tpl_note %>'
             },
@@ -252,18 +240,6 @@ module.exports = function(grunt) {
               replacement: '<script src="<%= build_js.replace(".js", ".min.js") %>?data=true"></script>'
             },
             {
-              match: 'HOWTO',
-              replacement: '<%= how_to %>'
-            },
-            {
-              match: 'SAVE_STATE',
-              replacement: '<%= save_state %>'
-            },
-            {
-              match: 'RAW_DATA',
-              replacement: '<%= raw_data %>'
-            },
-            {
               match: 'TPL_NOTE',
               replacement: '<%= tpl_note %>'
             },
@@ -304,18 +280,6 @@ module.exports = function(grunt) {
             {
               match: 'SCRIPT',
               replacement: '<script src="<%= cdn_path %><%= build_js.replace(".js", ".min.js") %>?data=true"></script>'
-            },
-            {
-              match: 'HOWTO',
-              replacement: '<%= how_to %>'
-            },
-            {
-              match: 'SAVE_STATE',
-              replacement: '<%= save_state %>'
-            },
-            {
-              match: 'RAW_DATA',
-              replacement: '<%= raw_data %>'
             },
             {
               match: 'TPL_NOTE',
@@ -437,6 +401,14 @@ module.exports = function(grunt) {
         files: '<%= tpl_dir %>/*.scss',
         tasks: ['compass:tpl_dev']
       },
+      lang: {
+        files: '<%= lang_dir %>/*',
+        tasks: ['copy:lang']
+      },
+      docs: {
+        files: '<%= docs_dir %>/*.js',
+        tasks: ['copy:docs']
+      },
       livereload: {
         options: {
           livereload: true
@@ -447,13 +419,13 @@ module.exports = function(grunt) {
 
     banner: '/*! <%= pkg.description %> @author: <%= pkg.author.name %> @email: <%= pkg.author.email %> @web: <%= pkg.author.web %> @version: <%= pkg.version %> @updated: <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> @license: <%= pkg.license %> */',
     tpl_note: '<!--\n  Invoice template by invoicebus.com\n  To customize this template consider following this guide https://invoicebus.com/how-to-create-invoice-template/\n  This template is under The MIT License\n-->',
-    how_to: grunt.file.read('docs/how-to.html').replace(/'/g, "\\'").replace(/\r\n|\r|\n/g, ' '),
-    save_state: grunt.file.read('docs/save-state.html').replace(/'/g, "\\'").replace(/\r\n|\r|\n/g, ' '),
-    raw_data: grunt.file.read('docs/raw-data.txt').replace(/'/g, "\\'").replace(/\r\n/g, '[crlf]'),
     promo: grunt.file.read('promo.html').replace(/'/g, "\\'").replace(/"/g, "\\\"").replace(/\r\n|\r|\n/g, '[crlf]'),
 
     js_src: ['src/js/<%= build_js %>', 'src/js/table-dnd.js', 'src/js/bootstrap-datepicker.js', 'src/js/bootstrap3-typeahead.js', 'src/js/multiline.js', 'src/js/parse-data.js'],
     css_src: 'src/sass',
+
+    lang_dir: 'src/lang',
+    docs_dir: 'docs',
 
     build_js: 'generator.js',
     build_css: 'generator.css',
@@ -473,10 +445,10 @@ module.exports = function(grunt) {
 
 
   // Dev build task.
-  grunt.registerTask('dev', ['clean', 'jshint', 'concat:js', 'compass:dev', 'compass:tpl_dev', 'copy:tpl', 'replace:dev', 'copy:fonts']);
+  grunt.registerTask('dev', ['clean', 'jshint', 'concat:js', 'compass:dev', 'compass:tpl_dev', 'copy:tpl', 'replace:dev', 'copy:fonts', 'copy:lang', 'copy:docs']);
 
   // Prod build task.
-  grunt.registerTask('prod', ['clean', 'jshint', 'uglify:js', 'compass:prod', 'compass:tpl_prod', 'copy:tpl', 'replace:prod', 'rename:prod', 'copy:fonts']);
+  grunt.registerTask('prod', ['clean', 'jshint', 'uglify:js', 'compass:prod', 'compass:tpl_prod', 'copy:tpl', 'replace:prod', 'rename:prod', 'copy:fonts', 'copy:lang', 'copy:docs']);
   
 
   // Publish to CloudFiles CDN
@@ -486,6 +458,9 @@ module.exports = function(grunt) {
     'copy:fonts',
 
     'jshint',
+
+    'copy:lang',
+    'copy:docs',
 
     'uglify:js',
     'compass:prod',

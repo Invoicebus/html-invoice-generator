@@ -1,0 +1,249 @@
+var ib_invoice_data = function(){/*
+#=========================================================================================================
+
+
+### Données sur l'entreprise
+
+[{company_name}]
+Dino Store
+
+[{company_address}]
+227 Cobblestone Road
+
+[{company_city_zip_state}]
+30000 Bedrock, Cobblestone County
+
+[{company_phone_fax}]
++555 7 789-1234
+
+[{company_email_web}]
+http://dinostore.bed | hello@dinostore.bed
+
+[{payment_info1}]
+Détails sur le payement:
+
+[{payment_info2}]
+ACC:123006705
+
+[{payment_info3}]
+IBAN:US100000060345
+
+[{payment_info4}]
+SWIFT:BOA447
+
+[{payment_info5}]
+
+
+[{issue_date_label}]
+Date de délivrance:
+
+[{issue_date}]
+
+
+[{net_term_label}]
+Net:
+
+[{net_term}]
+21
+
+[{due_date_label}]
+Date limite:
+
+[{due_date}]
+
+
+[{currency_label}]
+Monnaie:
+
+[{currency}]
+USD
+
+[{po_number_label}]
+P.O. #
+
+[{po_number}]
+1/3-147
+
+[{bill_to_label}]
+Facture pour:
+
+[{client_name}]
+Slate Rock and Gravel Company
+
+[{client_address}]
+222 Rocky Way
+
+[{client_city_zip_state}]
+30000 Bedrock, Cobblestone County
+
+[{client_phone_fax}]
++555 7 123-5555
+
+[{client_email}]
+fred@slaterockgravel.bed
+
+[{client_other}]
+Attn: Fred Flintstone
+
+[{invoice_title}]
+FACTURE
+
+[{invoice_number}]
+#1
+
+
+### Noms de la colonne
+
+[{item_row_number_label}]
+
+
+[{item_description_label}]
+Article
+
+[{item_quantity_label}]
+Quantité
+
+[{item_price_label}]
+Prix
+
+[{item_discount_label}]
+Réduction
+
+[{item_tax_label}]
+Taxe
+
+[{item_line_total_label}]
+Total de la ligne
+
+[{item_row_number}]
+
+
+[{item_description}]
+
+
+[{item_quantity}]
+
+
+[{item_price}]
+
+
+[{item_discount}]
+
+
+[{item_tax}]
+
+
+[{item_line_total}]
+
+
+
+### Sommaire des totals
+
+[{amount_subtotal_label}]
+Total partiel:
+
+[{amount_subtotal}]
+
+
+[{tax_name}]
+Taxe:
+
+[{tax_value}]
+
+
+[{amount_total_label}]
+Total:
+
+[{amount_total}]
+
+
+[{amount_paid_label}]
+Payé:
+
+[{amount_due_label}]
+Montant dû:
+
+[{amount_due}]
+
+
+[{terms_label}]
+Termes & Notes
+
+[{terms}]
+Fred, merci beaucoup. Nous estimons vraiment vos affaires.<br />Nous vous prions d'envoyer vos paiement avant la date limite.
+
+
+### Settings
+
+# Un des suivants 'dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy', 'yyyy mm dd', 'yyyy-mm-dd', 'yyyy.mm.dd'
+[date_format]
+mm/dd/yyyy
+
+# Un des suivants'left' ou 'right'
+[currency_position]
+left
+
+# Un des suivants '0,000.00', '0000.00', '0.000,00', or '0000,00'
+[number_format]
+0,000.00
+
+[default_columns]
+item_row_number,item_description,item_quantity,item_price,item_discount,item_tax,item_line_total
+
+[default_quantity]
+1
+
+[default_price]
+0
+
+[default_discount]
+0
+
+[default_tax]
+0
+
+[default_number_rows]
+3
+
+[auto_calculate_dates]
+true
+
+[load_items]
+true
+
+[invoicebus_fineprint]
+true
+
+[lang]
+fr
+
+
+### Articles (dans l'ordre qui suit item_description@||@item_quantity@||@item_price@||@item_discount@||@item_tax)
+
+[items]
+Côtes de Brontosaurus@||@2@||@120@||@@||@2
+Côtelettes de mammouth@||@14@||@175@||@-10@||@5
+@||@@||@@||@@||@
+
+
+### Données personnalisées (dans un format field_name@||@field_value)
+
+# Document données personnalisées
+[document_custom]
+
+
+# Client données personnalisées
+[client_custom]
+
+
+
+### Logo
+
+# base64 données encodées URI d'image PNG
+[{company_logo}]
+
+
+
+
+#=========================================================================================================
+*/}

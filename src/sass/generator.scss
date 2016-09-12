@@ -933,10 +933,14 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
     .ib_hide_small {
       display: none;
     }
+
+    .ib_show_small {
+      display: block !important;
+    }
   }
 }
 
-@media only screen and (max-width: 570px) {
+@media only screen and (max-width: 620px) {
 
   .ib_invoice_commands {
 
@@ -950,6 +954,21 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
       .fa {
         margin-right: 0 !important;
       }
+    }
+  }
+}
+
+@media only screen and (max-width: 380px) {
+
+  .ib_invoice_commands {
+
+    .ib_clear_xsmall {
+      display: block;
+      clear: both;
+    }
+
+    .ib_pull_right {
+      float: left !important;
     }
   }
 }

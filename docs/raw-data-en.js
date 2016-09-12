@@ -1,4 +1,5 @@
-var ib_invoice_data = function(){/*
+var ib_raw_data = function(){/*
+var ib_invoice_data = function(){\/*
 #=========================================================================================================
 
 
@@ -91,6 +92,9 @@ var ib_invoice_data = function(){/*
 [{invoice_number}]
 |invoice_number|
 
+
+### Column names
+
 [{item_row_number_label}]
 |item_row_number_label|
 
@@ -132,6 +136,9 @@ var ib_invoice_data = function(){/*
 
 [{item_line_total}]
 |item_line_total|
+
+
+### Summary of totals
 
 [{amount_subtotal_label}]
 |amount_subtotal_label|
@@ -208,6 +215,9 @@ var ib_invoice_data = function(){/*
 [invoicebus_fineprint]
 |invoicebus_fineprint|
 
+[lang]
+|lang|
+
 
 ### Items (in this order item_description@||@item_quantity@||@item_price@||@item_discount@||@item_tax)
 
@@ -228,7 +238,7 @@ var ib_invoice_data = function(){/*
 
 ### Logo
 
-#base64 encoded data URI of PNG image
+# base64 encoded data URI of PNG image
 [{company_logo}]
 |company_logo|
 
@@ -236,4 +246,5 @@ var ib_invoice_data = function(){/*
 
 
 #=========================================================================================================
+*\/}
 */}
