@@ -113,7 +113,7 @@ Descuento
 Impuestas
 
 [{item_line_total_label}]
-Total de linea
+Total
 
 [{item_row_number}]
 

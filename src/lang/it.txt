@@ -113,7 +113,7 @@ Sconto
 Tasse
 
 [{item_line_total_label}]
-Totale linea
+Totale
 
 [{item_row_number}]
 

@@ -113,7 +113,7 @@ Réduction
 Taxe
 
 [{item_line_total_label}]
-Total de la ligne
+Total
 
 [{item_row_number}]
 

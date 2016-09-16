@@ -112,7 +112,7 @@ Rabatt
 Steuer
 
 [{item_line_total_label}]
-Linie Gesamt
+Gesamt
 
 [{item_row_number}]
 
