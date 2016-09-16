@@ -1,7 +1,7 @@
 ﻿var ib_how_to_data = function(){/*
 <ib-div class="ib_modal_container">
   <ib-div class="ib_p">
-    Si tu es one-man performer y todo que haces para tu negocio lo haces solo - bienvenido al club! Conoces bien el aburrimiento de escribir facturas. Word? Excel? Software de contabilidad complicado? Olvida todo y saluda a tu nueva alegría!
+    Si tu es one-man performer y todo que haces para tu negocio lo haces solo – bienvenido al club! Conoces bien el aburrimiento de escribir facturas. Word? Excel? Software de contabilidad complicado? Olvida todo y saluda a tu nueva alegría!
   </ib-div>
 
   <ib-div class="ib_h3">Que puedo hacer con esta plantilla?</ib-div>
@@ -34,7 +34,7 @@
         </ib-div>
       </ib-div>
       <ib-div class="ib_li">
-        &#9679; &nbsp; Redisegnala con otro estilo, usando un HTML & amp simple ; Technologie CSS.
+        &#9679; &nbsp; Redisegnala con otro estilo, usando de técnicas de HTML y CSS simples.
       </ib-div>
       <ib-div class="ib_li">
         &#9679; &nbsp; Imprime directamente.
@@ -47,7 +47,7 @@
 
   <ib-div class="ib_h3">¿Cómo puedo guardar mis datos de negocio predefinidos para uso futuro?</ib-div>
   <ib-div class="ib_p">
-    Haz click <ib-span class="ib_b">&quot;Guarda actual State&quot;</ib-span> al botón y sigue las instrucciones de la pantalla.
+    Haz click <ib-span class="ib_b">&quot;Guardar Estado&quot;</ib-span> al botón y sigue las instrucciones de la pantalla.
   </ib-div>
 
   <ib-div class="ib_h3">Cómo guardar la factura?</ib-div>
@@ -64,11 +64,11 @@
   </ib-div>
 
   <ib-div class="ib_p">
-    Guardando la factura en PDF se puede hacer usando algo llamado PDF Print Driver. Esto también se conoce como impresión en PDF ya que el resultado del navegador se envía a un archivo en lugar de una impresora. Esta funcionalidad se crea en algunos navegadores (como Google Chrome) mientras en otros (como Firefox o Internet Explorer)es necesario instalar la impresora de PDF de forma manual. Una impresora de PDF buena y gratis es <ib-span class="ib_a" onclick="window.open('http://www.bullzip.com', '_blank')">Bullzip</ib-span>. Si ya has instalado una impresora PDF, <ib-span class="ib_b">click &quot;Print Invoice&quot;, establece el objetivo para la impresión &quot;Guarda en PDF&quot; y haz click guarda</ib-span>.
+    Guardando la factura en PDF se puede hacer usando algo llamado PDF Print Driver. Esto también se conoce como impresión en PDF ya que el resultado del navegador se envía a un archivo en lugar de una impresora. Esta funcionalidad se crea en algunos navegadores (como Google Chrome) mientras en otros (como Firefox o Internet Explorer)es necesario instalar la impresora de PDF de forma manual. Una impresora de PDF buena y gratis es <ib-span class="ib_a" onclick="window.open('http://www.bullzip.com', '_blank')">Bullzip</ib-span>. Si ya has instalado una impresora PDF, <ib-span class="ib_b">click &quot;Impresión&quot;, establece el objetivo para la impresión &quot;Guarda en PDF&quot; y haz click guarda</ib-span>.
   </ib-div>
 
   <ib-div class="ib_p">
-    Para guardar tu factura online, primero debes crear una cuenta Invoicebus. Esto se puede hacer con un simple clic &quot;Save Invoice Online&quot; botón. Después, serás llevado a una página segura donde puedes completar tu registro y guardar la factura. Por favor, tenga en cuenta que una factura online es mucho más potente que una factura en PDF estático. Por ejemplo, una factura online se puede cambiar on-the-fly, enviada por correo electrónico, rastreada y pagada directamente con Credit card, PayPal o Bitcoin. Aquí es <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/demoinvoice/', '_blank')">example</ib-span>.
+    Para guardar tu factura online, primero debes crear una cuenta Invoicebus. Esto se puede hacer con un simple clic &quot;Guardar Online&quot; botón. Después, serás llevado a una página segura donde puedes completar tu registro y guardar la factura. Por favor, tenga en cuenta que una factura online es mucho más potente que una factura en PDF estático. Por ejemplo, una factura online se puede cambiar on-the-fly, enviada por correo electrónico, rastreada y pagada directamente con Credit card, PayPal o Bitcoin. Aquí es <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/demoinvoice/', '_blank')">example</ib-span>.
   </ib-div>
 
   <ib-div class="ib_h3">Cómo remodelar la plantilla?</ib-div>
@@ -98,14 +98,14 @@
     La plantilla utiliza Fuentes de Google, ya que son gratuitas y abiertas a todos. Si quieres utilizar la plantilla offline (sin estar conectado a Internet) debes descargar y instalar las fuentes en tu ordenador (<ib-span class="ib_a" onclick="window.open('http://www.fonts.com/web-fonts/google', '_blank')">SkyFonts</ib-span> es una herramienta sencilla y te ayuda a hacer esto facilmente).
   </ib-div>
 
-  <ib-div class="ib_h3">Puedo utilizar el código Java Script?</ib-div>
+  <ib-div class="ib_h3">Puedo utilizar el código JavaScript?</ib-div>
   <ib-div class="ib_p">
-    ¡Por supuesto! De hecho, vamos a estar orgullosos de ti por hacerlo (<ib-span class="ib_a" onclick="window.open('https://github.com/Invoicebus/html-invoice-generator', '_blank')">fork us on GitHub</ib-span>). A pesar decides de utlizarlo en proyectos comerciales o no comerciales, no dudes en decirnos porque queremos saber todas las posibilidades como esta harramienta puede ser utilizada. A veces, te podemos ayudar ;)
+    ¡Por supuesto! De hecho, vamos a estar orgullosos de ti por hacerlo (<ib-span class="ib_a" onclick="window.open('https://github.com/Invoicebus/html-invoice-generator', '_blank')">tenedor nos en GitHub</ib-span>). A pesar decides de utlizarlo en proyectos comerciales o no comerciales, no dudes en decirnos porque queremos saber todas las posibilidades como esta harramienta puede ser utilizada. A veces, te podemos ayudar ;)
   </ib-div>
 
   <ib-div class="ib_h3">Apoya el nuestro trabajo</ib-div>
   <ib-div class="ib_p">
-    Mantener este script requiere mucho tiempo y esfuerzo para salvarlo libre y actualizado.Todo lo que buscamos es una pequeña ayuda '- escribir las cláusulas en la parte baja de nuestro servicio de facturación al final del documento. Esto significará un mundo para nosotros si las dejas allí. Gracias!
+    Mantener este script requiere mucho tiempo y esfuerzo para salvarlo libre y actualizado.Todo lo que buscamos es una pequeña ayuda – escribir las cláusulas en la parte baja de nuestro servicio de facturación al final del documento. Esto significará un mundo para nosotros si las dejas allí. Gracias!
   </ib-div>
 
   <ib-div class="ib_p">
@@ -119,7 +119,7 @@
 
   <ib-div class="ib_h3">Sugerencias, preguntas, críticas?</ib-div>
   <ib-div class="ib_p">
-    Hay algo para hacer esta plantilla más bella y mejor para ti? Cosas buenas / cosas malas? Siéntase libre para encontrar el título apropiado en el nuestro<ib-span class="ib_a" onclick="window.open('https://groups.google.com/d/forum/html-invoice-generator', '_blank')">foro de soporte</ib-span> y golpearnos - Leemos y respondemos a todos los envíos.
+    Hay algo para hacer esta plantilla más bella y mejor para ti? Cosas buenas / cosas malas? Siéntase libre para encontrar el título apropiado en el nuestro <ib-span class="ib_a" onclick="window.open('https://groups.google.com/d/forum/html-invoice-generator', '_blank')">foro de soporte</ib-span> y golpearnos – Leemos y respondemos a todos los envíos.
   </ib-div>
 </ib-div>
 */}

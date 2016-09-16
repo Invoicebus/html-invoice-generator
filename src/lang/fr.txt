@@ -56,7 +56,7 @@ Date limite:
 Monnaie:
 
 [{currency}]
-USD
+EUR
 
 [{po_number_label}]
 P.O. #

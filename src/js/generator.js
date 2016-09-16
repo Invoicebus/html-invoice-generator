@@ -329,21 +329,22 @@
   var ib_languages = {
     'en': {
       long_name: 'English',
+      long_name_en: 'English',
+      change_lang: 'Change the language to English',
       print: 'Print',
       invoice: 'Invoice',
       print_info: 'This command is also used to save<br/>the invoice as PDF. See FAQ for more info.',
       highlight: 'Highlight',
-      fields: 'Fields',
       highlight_info: 'Highlight editable fields',
-      save: 'Save',
-      current: 'Current',
-      state: 'State',
+      save_state: 'Save State',
+      save_online: 'Save Online',
       save_info: 'Save current invoice data such as<br/>company address, logo, etc., for future re-use',
       online: 'Online',
       online_info: 'You\'ll be taken to Invoicebus website<br>to save this invoice online',
       account_info: 'You\'ll need Invoicebus account to save this invoice',
       about: 'About',
       faq: 'FAQ',
+      got_it: 'OK, got it',
       crafted_by: 'Crafted with &#x2764; by',
       invoicebus_mechanics: 'The Invoicebus Mechanics',
       add_new_row: 'Add new row',
@@ -420,22 +421,23 @@
       terms_tooltip: 'Enter invoice terms and notes'
     },
     'de': {
-      long_name: 'Deutsche',
-      print: 'Druck',
+      long_name: 'Deutsch',
+      long_name_en: 'German',
+      change_lang: 'Ändern sie die sprache auf Deutsch',
+      print: 'Drucken',
       invoice: 'Rechnung',
-      print_info: 'Dieser Befehl wird auch zu speichern<br/>die Rechnung als PDF verwendet. Siehe FAQ für weitere Informationen.',
+      print_info: 'Dieser befehl wird auch zu speichern<br/>die rechnung als PDF verwendet. Siehe FAQ für weitere informationen.',
       highlight: 'Markieren',
-      fields: 'Felder',
       highlight_info: 'Markieren sie editierbaren felder',
-      save: 'Sparen',
-      current: 'Aktuellen',
-      state: 'Zustand',
-      save_info: 'Speichern des aktuellen Rechnungsdaten wie<br/>firmenadresse, logo usw. für zukünftige nutzung',
+      save_state: 'Sicherer Staat',
+      save_online: 'Speichern Online',
+      save_info: 'Speichern des aktuellen rechnungsdaten wie<br/>firmenadresse, logo usw. Für zukünftige nutzung',
       online: 'Online',
-      online_info: 'Sie werden auf Invoicebus Website<br>genommen werden, um diese rechnung online zu speichern',
-      account_info: 'Sie müssen Invoicebus Konto diese Rechnung zu sparen',
+      online_info: 'Sie werden auf Invoicebus website<br>genommen werden, um diese rechnung online zu speichern',
+      account_info: 'Sie müssen Invoicebus konto diese rechnung zu sparen',
       about: 'Über',
       faq: 'FAQ',
+      got_it: 'OK, habe es',
       crafted_by: 'Mit &#x2764; hergestellt von',
       invoicebus_mechanics: 'Die Invoicebus Mechanik',
       add_new_row: 'In neue zeile',
@@ -456,79 +458,80 @@
       currency_left: 'Zeigen währung auf der linken seite',
       currency_right: 'Zeigen währung auf der rechten seite',
       company_name_tooltip: 'Geben sie den namen ihres unternehmens',
-      company_address_tooltip: 'Enter company\'s address',
-      company_city_zip_state_tooltip: 'Enter company\'s zip, city and country',
-      company_phone_fax_tooltip: 'Enter company\'s contact phones',
-      company_email_web_tooltip: 'Enter company\'s web and email address',
-      payment_info1_tooltip: 'Enter your payment details',
-      payment_info2_tooltip: 'Enter other payment details',
-      payment_info3_tooltip: 'Enter other payment details',
-      payment_info4_tooltip: 'Enter other payment details',
-      payment_info5_tooltip: 'Enter other payment details',
-      issue_date_label_tooltip: 'Enter issue date label',
-      issue_date_tooltip: 'Select invoice issue date',
-      net_term_label_tooltip: 'Enter net days label',
-      net_term_tooltip: 'Enter invoice net days',
-      due_date_label_tooltip: 'Enter invoice due date label',
-      due_date_tooltip: 'Select invoice due date',
-      currency_label_tooltip: 'Enter invoice currency label',
-      currency_tooltip: 'Enter invoice currency',
-      po_number_label_tooltip: 'Enter P.O. label',
-      po_number_tooltip: 'Enter P.O. Number',
-      bill_to_label_tooltip: 'Enter bill to label',
-      client_name_tooltip: 'Enter client name',
-      client_address_tooltip: 'Enter client address',
-      client_city_zip_state_tooltip: 'Enter client city, zip, country',
-      client_phone_fax_tooltip: 'Enter client pnone & fax',
-      client_email_tooltip: 'Enter client email',
-      client_other_tooltip: 'Enter other client info',
-      invoice_title_tooltip: 'Enter invoice title',
-      invoice_number_tooltip: 'Enter invoice number',
+      company_address_tooltip: 'Geben sie firmenadresse',
+      company_city_zip_state_tooltip: 'Geben sie unternehmens zip, stadt und land',
+      company_phone_fax_tooltip: 'Geben sie unternehmens vertrag handys',
+      company_email_web_tooltip: 'Geben sie unternehmens web-adresse und e-mail-adresse',
+      payment_info1_tooltip: 'Geben sie ihre zahlungsdaten',
+      payment_info2_tooltip: 'Geben sie eine andere zahlungsdetails',
+      payment_info3_tooltip: 'Geben sie eine andere zahlungsdetails',
+      payment_info4_tooltip: 'Geben sie eine andere zahlungsdetails',
+      payment_info5_tooltip: 'Geben sie eine andere zahlungsdetails',
+      issue_date_label_tooltip: 'Geben sie ausgabetag label',
+      issue_date_tooltip: 'Wählen sie rechnungs ausgabetag',
+      net_term_label_tooltip: 'Geben sie net tage label',
+      net_term_tooltip: 'Geben sie rechnung netto tage',
+      due_date_label_tooltip: 'Geben sie rechnung fälligkeit etikett',
+      due_date_tooltip: 'Wählen sie rechnungsfälligkeitsdatum',
+      currency_label_tooltip: 'Geben sie rechnungswährung etikett',
+      currency_tooltip: 'Geben sie rechnungswährung',
+      po_number_label_tooltip: 'Geben sie P.O. etikette',
+      po_number_tooltip: 'Geben sie P.O. nummer',
+      bill_to_label_tooltip: 'Geben sie rechnung zu beschriften',
+      client_name_tooltip: 'Geben sie client-namen',
+      client_address_tooltip: 'Geben sie client-adresse',
+      client_city_zip_state_tooltip: 'Geben sie client ort, plz, land',
+      client_phone_fax_tooltip: 'Geben sie client-telefon und fax',
+      client_email_tooltip: 'Geben sie client-e-mail',
+      client_other_tooltip: 'Geben sie anderen client-info',
+      invoice_title_tooltip: 'Geben sie rechnung titel',
+      invoice_number_tooltip: 'Geben sie die rechnungsnummer',
       item_row_number_label_tooltip: '',
-      item_description_label_tooltip: 'Enter item header',
-      item_quantity_label_tooltip: 'Enter quantity header',
-      item_price_label_tooltip: 'Enter price header',
-      item_discount_label_tooltip: 'Enter discount header',
-      item_tax_label_tooltip: 'Enter tax header',
-      item_line_total_label_tooltip: 'Enter line total header',
+      item_description_label_tooltip: 'Geben sie artikel kopf',
+      item_quantity_label_tooltip: 'Geben sie die menge kopf',
+      item_price_label_tooltip: 'Geben sie preiskopf',
+      item_discount_label_tooltip: 'Geben sie rabatt kopf',
+      item_tax_label_tooltip: 'Geben sie faxkopf',
+      item_line_total_label_tooltip: 'Geben sie zeilensumme kopf',
       item_row_number_tooltip: '',
-      item_description_tooltip: 'Enter item description',
-      item_quantity_tooltip: 'Enter quantity',
-      item_price_tooltip: 'Enter price',
-      item_discount_tooltip: 'Enter discount',
-      item_tax_tooltip: 'Enter tax',
+      item_description_tooltip: 'Geben sie artikelbeschreibung',
+      item_quantity_tooltip: 'Geben sie die menge',
+      item_price_tooltip: 'Geben sie preis',
+      item_discount_tooltip: 'Geben sie rabatt',
+      item_tax_tooltip: 'Geben sie den steuer',
       item_line_total_tooltip: '',
-      amount_subtotal_label_tooltip: 'Enter subtotal label',
+      amount_subtotal_label_tooltip: 'Geben sie wert ihrer label',
       amount_subtotal_tooltip: '',
-      tax_name_tooltip: 'Enter tax label',
+      tax_name_tooltip: 'Geben sie steuerbanderole',
       tax_value_tooltip: '',
-      amount_total_label_tooltip: 'Enter total label',
+      amount_total_label_tooltip: 'Geben sie die gesamt label',
       amount_total_tooltip: '',
-      amount_paid_label_tooltip: 'Enter amount paid label',
-      amount_paid_tooltip: 'Enter amount paid',
-      amount_due_label_tooltip: 'Enter amount due label',
+      amount_paid_label_tooltip: 'Geben sie den betrag bezahlt label',
+      amount_paid_tooltip: 'Geben sie den betrag bezahlt',
+      amount_due_label_tooltip: 'Geben sie den betrag aufgrund label',
       amount_due_tooltip: '',
-      terms_label_tooltip: 'Enter terms and notes label',
-      terms_tooltip: 'Enter invoice terms and notes'
+      terms_label_tooltip: 'Geben sie begriffe und hinweise label',
+      terms_tooltip: 'Geben sie rechnungskonditionen und notizen'
     },
     'es': {
-      long_name: 'Ingles',
-      print: 'Impresion',
+      long_name: 'Español',
+      long_name_en: 'Spanish',
+      change_lang: 'Cambiar el idioma a Español',
+      print: 'Impresión',
       invoice: 'Factura',
       print_info: 'Este comando tambien se utiliza para guardar<br/>la factura en PDF. Ve FAQ para mas informacion.',
       highlight: 'Destaca',
-      fields: 'Campos',
       highlight_info: 'Destaca los campos modificables',
-      save: 'Guarda',
-      current: 'Actual',
-      state: 'Estado',
+      save_state: 'Guardar Estado',
+      save_online: 'Guardar Online',
       save_info: 'Guarda los datos de la factura actuales como<br/>, direccion de la empresa,logotipo, etc., por una reutilizacion futura',
       online: 'Online',
       online_info: 'Seras llevado a la pagina Web<br>para guardar esta factura online',
       account_info: 'Necesitas una cuenta Invoicebus para guardar esta factura',
-      about: 'Sobre esto',
+      about: 'Sobre',
       faq: 'FAQ',
-      crafted_by: 'Creado con amor de',
+      got_it: 'OK, entendido',
+      crafted_by: 'Creado con &#x2764; de',
       invoicebus_mechanics: 'The Invoicebus Mechanics',
       add_new_row: 'Anade nueva fila',
       configure_columns: 'Configura columnas',
@@ -604,23 +607,24 @@
       terms_tooltip: 'Introduce condiciones y notas de la factura'
     },
     'it': {
-      long_name: 'Inglese',
-      print: 'Stampa',
+      long_name: 'Italiano',
+      long_name_en: 'Italian',
+      change_lang: 'Cambiare la lingua di Italiano',
+      print: 'Stampare',
       invoice: 'Fattura',
       print_info: 'Questo comando e anche usato per salvare<br/>la fattura come PDF. Vedi FAQ per piu informazioni.',
       highlight: 'Evidenzia',
-      fields: 'Campi',
       highlight_info: 'Seleziona i campi modificabili',
-      save: 'Salva',
-      current: 'Attuale',
-      state: 'Stato',
+      save_state: 'Salva Stato Della',
+      save_online: 'Salva Online',
       save_info: 'Salva i dati di fattura attuali come <br/>indirizzo dell\'azienda, logo, ecc., per un riutilizzo futuro',
       online: 'Online',
       online_info: 'Sarai portato alla pagina web di Invoicebus<br>per salvare questa fattura online',
       account_info: 'Hai bisogno di un account Invoicebus per salvare questa fattura',
-      about: 'Riguardo a questo',
+      about: 'Attorno',
       faq: 'FAQ',
-      crafted_by: 'Realizzato con amore di',
+      got_it: 'OK, capito',
+      crafted_by: 'Realizzato con &#x2764; di',
       invoicebus_mechanics: 'The Invoicebus Mechanics',
       add_new_row: 'Aggiungi nova riga',
       configure_columns: 'Configure colonne',
@@ -696,24 +700,25 @@
       terms_tooltip: 'Inserisci condizioni e note della fattura'
     },
     'fr': {
-      long_name: 'Anglais',
+      long_name: 'Français',
+      long_name_en: 'French',
+      change_lang: 'Changer la langue Française',
       print: 'Imprimer',
       invoice: 'Facture',
       print_info: 'Cette commande est aussi utilisée pour sauvegarder<br/>la facture sous forme PDF. Consultez FAQ pour plus d\'infos.',
-      highlight: 'Mettre en relief',
-      fields: 'Champs',
+      highlight: 'Marque',
       highlight_info: 'Mettre en relief les champs modifiables',
-      save: 'Enregistrer',
-      current: 'Actuel',
-      state: 'Etat',
+      save_state: 'Enregistrer L\'état',
+      save_online: 'Enregistrer en Ligne',
       save_info: 'Enregistrer les données actuelles de la facture telles que<br/>adresse de l\'entreprise, logo, etc., pour un futur réemploi',
       online: 'En ligne',
       online_info: 'Vous serez réorienté vers le site de Invoicebus website<br>sauvegarder cette facture en ligne',
       account_info: 'Vous avez besoin d\'un compte Invoicebus pour sauvegarder cette facture',
       about: 'Pour',
       faq: 'FAQ',
-      crafted_by: 'Conçu avec amour par',
-      invoicebus_mechanics: 'La Mécanique Invoicebus ',
+      got_it: 'OK, compris',
+      crafted_by: 'Conçu avec &#x2764; par',
+      invoicebus_mechanics: 'La Mécanique Invoicebus',
       add_new_row: 'Ajouter ligne',
       configure_columns: 'Configurer Colonnes',
       row_number: 'Numéro de ligne',
@@ -793,13 +798,14 @@
     var lang_select = '';
 
     // language select short names
-    lang_select += '<select class="ib_pull_right ib_lang_select ib_hide">';
+    lang_select += '<select class="ib_pull_right ib_lang_select">';
 
     // add default option that reverts to user data
-    lang_select += '<option value="" selected>default</option>';
+    lang_select += '<option value="" selected="selected" title="These are the data and language saved in your \'data.txt\' file">Default</option>';
+    lang_select += '<option value="" disabled="disabled">------------</option>';
 
     for(var key in ib_languages) {
-      lang_select += '<option value="' + key + '">' + key + '</option>';
+      lang_select += '<option value="' + key + '" title="' + ib_languages[key].change_lang + '">' + ib_languages[key].long_name + '</option>';
     }
 
     lang_select += '</select>';
@@ -814,11 +820,11 @@
     $(document.body)
       .before($('<ib-span class="ib_invoice_commands_wrap">' +
                   '<ib-span class="ib_invoice_commands">' +
-                    '<ib-span id="ib-print-btn" class="ib_default_button" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].print_info + '"><i class="fa fa-print"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].print + '</span><span class="ib_hide_medium"> ' + ib_languages[ib_lang].invoice + '</span></ib-span>' +
-                    '<ib-span class="ib_default_button ib_highlight_editable" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].highlight_info + '"><i class="fa fa-edit"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].highlight + '</span><span class="ib_hide_medium"> ' + ib_languages[ib_lang].fields + '</span></ib-span>' +
-                    '<ib-span id="ib-save-data-btn" class="ib_default_button" data-toggle="modal" data-target="#ib_saveCurrentStateModal" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].save_info + '"><i class="fa fa-bolt"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].save + '</span><span class="ib_hide_medium"> ' + ib_languages[ib_lang].current + '</span><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].state + '</span></ib-span>' +
+                    '<ib-span id="ib-print-btn" class="ib_default_button" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].print_info + '"><i class="fa fa-print"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].print + '</span></ib-span>' +
+                    '<ib-span class="ib_default_button ib_highlight_editable" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].highlight_info + '"><i class="fa fa-edit"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].highlight + '</span></ib-span>' +
+                    '<ib-span id="ib-save-data-btn" class="ib_default_button" data-toggle="modal" data-target="#ib_saveCurrentStateModal" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].save_info + '"><i class="fa fa-bolt"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].save_state + '</span></ib-span>' +
                     '<iframe id="ib_download_data_frame" class="ib_force_hide"></iframe>' +
-                    '<ib-span class="ib_default_button ib_save_online" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].online_info + '"><i class="fa fa-cloud-upload"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].save + '</span><span class="ib_hide_medium"> ' + ib_languages[ib_lang].invoice + '</span><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].online + '</span></ib-span>' +
+                    '<ib-span class="ib_default_button ib_save_online" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].online_info + '"><i class="fa fa-cloud-upload"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].save_online + '</span></ib-span>' +
                     '<ib-span class="ib_save_info" data-tooltip="tooltip" data-placement="right" title="' + ib_languages[ib_lang].account_info + '"><i class="fa fa-question-circle"></i></ib-span>' +
 
                     '<ib-span class="ib_clear_xsmall"></ib-span>' +
@@ -826,7 +832,7 @@
                     '<ib-span class="ib_gray_link ib_how_to_link ib_pull_right" data-toggle="modal" data-target="#ib_howToModal">' + ib_languages[ib_lang].about + '</ib-span>' +
                     '<ib-span class="ib_top_separator ib_pull_right">●</ib-span>' +
                     '<ib-span class="ib_gray_link ib_how_to_link ib_pull_right" onclick="window.open(\'https://groups.google.com/d/forum/html-invoice-generator\', \'_blank\')">' + ib_languages[ib_lang].faq + '</ib-span>' +
-                    '<ib-span class="ib_top_separator ib_pull_right ib_hide">●</ib-span>' +
+                    '<ib-span class="ib_top_separator ib_pull_right">●</ib-span>' +
                     
                     ib_generateLanguageSelect() +
 
@@ -1136,7 +1142,7 @@
                                   '<ib-div class="modal-content">' +
                                     '<ib-div class="modal-header">' +
                                       '<ib-span type="button" class="close" data-dismiss="modal"><ib-span aria-hidden="true">&times;</ib-span></ib-span>' +
-                                      '<ib-div class="modal-title" id="saveStateModal">' + ib_languages[ib_lang].save + ' '  + ib_languages[ib_lang].current + ' ' + ib_languages[ib_lang].state + '</ib-div>' +
+                                      '<ib-div class="modal-title" id="saveStateModal">' + ib_languages[ib_lang].save_state + '</ib-div>' +
                                     '</ib-div>' +
                                     '<ib-div class="modal-body">' +
                                       '<ib-div class="ib_how_to_container">' + ib_save_state + '</ib-div>' +
@@ -1175,7 +1181,7 @@
             $(this).attr('href', 'data:text/plain;charset=UTF-8,' + encodeURIComponent(raw_data));
         });
       };
-      js.src = PATH + 'docs/save-state-' + (ib_lang || 'en') + '.js';
+      js.src = PATH + 'docs/save-state/save-state-' + (ib_lang || 'en') + '.js';
       document.body.appendChild(js);
 
       js = document.createElement('script');
@@ -1193,7 +1199,7 @@
                                   '<ib-div class="ib_how_to_container">' + ib_how_to + '</ib-div>' +
                                 '</ib-div>' +
                                 '<ib-div class="modal-footer">' +
-                                  '<ib-span class="ib_default_button" data-dismiss="modal">OK, got it</ib-span>' +
+                                  '<ib-span class="ib_default_button" data-dismiss="modal">' + ib_languages[ib_lang].got_it + '</ib-span>' +
                                 '</ib-div>' +
                               '</ib-div>' +
                             '</ib-div>' +
@@ -1202,7 +1208,7 @@
         $(document.body)
           .after($(modal_how_to));
       };
-      js.src = PATH + 'docs/how-to-' + (ib_lang || 'en') + '.js';
+      js.src = PATH + 'docs/how-to/how-to-' + (ib_lang || 'en') + '.js';
       document.body.appendChild(js);
 
       for(key in ib_data)
@@ -2943,7 +2949,7 @@
   document.body.appendChild(js);
 
   js = document.createElement('script');
-  js.src = PATH + 'docs/raw-data-' + (ib_lang || 'en') + '.js';
+  js.src = PATH + 'docs/raw-data/raw-data-' + (ib_lang || 'en') + '.js';
   document.body.appendChild(js);
 
   // Start polling...

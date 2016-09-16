@@ -16,7 +16,7 @@ var ib_save_state_data = function(){/*
     <ib-span class="ib_b">Note:</ib-span> Sauvegarder l'état du template ne veut pas dire garder une instance actuelle de la facture pour le dossier. Pour cela,vous devriez soit <ib-span class="ib_a" onclick="window.open('https://groups.google.com/forum/#!topic/html-invoice-generator/H8s1yUCXnj4', '_blank')">sauvegarder la facture sous PDF</ib-span> (en utilisant l'option Imprimer) ou <ib-span class="ib_a" onclick="window.open('https://groups.google.com/forum/#!topic/html-invoice-generator/EfafX6izKxc', '_blank')">sauvegarder en ligne</ib-span>.
   </ib-div>
   
-  <a href="javascript:void(0);" download="data.txt" class="ib_default_button ib_success_button ib_large_button" id="ib-save-current-data"><ib-span class="fa fa-bolt"></ib-span> Save data.txt</a>
-  <ib-div id="ib-safari-save-as" class="ib_hide ib_safari_note">Droit cliquez la touche et choisissez <ib-span class="ib_b">&quot;Download Linked File As...&quot;</ib-span></ib-div>
+  <a href="javascript:void(0);" download="data.txt" class="ib_default_button ib_success_button ib_large_button" id="ib-save-current-data"><ib-span class="fa fa-bolt"></ib-span> Enregistrer data.txt</a>
+  <ib-div id="ib-safari-save-as" class="ib_hide ib_safari_note">Droit cliquez la touche et choisissez <ib-span class="ib_b">&quot;Télécharger Le Fichier Lié Sous...&quot;</ib-span></ib-div>
 </ib-div>
 */}

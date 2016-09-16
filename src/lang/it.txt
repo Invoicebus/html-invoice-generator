@@ -222,7 +222,7 @@ it
 
 [items]
 Congelati Brontosauro Costole@||@2@||@120@||@@||@2
-Mammoth Chops@||@14@||@175@||@-10@||@5
+Chops di Mammoth@||@14@||@175@||@-10@||@5
 @||@@||@@||@@||@
 
 

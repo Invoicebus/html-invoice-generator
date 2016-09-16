@@ -3,7 +3,7 @@ var ib_invoice_data = function(){\/*
 #=========================================================================================================
 
 
-### Company data
+### Firmen Daten
 
 [{company_name}]
 |company_name|
@@ -93,7 +93,7 @@ var ib_invoice_data = function(){\/*
 |invoice_number|
 
 
-### Column names
+### Spaltennamen
 
 [{item_row_number_label}]
 |item_row_number_label|
@@ -138,7 +138,7 @@ var ib_invoice_data = function(){\/*
 |item_line_total|
 
 
-### Summary of totals
+### Zusammenfassung der summen
 
 [{amount_subtotal_label}]
 |amount_subtotal_label|
@@ -174,17 +174,17 @@ var ib_invoice_data = function(){\/*
 |terms|
 
 
-### Settings
+### Einstellungen
 
-# One of 'dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy', 'yyyy mm dd', 'yyyy-mm-dd', 'yyyy.mm.dd'
+# Einer von 'dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy', 'yyyy mm dd', 'yyyy-mm-dd', 'yyyy.mm.dd'
 [date_format]
 |date_format|
 
-# One of 'left' or 'right'
+# Einer von 'left' oder 'right'
 [currency_position]
 |currency_position|
 
-# One of '0,000.00', '0000.00', '0.000,00', or '0000,00'
+# Einer von '0,000.00', '0000.00', '0.000,00', or '0000,00'
 [number_format]
 |number_format|
 
@@ -219,27 +219,27 @@ var ib_invoice_data = function(){\/*
 |lang|
 
 
-### Items (in this order item_description@||@item_quantity@||@item_price@||@item_discount@||@item_tax)
+### Artikel (in dieser reihenfolge item_description@||@item_quantity@||@item_price@||@item_discount@||@item_tax)
 
 [items]
 |items|
 
 
-### Custom data (in format field_name@||@field_value)
+### Kundenspezifische daten (im format field_name@||@field_value)
 
-# Document custom data
+# Dokument benutzerdefinierte daten
 [document_custom]
 |document_custom|
 
 
-# Client custom data
+# Client benutzerdefinierte daten
 [client_custom]
 |client_custom|
 
 
 ### Logo
 
-#base64 encoded data URI of PNG image
+#base64 codierten daten URI von PNG-bild
 [{company_logo}]
 |company_logo|
 

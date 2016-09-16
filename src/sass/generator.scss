@@ -203,7 +203,7 @@ html {
 }
 
 .modal-body {
-  height:450px;
+  height:470px;
   padding:0;
 }
 
@@ -926,21 +926,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   }
 }
 
-@media only screen and (max-width: 700px) {
-
-  .ib_invoice_commands {
-
-    .ib_hide_small {
-      display: none;
-    }
-
-    .ib_show_small {
-      display: block !important;
-    }
-  }
-}
-
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 767px) {
 
   .ib_invoice_commands {
 

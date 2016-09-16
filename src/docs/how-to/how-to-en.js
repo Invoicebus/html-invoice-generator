@@ -47,7 +47,7 @@ var ib_how_to_data = function(){/*
 
   <ib-div class="ib_h3">How can I save my default company data for future re-use?</ib-div>
   <ib-div class="ib_p">
-    Click <ib-span class="ib_b">&quot;Save Current State&quot;</ib-span> button and follow the on-screen instructions.
+    Click <ib-span class="ib_b">&quot;Save State&quot;</ib-span> button and follow the on-screen instructions.
   </ib-div>
 
   <ib-div class="ib_h3">How to save the invoice?</ib-div>
@@ -64,11 +64,11 @@ var ib_how_to_data = function(){/*
   </ib-div>
 
   <ib-div class="ib_p">
-    Saving the invoice to PDF can be done by using something called PDF Print Driver. This is also known as printing to PDF because the output from the browser is sent to a file instead to a printer. This functionality is built-in in some browsers (like Google Chrome), while in others (like Firefox or Internet Explorer) you have to install PDF printer manually. A good and free PDF printer is <ib-span class="ib_a" onclick="window.open('http://www.bullzip.com', '_blank')">Bullzip</ib-span>. If you already have your PDF printer installed, <ib-span class="ib_b">click &quot;Print Invoice&quot;, set the destination printer to &quot;Save as PDF&quot; and click Save</ib-span>.
+    Saving the invoice to PDF can be done by using something called PDF Print Driver. This is also known as printing to PDF because the output from the browser is sent to a file instead to a printer. This functionality is built-in in some browsers (like Google Chrome), while in others (like Firefox or Internet Explorer) you have to install PDF printer manually. A good and free PDF printer is <ib-span class="ib_a" onclick="window.open('http://www.bullzip.com', '_blank')">Bullzip</ib-span>. If you already have your PDF printer installed, <ib-span class="ib_b">click &quot;Print&quot;, set the destination printer to &quot;Save as PDF&quot; and click Save</ib-span>.
   </ib-div>
 
   <ib-div class="ib_p">
-    In order to save the invoice online you'll need to create an Invoicebus account first. You can do this by clicking &quot;Save Invoice Online&quot; button. Then you'll be taken to a secure page where you can complete your registration and save the invoice. Please note that an online invoice is much more powerful than a static PDF invoice. For example, an online invoice can be edited on-the-fly, sent by email, tracked, and paid directly by Credit card, PayPal or Bitcoin. Here's an <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/demoinvoice/', '_blank')">example</ib-span>.
+    In order to save the invoice online you'll need to create an Invoicebus account first. You can do this by clicking &quot;Save Online&quot; button. Then you'll be taken to a secure page where you can complete your registration and save the invoice. Please note that an online invoice is much more powerful than a static PDF invoice. For example, an online invoice can be edited on-the-fly, sent by email, tracked, and paid directly by Credit card, PayPal or Bitcoin. Here's an <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/demoinvoice/', '_blank')">example</ib-span>.
   </ib-div>
 
   <ib-div class="ib_h3">How to restyle the template?</ib-div>
@@ -97,7 +97,6 @@ var ib_how_to_data = function(){/*
   <ib-div class="ib_p">
     The template uses Google Fonts as they are free and open to everyone. If you want to use the template offline (without being connected to internet) you'll have to download and install the fonts on your local computer (<ib-span class="ib_a" onclick="window.open('http://www.fonts.com/web-fonts/google', '_blank')">SkyFonts</ib-span> is a simple tool that helps you do this easily).
   </ib-div>
-
 
   <ib-div class="ib_h3">Can I use the JavaScript source code?</ib-div>
   <ib-div class="ib_p">

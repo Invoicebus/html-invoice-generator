@@ -118,10 +118,10 @@ module.exports = function(grunt) {
         flatten: true
       },
       docs: {
-        src: ['<%= docs_dir %>/*.js'],
+        src: ['**/*'],
         dest: '<%= build_dir %>/docs',
-        expand: true,
-        flatten: true
+        cwd: 'src/docs/',
+        expand: true
       },
       print_css: {
         src: ['<%= tpl_dir %>/print.css'],
@@ -382,7 +382,7 @@ module.exports = function(grunt) {
         tasks: ['dev']
       },
       js: {
-        files: ['<%= js_src %>', 'docs/*'],
+        files: ['<%= js_src %>'],
         tasks: ['jshint', 'concat:js', 'replace:dev']
       },
       css: {
@@ -406,7 +406,7 @@ module.exports = function(grunt) {
         tasks: ['copy:lang']
       },
       docs: {
-        files: '<%= docs_dir %>/*.js',
+        files: '<%= docs_dir %>/**/*',
         tasks: ['copy:docs']
       },
       livereload: {
@@ -425,7 +425,7 @@ module.exports = function(grunt) {
     css_src: 'src/sass',
 
     lang_dir: 'src/lang',
-    docs_dir: 'docs',
+    docs_dir: 'src/docs',
 
     build_js: 'generator.js',
     build_css: 'generator.css',

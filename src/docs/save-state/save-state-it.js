@@ -17,6 +17,6 @@ var ib_save_state_data = function(){/*
   </ib-div>
 
   <a href="javascript:void(0);" download="data.txt" class="ib_default_button ib_success_button ib_large_button" id="ib-save-current-data"><ib-span class="fa fa-bolt"></ib-span> Salva i dati.txt</a>
-  <ib-div id="ib-safari-save-as" class="ib_hide ib_safari_note">Clicca con il tasto destro e scegli<ib-span class="ib_b">&quot;Download Linked File As...&quot;</ib-span></ib-div>
+  <ib-div id="ib-safari-save-as" class="ib_hide ib_safari_note">Clicca con il tasto destro e scegli <ib-span class="ib_b">&quot;Scaricare File Collegato Come...&quot;</ib-span></ib-div>
 </ib-div>
 */}
