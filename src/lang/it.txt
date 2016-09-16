@@ -98,7 +98,7 @@ FATTURA
 
 
 [{item_description_label}]
-Voce
+Articolo
 
 [{item_quantity_label}]
 Quantità

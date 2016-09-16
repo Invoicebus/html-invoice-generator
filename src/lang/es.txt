@@ -98,7 +98,7 @@ FACTURA
 
 
 [{item_description_label}]
-Seccion
+Artículo
 
 [{item_quantity_label}]
 Cantidad
