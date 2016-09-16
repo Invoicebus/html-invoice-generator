@@ -176,15 +176,15 @@ Fred, ich danke Ihnen sehr. Wir schätzen Ihr geschäft wirklich.<br />Bitte sen
 
 # Einer von 'dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy', 'yyyy mm dd', 'yyyy-mm-dd', 'yyyy.mm.dd'
 [date_format]
-mm/dd/yyyy
+yyyy-mm-dd
 
 # Einer von 'left' oder 'right'
 [currency_position]
-left
+right
 
 # Einer von '0,000.00', '0000.00', '0.000,00', or '0000,00'
 [number_format]
-0,000.00
+0.000,00
 
 [default_columns]
 item_row_number,item_description,item_quantity,item_price,item_discount,item_tax,item_line_total
