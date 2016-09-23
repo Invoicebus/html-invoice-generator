@@ -361,7 +361,7 @@ module.exports = function(grunt) {
         },
         files: [
           {
-            src: ['bootstrap.*', 'generator.*', 'jquery.*', 'fonts/*'],
+            src: ['bootstrap.*', 'generator.*', 'jquery.*', '{fonts,lang,docs}/**/*'],
             cwd: '<%= build_dir %>',
             filter: 'isFile',
             expand: true
