@@ -882,7 +882,7 @@
     });
 
     $(document.body)
-      .after($('<ib-span class="ib_invoicebus_fineprint">Manage your invoices super easy at <ib-span onclick="window.open(\'https://invoicebus.com\', \'_blank\')">invoicebus.com</ib-span></ib-span>'));
+      .after($('<ib-span class="ib_invoicebus_fineprint">Receive online payments through your invoices at <ib-span onclick="window.open(\'https://invoicebus.com\', \'_blank\')">invoicebus.com</ib-span></ib-span>'));
 
     if(!JSON.parse(ib_data.invoicebus_fineprint))
       $('.ib_invoicebus_fineprint').css('visibility', 'hidden');
@@ -1974,19 +1974,19 @@
     var rows = $('[data-iterate="item"]');
 
     // private
-    function field_keydown(e) {
+    function ib_fieldKeydown(e) {
       var self = this;
 
       if (e.ctrlKey)
         return true;
 
-      // allow only numbers
-      if ((e.keyCode >= 35 && e.keyCode <= 40) || 
-          ((e.keyCode >= 48 && e.keyCode <= 57) && !e.shiftKey) || 
-          (e.keyCode >= 96 && e.keyCode <= 105) || 
-          e.keyCode == 8 || e.keyCode == 9 || 
-          e.keyCode == 46 || e.keyCode == 190 || e.keyCode == 110 || e.keyCode == 188 ||
-          e.keyCode == 116) {
+      // allow only numbers and navigation keys
+      if ((e.which >= 35 && e.which <= 40) || 
+          ((e.which >= 48 && e.which <= 57) && /[0-9.,]/.test(e.key)) || 
+          (e.which >= 96 && e.which <= 105) || 
+          e.which == 8 || e.which == 9 || 
+          e.which == 46 || e.which == 190 || e.which == 110 || e.which == 188 ||
+          e.which == 116) {
           // Don't do anything
 
         switch($(this).data('ibcl-id'))
@@ -2015,7 +2015,7 @@
           case 'item_discount':
           case 'amount_paid':
             // Allow minus (-) sign
-            if((e.keyCode == 189 || e.keyCode == 109 || e.key == '-') && $(this).text().indexOf('-') == -1)
+            if((e.which == 189 || e.which == 109 || e.key == '-') && $(this).text().indexOf('-') == -1)
             {
               var pos = window.getSelection().extentOffset + 1;
 
@@ -2032,21 +2032,21 @@
       }
 
       // if a decimal separator has been added, disable the '.' or ',' keys
-      if(ib_decimal_separator == '.' && $(this).text().indexOf('.') != -1 && (e.keyCode == 190 || e.keyCode == 110))
+      if(ib_decimal_separator == '.' && $(this).text().indexOf('.') != -1 && (e.which == 190 || e.which == 110))
         e.preventDefault(); 
 
-      if(ib_decimal_separator == ',' && $(this).text().indexOf(',') != -1 && e.keyCode == 188)
+      if(ib_decimal_separator == ',' && $(this).text().indexOf(',') != -1 && e.which == 188)
         e.preventDefault();
 
       // if decimal separator is '.' than preven the ',' from being typed
-      if(ib_decimal_separator == '.' && e.keyCode == 188)
+      if(ib_decimal_separator == '.' && e.which == 188)
         e.preventDefault();
 
       // if decimal separator is ',' than preven the '.' from being typed
-      if(ib_decimal_separator == ',' && (e.keyCode == 190 || e.keyCode == 110))
+      if(ib_decimal_separator == ',' && (e.which == 190 || e.which == 110))
         e.preventDefault();
         
-      if($(this).data('ibcl-id') == 'net_term' && ((e.keyCode == 188 || e.keyCode == 190 || e.keyCode == 110) || ($(this).text().length >= 3 && e.keyCode >= 48 && e.keyCode <= 57 && window.getSelection().isCollapsed)))
+      if($(this).data('ibcl-id') == 'net_term' && ((e.which == 188 || e.which == 190 || e.which == 110) || ($(this).text().length >= 3 && e.which >= 48 && e.which <= 57 && window.getSelection().isCollapsed)))
         e.preventDefault();
 
       setTimeout(ib_calculateTotals, 0);
@@ -2066,7 +2066,7 @@
       var item_line_total = row.find('');
       
       $('[data-ibcl-id="net_term"], [data-ibcl-id="item_quantity"], [data-ibcl-id="item_price"], [data-ibcl-id="item_discount"], [data-ibcl-id="item_tax"], [data-ibcl-id="amount_paid"], [data-ibcl-id="amount_due"]')
-        .keydown(field_keydown);
+        .keydown(ib_fieldKeydown);
     }
   };
 
