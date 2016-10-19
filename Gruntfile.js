@@ -486,10 +486,20 @@ module.exports = function(grunt) {
     
     'copy:print_css',
 
-    // Fonts shouldn't be uploaded everytime,
-    // so if there are changes upload them manually and
-    // set header 'Access-Control-Allow-Origin': * to all font files
-    // and proper 'Content-Type' header
+    /*
+      Fonts shouldn't be uploaded everytime,
+      so if there are changes upload them manually and
+      set header 'Access-Control-Allow-Origin': * to all font files
+      and proper 'Content-Type' headers:
+      
+      .eot   - application/vnd.ms-fontobject
+      .otf   - application/font-sfnt
+      .svg   - image/svg+xml
+      .ttf   - application/font-sfnt
+      .woff  - application/font-woff
+      .woff2 - application/font-woff2
+    */
+
     'clean:fonts',
 
     'cloudfiles:publish'

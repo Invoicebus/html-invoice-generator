@@ -123,6 +123,10 @@ ib-div {
   content: "\f110";
 }
 
+.fa-fw:before {
+  content: "\f115";
+}
+
 .fa-flash:before,
 .fa-bolt:before {
   content: "\f0e7";
@@ -305,10 +309,10 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
     line-height: 1.4em;
 
     > ib-span {
-      opacity:.6;
+      @include opacity(.6);
 
       &:hover {
-        opacity:1;
+        @include opacity(1);
       }
     }
 
@@ -436,7 +440,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
     position:absolute !important;
     top:-2px !important;
     left:-2px !important;
-    opacity:0 !important;
+    @include opacity(0);
   }
 }
 
@@ -747,6 +751,21 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
         margin-right: 3px;
       }
 
+      &.ib_open_data {
+        position: relative;
+
+        input[type="file"] {
+          background: transparent !important;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          @include opacity(0);
+          cursor: pointer;
+        }
+      }
+
       &.ib_save_online {
         margin-right: 0;
       }
@@ -762,14 +781,14 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
       position:relative;
       top:8px;
       color:#888;
-      opacity: .7;
+      @include opacity(.7);
       cursor: help;
       margin-left: 20px;
       width:18px;
       text-align:center;
 
       &:hover {
-        opacity: 1;
+        @include opacity(1);
       }
     }
 
@@ -926,7 +945,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 850px) {
 
   .ib_invoice_commands {
 
@@ -944,9 +963,10 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   }
 }
 
-@media only screen and (max-width: 380px) {
+@media only screen and (max-width: 460px) {
 
   .ib_invoice_commands {
+    padding: 15px 0 15px 0 !important;
 
     .ib_clear_xsmall {
       display: block;
@@ -955,6 +975,7 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 
     .ib_pull_right {
       float: left !important;
+      margin-top: 5px !important;
     }
   }
 }

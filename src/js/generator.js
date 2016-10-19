@@ -336,6 +336,9 @@
       print_info: 'This command is also used to save<br/>the invoice as PDF. See FAQ for more info.',
       highlight: 'Highlight',
       highlight_info: 'Highlight editable fields',
+      open_data: 'Open',
+      open_data_info: 'Open already saved data.<br>The file must be loaded from the<br>same location as template.html',
+      text_format_alert: 'Please upload text file. Supported format is .txt',
       save_state: 'Save State',
       save_online: 'Save Online',
       save_info: 'Save current invoice data such as<br/>company address, logo, etc., for future re-use',
@@ -362,6 +365,8 @@
       logo_upload_tooltip: 'Drop image or click to upload your logo (max 2MB).<br>For better print resolution use larger image,<br>as it\'s automatically scaled down.',
       drop_logo: 'Drop your logo here',
       remove_logo: 'Remove logo',
+      image_format_alert: 'Please upload image file. Supported formats are .png, .jpg ang .gif',
+      image_too_big_alert: 'File too big, maximum size is 2MB',
       currency_left: 'Show currency on left',
       currency_right: 'Show currency on right',
       company_name_tooltip: 'Enter your company name',
@@ -429,6 +434,9 @@
       print_info: 'Dieser befehl wird auch zu speichern<br/>die rechnung als PDF verwendet. Siehe FAQ für weitere informationen.',
       highlight: 'Markieren',
       highlight_info: 'Markieren sie editierbaren felder',
+      open_data: 'Öffnen',
+      open_data_info: 'Öffnen sie bereits gespeicherte daten.<br>Die datei muss von demselben speicherort<br>wie template.html geladen werden',
+      text_format_alert: 'Bitte laden sie die textdatei hoch. Das unterstützte format ist .txt',
       save_state: 'Sicherer Staat',
       save_online: 'Speichern Online',
       save_info: 'Speichern des aktuellen rechnungsdaten wie<br/>firmenadresse, logo usw. Für zukünftige nutzung',
@@ -455,6 +463,8 @@
       logo_upload_tooltip: 'Drop-bild oder klicken sie ihr logo (max 2 MB) hochladen.<br>Für eine bessere druckauflösung größeres bild zu verwenden,<br>wie es automatisch verkleinert wird.',
       drop_logo: 'Lassen sie ihr logo hier',
       remove_logo: 'Logo entfernen',
+      image_format_alert: 'Bitte laden sie die bilddatei hoch. Unterstützte formate sind .png, .jpg und .gif',
+      image_too_big_alert: 'Datei zu groß, maximale größe 2mb',
       currency_left: 'Zeigen währung auf der linken seite',
       currency_right: 'Zeigen währung auf der rechten seite',
       company_name_tooltip: 'Geben sie den namen ihres unternehmens',
@@ -522,6 +532,9 @@
       print_info: 'Este comando tambien se utiliza para guardar<br/>la factura en PDF. Ve FAQ para mas informacion.',
       highlight: 'Destaca',
       highlight_info: 'Destaca los campos modificables',
+      open_data: 'Abierto',
+      open_data_info: 'Abrir datos ya guardados.<br>El archivo debe ser cargado desde la<br>misma ubicación que template.html',
+      text_format_alert: 'Por favor, sube archivo de texto. Formato soportado es .txt',
       save_state: 'Guardar Estado',
       save_online: 'Guardar Online',
       save_info: 'Guarda los datos de la factura actuales como<br/>direccion de la empresa, logotipo, etc., por una reutilizacion futura',
@@ -548,6 +561,8 @@
       logo_upload_tooltip: 'Caiga imagen o haga clic para cargar tu logotipo (max 2MB).<br>Para obtener la mejor resolucion de impresion utiliza la imagen grande,<br>como se reducen de forma automatica.',
       drop_logo: 'Arrastre tu logotipo aqui',
       remove_logo: 'Elimina tu logotipo',
+      image_format_alert: 'Por favor, cargar el archivo de imagen. Los formatos soportados son .png, .jpg .gif ang',
+      image_too_big_alert: 'El archivo es demasiado grande, el tamaño máximo es de 2MB',
       currency_left: 'Mostra moneda a la izquierda',
       currency_right: 'Mostra moneda a la derecha',
       company_name_tooltip: 'Rellena con el nombre de la empresa',
@@ -615,6 +630,9 @@
       print_info: 'Questo comando e anche usato per salvare<br/>la fattura come PDF. Vedi FAQ per piu informazioni.',
       highlight: 'Evidenzia',
       highlight_info: 'Seleziona i campi modificabili',
+      open_data: 'Aperto',
+      open_data_info: 'Aprire i dati già salvati.<br>Il file deve essere caricato dalla<br>stessa posizione come template.html',
+      text_format_alert: 'Si prega di caricare file di testo. formato supportato è .txt',
       save_state: 'Salva Stato Della',
       save_online: 'Salva Online',
       save_info: 'Salva i dati di fattura attuali come<br/>indirizzo dell\'azienda, logo, ecc., per un riutilizzo futuro',
@@ -641,6 +659,8 @@
       logo_upload_tooltip: 'Rilascia immagine o clicca per caricare il tuo logo (max 2MB).<br>Per migliore risoluzione di stampa usa immagine grande,<br>com\'e scalato automaticamente.',
       drop_logo: 'Rilascia il tuo logo qui',
       remove_logo: 'Rimuovere logo',
+      image_format_alert: 'Si prega di caricare file di immagine. I formati supportati sono .png, .jpg ang .gif',
+      image_too_big_alert: 'File troppo grande, la dimensione massima è di 2MB',
       currency_left: 'Mostra la valuta alla sinistra',
       currency_right: 'Mostra la valuta alla destra',
       company_name_tooltip: 'Inserisci il nome della tua azienda',
@@ -708,6 +728,9 @@
       print_info: 'Cette commande est aussi utilisée pour sauvegarder<br/>la facture sous forme PDF. Consultez FAQ pour plus d\'infos.',
       highlight: 'Marque',
       highlight_info: 'Mettre en relief les champs modifiables',
+      open_data: 'Ouvrir',
+      open_data_info: 'Ouvrez les données déjà enregistrées.<br>Le fichier doit être chargé à partir<br>du même emplacement que template.html',
+      text_format_alert: 'S\'il vous plaît télécharger le fichier texte. Format pris en charge est .txt',
       save_state: 'Enregistrer L\'état',
       save_online: 'Enregistrer en Ligne',
       save_info: 'Enregistrer les données actuelles de la facture telles que<br/>adresse de l\'entreprise, logo, etc., pour un futur réemploi',
@@ -734,6 +757,8 @@
       logo_upload_tooltip: 'Laisser tomber l\'image ou cliquer pour télécharger votre logo (max 2MB).<br>Pour une meilleure résolution d\'impression utiliser un image plus large,<br>comme c\'est automatiquement réduit.',
       drop_logo: 'Laisser tomber votre logo ici',
       remove_logo: 'Supprimer logo',
+      image_format_alert: 'S\'il vous plaît télécharger le fichier d\'image. Les formats supportés sont .png, .jpg ang .gif',
+      image_too_big_alert: 'Fichier trop grand, la taille maximale est de 2MB',
       currency_left: 'Montrer la monnaie à gauche',
       currency_right: 'Montrer la monnaie à droite',
       company_name_tooltip: 'Entrer le nom de votre entreprise',
@@ -822,6 +847,7 @@
                   '<ib-span class="ib_invoice_commands">' +
                     '<ib-span id="ib-print-btn" class="ib_default_button" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].print_info + '"><i class="fa fa-print"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].print + '</span></ib-span>' +
                     '<ib-span class="ib_default_button ib_highlight_editable" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].highlight_info + '"><i class="fa fa-edit"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].highlight + '</span></ib-span>' +
+                    '<ib-span class="ib_default_button ib_open_data" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].open_data_info + '"><i class="fa fa-fw"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].open_data + '</span><input type="file" accept=".txt,text/plain" class="ib_load_saved_data"></ib-span>' +
                     '<ib-span id="ib-save-data-btn" class="ib_default_button" data-toggle="modal" data-target="#ib_saveCurrentStateModal" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].save_info + '"><i class="fa fa-bolt"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].save_state + '</span></ib-span>' +
                     '<iframe id="ib_download_data_frame" class="ib_force_hide"></iframe>' +
                     '<ib-span class="ib_default_button ib_save_online" data-tooltip="tooltip" data-placement="bottom" title="' + ib_languages[ib_lang].online_info + '"><i class="fa fa-cloud-upload"></i><span class="ib_hide_xsmall"> ' + ib_languages[ib_lang].save_online + '</span></ib-span>' +
@@ -851,6 +877,30 @@
       ib_highlighted = !ib_highlighted;
 
       ib_highlightEditable();
+    });
+
+    $('input.ib_load_saved_data').change(function(e){
+      var file = $(this).prop('files')[0];
+      if(file) {
+
+        if(file.type != 'text/plain')
+          alert(ib_languages[ib_lang].text_format_alert);
+        else {
+          var loc = window.location.href;
+
+          if(loc.indexOf('data=') > -1)
+            loc = loc.replace(/(data=)[^\&]+/, '$1' + file.name);
+          else if(loc.indexOf('?') > -1)
+            loc += '&data=' + file.name;
+          else
+            loc += '?data=' + file.name;
+
+          if(!file.name) {
+            loc = window.location.origin + window.location.pathname;
+          }
+          window.location = loc;
+        }
+      }
     });
 
     // Select the appropriate language
@@ -1132,6 +1182,8 @@
 
       // Set the default invoice template interface, fallback to English
       ib_lang = ib_invoice_data.lang || ib_lang_original || 'en';
+      if(ib_open_data)
+        ib_lang = ib_lang_original || 'en';
 
       var js = document.createElement('script');
       js.onload = function() {
@@ -1422,7 +1474,7 @@
 
       logo_img
         .hide()
-        .before($('<ib-span class="ib_drop_zone" data-tooltip="tooltip" data-placement="top" title="' + ib_languages[ib_lang].logo_upload_tooltip + '"><ib-span>' + ib_languages[ib_lang].drop_logo + '<br /><ib-span>(' + ib_logo_width + ' x ' + ib_logo_height + 'px)</ib-span><input type="file" accept="image/*" /></ib-span></ib-span>').width(ib_logo_width).height(ib_logo_height));
+        .before($('<ib-span class="ib_drop_zone" data-tooltip="tooltip" data-placement="top" title="' + ib_languages[ib_lang].logo_upload_tooltip + '"><ib-span>' + ib_languages[ib_lang].drop_logo + '<br /><ib-span>(' + ib_logo_width + ' x ' + ib_logo_height + 'px)</ib-span><input type="file" accept="image/*" class="ib_drop_logo" /></ib-span></ib-span>').width(ib_logo_width).height(ib_logo_height));
       
       // Setup the D&D listeners
       $('.ib_drop_zone')
@@ -1431,7 +1483,7 @@
         .bind('dragover', handleDragOver)
         .bind('drop', handleFileSelect);
         
-      $('input:file').change(function(e){
+      $('input.ib_drop_logo').change(function(e){
         e.originalEvent.dataTransfer = { files: $(this).prop('files') };
         handleFileSelect(e);
       });
@@ -1466,12 +1518,12 @@
 
       if(!file.type.match(/image.*/))
       {
-        alert('Please upload image file. Supported formats are .png, .jpg ang .gif');
+        alert(ib_languages[ib_lang].image_format_alert);
         return;
       }
       if(file.size > 2097152)
       {
-        alert('File too big, maximum size is 2MB');
+        alert(ib_languages[ib_lang].image_too_big_alert);
         return;
       }
       
@@ -1551,7 +1603,7 @@
       logo_img.attr('src', BLANK_GIF).hide();
       $('.ib_drop_zone').show();
       $('.ib_remove_logo_overlay').hide();
-      $('input:file').val(''); // Reset the file field
+      $('input.ib_drop_logo').val(''); // Reset the file field
     };
 
     var handleDragOver = function(e) {
@@ -2932,8 +2984,9 @@
   var ib_query = ib_getScriptQueryVariables();
 
   // Set the template language
-  var ib_lang = ib_getQueryVariable('lang') || '';
+  var ib_lang          = ib_getQueryVariable('lang') || '';
   var ib_lang_original = ib_lang;
+  var ib_open_data     = ib_getQueryVariable('data');
 
   var js = document.createElement('script');
   js.onerror = function() {
@@ -2947,6 +3000,12 @@
     js.src = PATH + 'lang/' + ib_lang + '.txt';
   }
   document.body.appendChild(js);
+
+  if(ib_open_data && ib_open_data.split('.').pop().toLowerCase() == 'txt') {
+    js = document.createElement('script');
+    js.src = PATH + ib_open_data;
+    document.body.appendChild(js);
+  }
 
   js = document.createElement('script');
   js.src = PATH + 'docs/raw-data/raw-data-' + (ib_lang || 'en') + '.js';
