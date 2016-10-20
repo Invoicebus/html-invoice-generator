@@ -1103,7 +1103,7 @@
       // Settings
       'date_format'             : 'mm/dd/yyyy', // One of 'dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy', 'yyyy mm dd', 'yyyy-mm-dd', 'yyyy.mm.dd'
       'currency_position'       : 'left', // One of 'left' or 'right'
-      'number_format'           : '0,000.00', // One of '0,000.00', '0000.00', '0.000,00', or '0000,00'
+      'number_format'           : '0,000.00', // One of '0,000.00', '0 000.00', '0000.00', '0.000,00', '0 000,00', '0000,00'
       'default_columns'         : ['item_row_number', 'item_description', 'item_quantity', 'item_price', 'item_discount', 'item_tax', 'item_line_total'],
       'default_quantity'        : '1',
       'default_price'           : '0',
@@ -1172,8 +1172,12 @@
       ib_currency_position = ib_invoice_data.currency_position;
       ib_number_format     = ib_invoice_data.number_format;
 
-      if(ib_number_format)
-        ib_decimal_separator = ib_number_format[ib_number_format.length - 3];
+      if(ib_number_format) {
+        ib_decimal_separator   = ib_number_format[ib_number_format.length - 3];
+        ib_thousands_separator = ib_number_format[1];
+        if(!isNaN(parseInt(ib_thousands_separator)))
+          ib_thousands_separator = '';
+      }
 
       ib_currency_symbol = $(ib_currencies).map(function(idx, val) {
                                                   if(val.code == ib_data['{currency}'].default_text)
@@ -1744,45 +1748,22 @@
         minus_sign = '-'; // set the minus sign
       }
 
-      if(ib_decimal_separator == '.') {
-        if(ib_number_format == '0,000.00') {
+      var thousands_separator = ib_thousands_separator;
+      if(ib_thousands_separator == ' ')
+        thousands_separator = '&#8239;';
+
+      number = number.replace(/\./g, ib_decimal_separator);
+      counter = 0;
+      for(i = number.lastIndexOf(ib_decimal_separator) - 1; i >= 0; i--)
+      {
+        if(counter < 2)
+        {
+          counter++;
+          continue;
+        }
+        else {
           counter = 0;
-          for(i = number.lastIndexOf('.') - 1; i >= 0; i--)
-          {
-            if(counter < 2)
-            {
-              counter++;
-              continue;
-            }
-            else {
-              counter = 0;
-              number = number.insertString(',', i);
-            }
-          }
-        }
-        else if(ib_number_format == '0000.00') {
-          // don't do anything, the number is already in this format
-        }
-      }
-      else if(ib_decimal_separator == ',') {
-        if(ib_number_format == '0.000,00') {
-          number = number.replace(/\./g, ',');
-          counter = 0;
-          for(i = number.lastIndexOf(',') - 1; i >= 0; i--)
-          {
-            if(counter < 2)
-            {
-              counter++;
-              continue;
-            }
-            else {
-              counter = 0;
-              number = number.insertString('.', i);
-            }
-          }
-        }
-        else if(ib_number_format == '0000,00') {
-          number = number.replace(/\./g, ',');
+          number = number.insertString(thousands_separator, i);
         }
       }
 
@@ -1888,7 +1869,7 @@
       }
 
       // item_line_total.text(line_sum !== 0 ? line_sum.toFixed(2).getFormatedNumber() : '');
-      item_line_total.text(line_sum.toFixed(2).getFormatedNumber());
+      item_line_total.html(line_sum.toFixed(2).getFormatedNumber());
     }
 
     var tax_rows = [], tax_row, tax_value;
@@ -1921,7 +1902,7 @@
 
         if(colon == -1 || colon != tax_name_text.length - 1) colon = tax_name_text.length;
 
-        tax_name.text(tax_name_text.substring(0, colon) + ' ' + (j + 1) + tax_name_text.substring(colon, tax_name_text.length));
+        tax_name.html(tax_name_text.substring(0, colon) + ' ' + (j + 1) + tax_name_text.substring(colon, tax_name_text.length));
 
         tax_row.find('[data-ibcl-id="tax_value"]').attr('data-ib-value', Object.keys(taxes[j])[0].getFormatedNumber());
         $('[data-iterate="tax"]:hidden').before(tax_row);
@@ -1941,7 +1922,7 @@
     if(isNaN(amount_paid))
     {
       amount_paid = 0;
-      $('[data-ibcl-id="amount_paid"]').text(amount_paid.toFixed(2).getFormatedNumber());
+      $('[data-ibcl-id="amount_paid"]').html(amount_paid.toFixed(2).getFormatedNumber());
     }
     if(isNaN(amount_due)) amount_due = 0;
     
@@ -1951,9 +1932,9 @@
     amount_total = ib_currency_position == 'left' ? ib_currency_symbol + amount_total.toFixed(2).getFormatedNumber() : amount_total.toFixed(2).getFormatedNumber() + ib_currency_symbol;
     amount_due   = ib_currency_position == 'left' ? ib_currency_symbol + amount_due.toFixed(2).getFormatedNumber() : amount_due.toFixed(2).getFormatedNumber() + ib_currency_symbol;
     
-    $('[data-ibcl-id="amount_subtotal"]').text(sum_total);
-    $('[data-ibcl-id="amount_total"]').text(amount_total);
-    $('[data-ibcl-id="amount_due"]').text(amount_due);
+    $('[data-ibcl-id="amount_subtotal"]').html(sum_total);
+    $('[data-ibcl-id="amount_total"]').html(amount_total);
+    $('[data-ibcl-id="amount_due"]').html(amount_due);
 
     ib_highlightEditable();
   };
@@ -2321,11 +2302,12 @@
   /**
    * Currency and number format functions
    */
-  var ib_currencies        = [],
-      ib_currency_symbol   = '$',
-      ib_currency_position = 'left',
-      ib_number_format     = '0,000.00',
-      ib_decimal_separator = '.';
+  var ib_currencies          = [],
+      ib_currency_symbol     = '$',
+      ib_currency_position   = 'left',
+      ib_number_format       = '0,000.00',
+      ib_decimal_separator   = '.',
+      ib_thousands_separator = ',';
 
   var ib_raw_currencies = 
     // name,symbol,code,priority
@@ -2500,6 +2482,7 @@
     var number_settings = 
       $('<ib-span class="ib_number_settings">' +
           '<table>' +
+
             '<tr>' +
               '<td>' +
                 '<input type="radio" id="ib_currency_left" name="ib_currency" value="left" checked />' +
@@ -2517,6 +2500,14 @@
                 '<label for="ib_currency_right" title="' + ib_languages[ib_lang].currency_right + '">100$</label>' +
               '</td>' +
               '<td>' +
+                '<input type="radio" id="ib_number_format_3" name="ib_number_format" value="0 000.00" />' +
+                '<label for="ib_number_format_3">1&#8239;234.56</label>' +
+              '</td>' +
+            '</tr>' +
+
+            '<tr>' +
+              '<td></td>' +
+              '<td>' +
                 '<input type="radio" id="ib_number_format_2" name="ib_number_format" value="0000.00" />' +
                 '<label for="ib_number_format_2">1234.56</label>' +
               '</td>' +
@@ -2525,18 +2516,27 @@
             '<tr>' +
               '<td></td>' +
               '<td>' +
-                '<input type="radio" id="ib_number_format_3" name="ib_number_format" value="0.000,00" />' +
-                '<label for="ib_number_format_3">1.234,56</label>' +
+                '<input type="radio" id="ib_number_format_4" name="ib_number_format" value="0.000,00" />' +
+                '<label for="ib_number_format_4">1.234,56</label>' +
               '</td>' +
             '</tr>' +
 
             '<tr>' +
               '<td></td>' +
               '<td>' +
-                '<input type="radio" id="ib_number_format_4" name="ib_number_format" value="0000,00" />' +
-                '<label for="ib_number_format_4">1234,56</label>' +
+                '<input type="radio" id="ib_number_format_6" name="ib_number_format" value="0 000,00" />' +
+                '<label for="ib_number_format_6">1&#8239;234,56</label>' +
               '</td>' +
             '</tr>' +
+
+            '<tr>' +
+              '<td></td>' +
+              '<td>' +
+                '<input type="radio" id="ib_number_format_5" name="ib_number_format" value="0000,00" />' +
+                '<label for="ib_number_format_5">1234,56</label>' +
+              '</td>' +
+            '</tr>' +
+
           '</table>' +
         '</ib-span>')
         .hover(
@@ -2626,8 +2626,12 @@
 
     $('[name="ib_number_format"]').change(function(e) {
       ib_number_format = $(this).val();
-      if(ib_number_format)
-        ib_decimal_separator = ib_number_format[ib_number_format.length - 3];
+      if(ib_number_format) {
+        ib_decimal_separator   = ib_number_format[ib_number_format.length - 3];
+        ib_thousands_separator = ib_number_format[1];
+        if(!isNaN(parseInt(ib_thousands_separator)))
+          ib_thousands_separator = '';
+      }
 
       var rows = $('[data-iterate="item"]');
       for(var i = 0; i < rows.length; i++)
@@ -2802,7 +2806,7 @@
     delete data.currency;  // Delete the old currency property
 
     data.currency_position = $('.ib_number_settings input[name="ib_currency"]:checked').val();
-    data.number_format     = $('.ib_number_settings input[name="ib_number_format"]:checked').val();
+    data.number_format     = $('.ib_number_settings input[name="ib_number_format"]:checked').val().replace(/\s+/g, ''); // clear empty spaces as Invoicebus don't support this number format
 
     // Properly structure custom document and client fields
     for(var key in data) {

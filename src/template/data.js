@@ -69,7 +69,7 @@ var ib_invoice_data = {
   // Settings
   "date_format"             : "mm/dd/yyyy", // One of 'dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy', 'yyyy mm dd', 'yyyy-mm-dd', 'yyyy.mm.dd'
   "currency_position"       : "left", // One of 'left' or 'right'
-  "number_format"           : "0,000.00", // One of '0,000.00', '0000.00', '0.000,00', or '0000,00'
+  "number_format"           : "0,000.00", // One of '0,000.00', '0 000.00', '0000.00', '0.000,00', '0 000,00', '0000,00'
   "default_columns"         : ["item_row_number", "item_description", "item_quantity", "item_price", "item_discount", "item_tax", "item_line_total"],
   "default_quantity"        : "1",
   "default_price"           : "0",
