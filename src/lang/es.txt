@@ -183,7 +183,10 @@ dd/mm/yyyy
 [currency_position]
 right
 
-# Uno de '0,000.00', '0000.00', '0.000,00', or '0000,00'
+[show_currency]
+true
+
+# Uno de '0,000.00', '0 000.00', '0000.00', '0.000,00', '0 000,00', '0000,00'
 [number_format]
 0.000,00
 

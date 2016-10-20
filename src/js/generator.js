@@ -1103,6 +1103,7 @@
       // Settings
       'date_format'             : 'mm/dd/yyyy', // One of 'dd/mm/yyyy', 'dd-mm-yyyy', 'dd.mm.yyyy', 'mm/dd/yyyy', 'mm-dd-yyyy', 'mm.dd.yyyy', 'yyyy mm dd', 'yyyy-mm-dd', 'yyyy.mm.dd'
       'currency_position'       : 'left', // One of 'left' or 'right'
+      'show_currency'           : true,
       'number_format'           : '0,000.00', // One of '0,000.00', '0 000.00', '0000.00', '0.000,00', '0 000,00', '0000,00'
       'default_columns'         : ['item_row_number', 'item_description', 'item_quantity', 'item_price', 'item_discount', 'item_tax', 'item_line_total'],
       'default_quantity'        : '1',
@@ -1170,6 +1171,7 @@
       }
 
       ib_currency_position = ib_invoice_data.currency_position;
+      ib_show_currency     = ib_invoice_data.show_currency;
       ib_number_format     = ib_invoice_data.number_format;
 
       if(ib_number_format) {
@@ -1822,6 +1824,18 @@
       if(isNaN(parseFloat(row.find('[data-ibcl-id="item_tax"]:visible').text())))
         item_tax = null;
 
+      // Handle the price and line total currency sign with pseudo element
+      if(!isNaN(row.find('[data-ibcl-id="item_price"]').text().getNumber())) {
+        row.find('[data-ibcl-id="item_price"]')
+          .removeClass('add_currency_left add_currency_right')
+          .attr('data-currency', ib_currency_symbol).data('currency', ib_currency_symbol);
+
+        if(JSON.parse(ib_show_currency))
+          row.find('[data-ibcl-id="item_price"]').addClass(ib_currency_position == 'left' ? 'add_currency_left' : 'add_currency_right');
+      }
+      else
+        row.find('[data-ibcl-id="item_price"]').removeClass('add_currency_left add_currency_right').find('br, p, div').remove();
+
       // Handle discount percentage (%) sign with pseudo element
       if(!isNaN(row.find('[data-ibcl-id="item_discount"]').text().getNumber()))
         row.find('[data-ibcl-id="item_discount"]').addClass('ib_item_percentage').find('br, p, div').remove();
@@ -1869,7 +1883,14 @@
       }
 
       // item_line_total.text(line_sum !== 0 ? line_sum.toFixed(2).getFormatedNumber() : '');
-      item_line_total.html(line_sum.toFixed(2).getFormatedNumber());
+
+      item_line_total
+        .html(line_sum.toFixed(2).getFormatedNumber())
+        .removeClass('add_currency_left add_currency_right')
+        .attr('data-currency', ib_currency_symbol).data('currency', ib_currency_symbol);
+
+      if(JSON.parse(ib_show_currency))
+        item_line_total.addClass(ib_currency_position == 'left' ? 'add_currency_left' : 'add_currency_right');
     }
 
     var tax_rows = [], tax_row, tax_value;
@@ -1913,7 +1934,11 @@
     for(j = 0; j < taxes.length; j++)
     {
       tax_value = Object.keys(taxes[j])[0];
-      tax_row = ib_currency_position == 'left' ? ib_currency_symbol + taxes[j][tax_value].toFixed(2).getFormatedNumber() : taxes[j][tax_value].toFixed(2).getFormatedNumber() + ib_currency_symbol;
+      if(JSON.parse(ib_show_currency))
+        tax_row = ib_currency_position == 'left' ? ib_currency_symbol + taxes[j][tax_value].toFixed(2).getFormatedNumber() : taxes[j][tax_value].toFixed(2).getFormatedNumber() + ib_currency_symbol;
+      else
+        tax_row = taxes[j][tax_value].toFixed(2).getFormatedNumber();
+
       $('[data-iterate="tax"]').find('[data-ib-value="' + tax_value.getFormatedNumber() + '"]').html(tax_row);
     }
 
@@ -1928,9 +1953,16 @@
     
     amount_due = amount_total - amount_paid;
     
-    sum_total    = ib_currency_position == 'left' ? ib_currency_symbol + sum_total.toFixed(2).getFormatedNumber() : sum_total.toFixed(2).getFormatedNumber() + ib_currency_symbol;
-    amount_total = ib_currency_position == 'left' ? ib_currency_symbol + amount_total.toFixed(2).getFormatedNumber() : amount_total.toFixed(2).getFormatedNumber() + ib_currency_symbol;
-    amount_due   = ib_currency_position == 'left' ? ib_currency_symbol + amount_due.toFixed(2).getFormatedNumber() : amount_due.toFixed(2).getFormatedNumber() + ib_currency_symbol;
+    if(JSON.parse(ib_show_currency)) {
+      sum_total    = ib_currency_position == 'left' ? ib_currency_symbol + sum_total.toFixed(2).getFormatedNumber() : sum_total.toFixed(2).getFormatedNumber() + ib_currency_symbol;
+      amount_total = ib_currency_position == 'left' ? ib_currency_symbol + amount_total.toFixed(2).getFormatedNumber() : amount_total.toFixed(2).getFormatedNumber() + ib_currency_symbol;
+      amount_due   = ib_currency_position == 'left' ? ib_currency_symbol + amount_due.toFixed(2).getFormatedNumber() : amount_due.toFixed(2).getFormatedNumber() + ib_currency_symbol;
+    }
+    else {
+      sum_total    = sum_total.toFixed(2).getFormatedNumber();
+      amount_total = amount_total.toFixed(2).getFormatedNumber();
+      amount_due   = amount_due.toFixed(2).getFormatedNumber();
+    }
     
     $('[data-ibcl-id="amount_subtotal"]').html(sum_total);
     $('[data-ibcl-id="amount_total"]').html(amount_total);
@@ -2305,6 +2337,7 @@
   var ib_currencies          = [],
       ib_currency_symbol     = '$',
       ib_currency_position   = 'left',
+      ib_show_currency       = true,
       ib_number_format       = '0,000.00',
       ib_decimal_separator   = '.',
       ib_thousands_separator = ',';
@@ -2537,6 +2570,13 @@
               '</td>' +
             '</tr>' +
 
+            '<tr>' +
+              '<td colspan="2" class="ib_show_currency">' +
+                '<input type="checkbox" id="ib_show_currency" name="ib_show_currency" />' +
+                '<label for="ib_show_currency" title="Checking this will show the currency symbol on all amounts on the invoice">Show currency symbol</label>' +
+              '</td>' +
+            '</tr>' +
+
           '</table>' +
         '</ib-span>')
         .hover(
@@ -2617,10 +2657,18 @@
 
     $('[name="ib_currency"][value="' + ib_currency_position + '"]').attr('checked','checked');
 
+    if(JSON.parse(ib_show_currency))
+      $('[name="ib_show_currency"]').attr('checked','checked');
+
     $('[name="ib_number_format"][value="' + ib_number_format + '"]').attr('checked','checked');
 
     $('[name="ib_currency"]').change(function(e) {
       ib_currency_position = $(this).val();
+      ib_calculateTotals();
+    });
+
+    $('[name="ib_show_currency"]').change(function(e) {
+      ib_show_currency = $(this).is(':checked');
       ib_calculateTotals();
     });
 
@@ -2708,7 +2756,9 @@
       'currency_code'          : '',
       'currency_symbol'        : '',
       'currency_position'      : '',
+      'show_currency'          : 'true',
       'number_format'          : '',
+      'lang'                   : 'en',
       'document_custom'        : [],
       'client_custom'          : []
     };
@@ -2806,7 +2856,8 @@
     delete data.currency;  // Delete the old currency property
 
     data.currency_position = $('.ib_number_settings input[name="ib_currency"]:checked').val();
-    data.number_format     = $('.ib_number_settings input[name="ib_number_format"]:checked').val().replace(/\s+/g, ''); // clear empty spaces as Invoicebus don't support this number format
+    data.show_currency     = $('.ib_number_settings input[name="ib_show_currency"]').is(':checked');
+    data.number_format     = $('.ib_number_settings input[name="ib_number_format"]:checked').val();
 
     // Properly structure custom document and client fields
     for(var key in data) {

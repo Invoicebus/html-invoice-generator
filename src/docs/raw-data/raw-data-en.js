@@ -184,6 +184,9 @@ var ib_invoice_data = function(){\/*
 [currency_position]
 |currency_position|
 
+[show_currency]
+|show_currency|
+
 # One of '0,000.00', '0 000.00', '0000.00', '0.000,00', '0 000,00', '0000,00'
 [number_format]
 |number_format|
