@@ -1170,9 +1170,9 @@
           ib_data[key] = ib_invoice_data[key];
       }
 
-      ib_currency_position = ib_invoice_data.currency_position;
-      ib_show_currency     = ib_invoice_data.show_currency;
-      ib_number_format     = ib_invoice_data.number_format;
+      ib_currency_position = ib_invoice_data.currency_position || 'left';
+      ib_show_currency     = ib_invoice_data.show_currency     || true;
+      ib_number_format     = ib_invoice_data.number_format     || '0,000.00';
 
       if(ib_number_format) {
         ib_decimal_separator   = ib_number_format[ib_number_format.length - 3];
