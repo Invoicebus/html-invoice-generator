@@ -827,14 +827,17 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   content: "%";
 }
 
+.ibcl_item_description,
+.ibcl_item_quantity,
 .ibcl_item_price,
+.ibcl_item_discount,
+.ibcl_item_tax,
 .ibcl_item_line_total {
-  min-width: 5px !important;
 
   &:empty {
-    display: block !important;
+    display: inline-block !important;
     min-width: 20px !important;
-    min-height: 16px !important;
+    min-height: 18px !important;
   }
 }
 
