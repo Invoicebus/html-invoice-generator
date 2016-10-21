@@ -1947,7 +1947,13 @@
     if(isNaN(amount_paid))
     {
       amount_paid = 0;
-      $('[data-ibcl-id="amount_paid"]').html(amount_paid.toFixed(2).getFormatedNumber());
+      $('[data-ibcl-id="amount_paid"]')
+        .html(amount_paid.toFixed(2).getFormatedNumber())
+        .removeClass('add_currency_left add_currency_right')
+        .attr('data-currency', ib_currency_symbol).data('currency', ib_currency_symbol);
+
+      if(JSON.parse(ib_show_currency))
+        $('[data-ibcl-id="amount_paid"]').addClass(ib_currency_position == 'left' ? 'add_currency_left' : 'add_currency_right');
     }
     if(isNaN(amount_due)) amount_due = 0;
     
@@ -2036,103 +2042,108 @@
   };
 
   var ib_setRowsEvents = function() {
-    var rows = $('[data-iterate="item"]');
-
     // private
-    function ib_fieldKeydown(e) {
-      var self = this;
-
-      if (e.ctrlKey)
-        return true;
+    function ib_fieldKeypress(e) {
+      var pos, key = String.fromCharCode(e.which);
 
       // allow only numbers and navigation keys
-      if ((e.which >= 35 && e.which <= 40) || 
-          ((e.which >= 48 && e.which <= 57) && /[0-9.,]/.test(e.key)) || 
-          (e.which >= 96 && e.which <= 105) || 
-          e.which == 8 || e.which == 9 || 
-          e.which == 46 || e.which == 190 || e.which == 110 || e.which == 188 ||
-          e.which == 116) {
-          // Don't do anything
+      if (e.which === 0 || e.which === 8 || /[0-9.,\-]/.test(key)) {
+        // Don't do anything
 
         switch($(this).data('ibcl-id'))
         {
-          case 'amount_paid':
-            setTimeout(function() {
-              if(isNaN(self.textContent.getNumber()))
-                self.textContent = '';
-
-              if(!isNaN(self.textContent.getNumber()) && self.textContent.indexOf('-') > 0)
-                  self.textContent = '-' + self.textContent.getNumber().toFixed(2);
-            }, 0);
-            break;
-
           case 'net_term':
-            $('[data-ibcl-id="net_term"], [data-ibcl-id="due_date"]').removeClass('ib_stop_animate').addClass('ib_highlight_bg');
-            setTimeout(function () { $('[data-ibcl-id="net_term"], [data-ibcl-id="due_date"]').removeClass('ib_highlight_bg'); }, 10);
-            break;
-        }
 
-      } else {
-        switch($(this).data('ibcl-id'))
-        {
+            if((key == '.' || key == ',' || key == '-') || ($(this).text().length >= 3 && e.which >= 48 /* 0 */ && e.which <= 57 /* 9 */ && window.getSelection().isCollapsed))
+              e.preventDefault();
+            else {
+              $('[data-ibcl-id="net_term"], [data-ibcl-id="due_date"]').removeClass('ib_stop_animate').addClass('ib_highlight_bg');
+              setTimeout(function () { $('[data-ibcl-id="net_term"], [data-ibcl-id="due_date"]').removeClass('ib_highlight_bg'); }, 10);
+            }
+            break;
+
           case 'item_quantity':
           case 'item_price':
           case 'item_discount':
           case 'amount_paid':
+
             // Allow minus (-) sign
-            if((e.which == 189 || e.which == 109 || e.key == '-') && $(this).text().indexOf('-') == -1)
+            if(key == '-')
             {
-              var pos = window.getSelection().extentOffset + 1;
+              if($(this).text().indexOf('-') == -1) {
 
-              this.textContent = '-' + this.textContent;
+                pos = window.getSelection().extentOffset + 1;
 
-              try {
-                window.getSelection().collapse(self.firstChild, pos);
-              } catch(err) {}
+                $(this).text('-' + $(this).text().replace(/\-/g, ''));
+
+                try {
+                  window.getSelection().collapse(this.firstChild, pos);
+                }
+                catch(err) { }
+              }
+
+              e.preventDefault();
             }
             break;
         }
 
-        e.preventDefault();
+        // if a decimal separator has been added, disable the '.' or ',' keys
+        if(ib_decimal_separator == '.' && $(this).text().indexOf('.') != -1 && key == '.')
+          e.preventDefault(); 
+
+        if(ib_decimal_separator == ',' && $(this).text().indexOf(',') != -1 && key == ',')
+          e.preventDefault();
+
+        // if decimal separator is '.' than preven the ',' from being typed
+        if(ib_decimal_separator == '.' && key == ',')
+          e.preventDefault();
+
+        // if decimal separator is ',' than preven the '.' from being typed
+        if(ib_decimal_separator == ',' && key == '.')
+          e.preventDefault();
       }
-
-      // if a decimal separator has been added, disable the '.' or ',' keys
-      if(ib_decimal_separator == '.' && $(this).text().indexOf('.') != -1 && (e.which == 190 || e.which == 110))
-        e.preventDefault(); 
-
-      if(ib_decimal_separator == ',' && $(this).text().indexOf(',') != -1 && e.which == 188)
+      else
         e.preventDefault();
-
-      // if decimal separator is '.' than preven the ',' from being typed
-      if(ib_decimal_separator == '.' && e.which == 188)
-        e.preventDefault();
-
-      // if decimal separator is ',' than preven the '.' from being typed
-      if(ib_decimal_separator == ',' && (e.which == 190 || e.which == 110))
-        e.preventDefault();
-        
-      if($(this).data('ibcl-id') == 'net_term' && ((e.which == 188 || e.which == 190 || e.which == 110) || ($(this).text().length >= 3 && e.which >= 48 && e.which <= 57 && window.getSelection().isCollapsed)))
-        e.preventDefault();
-
-      setTimeout(ib_calculateTotals, 0);
-
-      if($(this).data('ibcl-id') == 'net_term')
-        setTimeout(ib_calculateDates, 0);
     }
     
-    for(var i = 0; i < rows.length; i++)
-    {
-      var row = $(rows[i]);
-      
-      var item_quantity = row.find('');
-      var item_price = row.find('[data-ibcl-id="item_price"]');
-      var item_discount = row.find('');
-      var item_tax = row.find('');
-      var item_line_total = row.find('');
-      
-      $('[data-ibcl-id="net_term"], [data-ibcl-id="item_quantity"], [data-ibcl-id="item_price"], [data-ibcl-id="item_discount"], [data-ibcl-id="item_tax"], [data-ibcl-id="amount_paid"], [data-ibcl-id="amount_due"]')
-        .keydown(ib_fieldKeydown);
-    }
+    $('[data-ibcl-id="net_term"], [data-ibcl-id="item_quantity"], [data-ibcl-id="item_price"], [data-ibcl-id="item_discount"], [data-ibcl-id="item_tax"], [data-ibcl-id="amount_paid"], [data-ibcl-id="amount_due"]')
+      .keypress(ib_fieldKeypress)
+      .on('keyup keydown', function() {
+        
+        switch($(this).data('ibcl-id'))
+        {
+          case 'net_term':
+
+            setTimeout(ib_calculateDates, 0);
+            break;
+
+          case 'item_quantity':
+          case 'item_price':
+          case 'item_discount':
+
+            break;
+
+          case 'amount_paid':
+
+            if($(this).text() != $(this).text().getNumber().toFixed(2)) {
+
+              pos = window.getSelection().extentOffset + 1;
+
+              $(this).text($(this).text().getNumber().toFixed(2));
+
+              try {
+                window.getSelection().collapse(this.firstChild, pos);
+              }
+              catch(err) { }
+            }
+            break;
+        }
+
+        if($(this).text().trim() == '-')
+          $(this).text('');
+
+        setTimeout(ib_calculateTotals, 0);
+      });
   };
 
   var ib_addRow = function(el, e) {

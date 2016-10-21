@@ -832,12 +832,15 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
   min-width: 5px !important;
 
   &:empty {
+    display: block !important;
     min-width: 20px !important;
+    min-height: 16px !important;
   }
 }
 
 .ibcl_item_price,
-.ibcl_item_line_total {
+.ibcl_item_line_total,
+.ibcl_amount_paid {
 
   &.add_currency_left:before {
     content: attr(data-currency);
