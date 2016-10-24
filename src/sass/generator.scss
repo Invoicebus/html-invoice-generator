@@ -835,7 +835,6 @@ ib-span.ibcl_ie_contenteditable[contenteditable="true"] {
 .ibcl_item_line_total {
 
   &:empty {
-    display: inline-block !important;
     min-width: 20px !important;
     min-height: 18px !important;
   }
