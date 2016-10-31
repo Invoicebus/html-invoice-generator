@@ -1948,13 +1948,16 @@
     {
       amount_paid = 0;
       $('[data-ibcl-id="amount_paid"]')
-        .html(amount_paid.toFixed(2).getFormatedNumber())
-        .removeClass('add_currency_left add_currency_right')
-        .attr('data-currency', ib_currency_symbol).data('currency', ib_currency_symbol);
-
-      if(JSON.parse(ib_show_currency))
-        $('[data-ibcl-id="amount_paid"]').addClass(ib_currency_position == 'left' ? 'add_currency_left' : 'add_currency_right');
+        .html(amount_paid.toFixed(2).getFormatedNumber());
     }
+
+    $('[data-ibcl-id="amount_paid"]')
+      .removeClass('add_currency_left add_currency_right')
+      .attr('data-currency', ib_currency_symbol).data('currency', ib_currency_symbol);
+
+    if(JSON.parse(ib_show_currency))
+      $('[data-ibcl-id="amount_paid"]').addClass(ib_currency_position == 'left' ? 'add_currency_left' : 'add_currency_right');
+
     if(isNaN(amount_due)) amount_due = 0;
     
     amount_due = amount_total - amount_paid;
@@ -2125,8 +2128,6 @@
 
           case 'amount_paid':
 
-            console.log($(this).text());
-            console.log($(this).text().getNumber());
             if($(this).text().trim().replace(',', '.') != $(this).text().getNumber().toFixed(2)) {
 
               pos = window.getSelection().extentOffset + 1;
@@ -2704,6 +2705,8 @@
         row.find('[data-ibcl-id="item_discount"]').text(row.find('[data-ibcl-id="item_discount"]').text().replace(/[.,]/g, ib_decimal_separator));
         row.find('[data-ibcl-id="item_tax"]').text(row.find('[data-ibcl-id="item_tax"]').text().replace(/[.,]/g, ib_decimal_separator));
       }
+
+      $('[data-ibcl-id="amount_paid"]').text($('[data-ibcl-id="amount_paid"]').text().replace(/[.,]/g, ib_decimal_separator));
 
       ib_calculateTotals();
     });
