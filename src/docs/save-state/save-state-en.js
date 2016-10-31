@@ -1,7 +1,7 @@
 var ib_save_state_data = function(){/*
 <ib-div class="ib_modal_container">
   <ib-div class="ib_p">
-    This action will save the current state of the template to a local file. The data from this file can be used to pre-populate the template fields in the future. This comes handy when you want to save the invoice details such as company address, logo, client info, currency, notes, etc. so you don't need to re-enter them every time.
+    This action will save the current state of the template to a local <ib-span class="ib_code">.txt</ib-span> file. The data from this file can be used to pre-populate the template fields in the future. This comes handy when you want to save the invoice details such as company address, logo, client info, currency, notes, etc. so you don't need to re-enter them every time.
   </ib-div>
 
   <ib-div class="ib_p">

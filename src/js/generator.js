@@ -2125,11 +2125,13 @@
 
           case 'amount_paid':
 
-            if($(this).text() != $(this).text().getNumber().toFixed(2)) {
+            console.log($(this).text());
+            console.log($(this).text().getNumber());
+            if($(this).text().trim().replace(',', '.') != $(this).text().getNumber().toFixed(2)) {
 
               pos = window.getSelection().extentOffset + 1;
 
-              $(this).text($(this).text().getNumber().toFixed(2));
+              $(this).text($(this).text().getNumber().toFixed(2).replace('.', ib_decimal_separator));
 
               try {
                 window.getSelection().collapse(this.firstChild, pos);
@@ -2419,7 +2421,7 @@
     'Hong Kong dollar,$,HKD,255;' +
     'Hungarian forint,Ft,HUF,255;' +
     'Icelandic króna,kr,ISK,255;' +
-    'Indian rupee,₨,INR,255;' +
+    'Indian rupee,₹,INR,255;' +
     'Indonesian rupiah,Rp,IDR,255;' +
     'Iranian rial,﷼,IRR,255;' +
     'Iraqi dinar,ع.د,IQD,255;' +
