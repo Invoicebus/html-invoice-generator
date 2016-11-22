@@ -3074,7 +3074,7 @@
 
   if(ib_open_data && ib_open_data.split('.').pop().toLowerCase() == 'txt') {
     js = document.createElement('script');
-    js.src = PATH + ib_open_data;
+    js.src = ib_open_data;
     document.body.appendChild(js);
   }
 
