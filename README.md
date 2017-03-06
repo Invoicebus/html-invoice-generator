@@ -2,6 +2,10 @@
 
 This Invoice Generator will easily transform your HTML invoice template in fully functional invoice editor. To create your own invoice template and use it with this generator see the [Create your own invoice template](#create-your-own-invoice-template) section.
 
+## Demo
+
+To see the Invoice Generator in action check out working version of a [sample invoice](http://cdn.invoicebus.com/templates/Vip%20(tertia)/template.html).
+
 ## Setup
 
 To make changes to the generator you'll need Node.js with npm so make sure it is installed on your machine. After this install grunt command line tool globally with:
