@@ -47,7 +47,7 @@ Net:
 21
 
 [{due_date_label}]
-Geburtstermin:
+Fälligkeitsdatum:
 
 [{due_date}]
 
@@ -65,7 +65,7 @@ P.O. #
 1/3-147
 
 [{bill_to_label}]
-Gesetzesentwurf für:
+Rechnung für:
 
 [{client_name}]
 Slate Rock and Gravel Company
