@@ -77,7 +77,7 @@
   </ib-div>
 
   <ib-div class="ib_p">
-    Para cambios más pequeños (como el cambio de colores, la fuente o el tamaño de los elementos) sólo hay que modificar el archivo <ib-span class="ib_code">template.css</ib-span>. Si deseas hacer grandes cambios estructurales de layout  (eliminando o traferendo elementi), tendrás que modificar el archivo <ib-span class="ib_code">template.html</ib-span>. Hemos creado <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/how-to-create-invoice-template/', '_blank')">guide</ib-span> con las mejores prácticas de cómo crear tu propia plantilla, así que no dude en utilizarla como un punto de referencia.
+    Para cambios más pequeños (como el cambio de colores, la fuente o el tamaño de los elementos) sólo hay que modificar el archivo <ib-span class="ib_code">template.css</ib-span>. Si deseas hacer grandes cambios estructurales de layout  (eliminando o traferendo elementi), tendrás que modificar el archivo <ib-span class="ib_code">template.html</ib-span>. Hemos creado <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/create-html-invoice-template/', '_blank')">guide</ib-span> con las mejores prácticas de cómo crear tu propia plantilla, así que no dude en utilizarla como un punto de referencia.
   </ib-div>
 
   <ib-div class="ib_p">

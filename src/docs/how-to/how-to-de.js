@@ -77,7 +77,7 @@ var ib_how_to_data = function(){/*
   </ib-div>
 
   <ib-div class="ib_p">
-    Für kleinere änderungen (wie das ändern sie farben, schriftarten oder elementgrößen) müssen sie nur die <ib-span class="ib_code">template.css</ib-span> datei zu ändern. Wenn sie größere strukturelle veränderungen des layouts machen wollen (löschen oder elemente neu anordnen), müssen sie die <ib-span class="ib_code">template.html</ib-span> datei zu ändern. Wir haben einen <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/how-to-create-invoice-template/', '_blank')">führen</ib-span> mit bewährte methoden, wie sie ihre eigene vorlage zu erstellen, so frei zu verwenden es als bezugspunkt zu fühlen.
+    Für kleinere änderungen (wie das ändern sie farben, schriftarten oder elementgrößen) müssen sie nur die <ib-span class="ib_code">template.css</ib-span> datei zu ändern. Wenn sie größere strukturelle veränderungen des layouts machen wollen (löschen oder elemente neu anordnen), müssen sie die <ib-span class="ib_code">template.html</ib-span> datei zu ändern. Wir haben einen <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/create-html-invoice-template/', '_blank')">führen</ib-span> mit bewährte methoden, wie sie ihre eigene vorlage zu erstellen, so frei zu verwenden es als bezugspunkt zu fühlen.
   </ib-div>
 
   <ib-div class="ib_p">

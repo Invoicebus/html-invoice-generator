@@ -35,7 +35,7 @@ The generator script is tested and confirmed that is fully functional in:
 
 ## Create your own invoice template
 
-The major rule we have for this is **never start from scratch** so we encourage you to download the default Invoicebus [template](http://cdn.invoicebus.com/generator/template.zip) and use it as starting point for creating your custom invoice template. Refer to our [official guide](https://invoicebus.com/how-to-create-invoice-template/) on how to further customize your template.
+The major rule we have for this is **never start from scratch** so we encourage you to download the default Invoicebus [template](http://cdn.invoicebus.com/generator/template.zip) and use it as starting point for creating your custom invoice template. Refer to our [official guide](https://invoicebus.com/create-html-invoice-template/) on how to further customize your template.
 
 ## Issues and feedback
 

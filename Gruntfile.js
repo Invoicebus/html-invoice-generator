@@ -19,7 +19,8 @@ module.exports = function(grunt) {
 
     jshint: {
       options: {
-        reporter: require('jshint-stylish') // use jshint-stylish to make our errors look and read good
+        reporter: require('jshint-stylish'), // use jshint-stylish to make our errors look and read good
+        reporterOutput: ''
       },
       src: ['Gruntfile.js', '<%= js_src %>']
     },
@@ -418,7 +419,7 @@ module.exports = function(grunt) {
     },
 
     banner: '/*! <%= pkg.description %> @author: <%= pkg.author.name %> @email: <%= pkg.author.email %> @web: <%= pkg.author.web %> @version: <%= pkg.version %> @updated: <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> @license: <%= pkg.license %> */',
-    tpl_note: '<!--\n  Invoice template by invoicebus.com\n  To customize this template consider following this guide https://invoicebus.com/how-to-create-invoice-template/\n  This template is under The MIT License\n-->',
+    tpl_note: '<!--\n  Invoice template by invoicebus.com\n  To customize this template consider following this guide https://invoicebus.com/create-html-invoice-template/\n  This template is under The MIT License\n-->',
     promo: grunt.file.read('promo.html').replace(/'/g, "\\'").replace(/"/g, "\\\"").replace(/\r\n|\r|\n/g, '[crlf]'),
 
     js_src: ['src/js/<%= build_js %>', 'src/js/table-dnd.js', 'src/js/bootstrap-datepicker.js', 'src/js/bootstrap3-typeahead.js', 'src/js/multiline.js', 'src/js/parse-data.js'],

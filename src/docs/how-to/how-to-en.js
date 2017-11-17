@@ -91,7 +91,7 @@ var ib_how_to_data = function(){/*
   </ib-div>
 
   <ib-div class="ib_p">
-    For smaller modifications (like changing colors, fonts or element sizes) you only need to modify the <ib-span class="ib_code">template.css</ib-span> file. If you want to make bigger structural changes of the layout (deleting or rearranging elements), you'll need to modify the <ib-span class="ib_code">template.html</ib-span> file. We've made a <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/how-to-create-invoice-template/', '_blank')">guide</ib-span> with best practices on how to create your own template, so feel free to use it as a reference point.
+    For smaller modifications (like changing colors, fonts or element sizes) you only need to modify the <ib-span class="ib_code">template.css</ib-span> file. If you want to make bigger structural changes of the layout (deleting or rearranging elements), you'll need to modify the <ib-span class="ib_code">template.html</ib-span> file. We've made a <ib-span class="ib_a" onclick="window.open('https://invoicebus.com/create-html-invoice-template/', '_blank')">guide</ib-span> with best practices on how to create your own template, so feel free to use it as a reference point.
   </ib-div>
 
   <ib-div class="ib_p">

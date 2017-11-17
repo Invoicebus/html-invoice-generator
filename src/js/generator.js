@@ -3056,6 +3056,8 @@
 
   // Set the template language
   var ib_lang          = ib_getQueryVariable('lang') || '';
+  if(!ib_languages[ib_lang]) ib_lang = '';
+  
   var ib_lang_original = ib_lang;
   var ib_open_data     = ib_getQueryVariable('data');
 
