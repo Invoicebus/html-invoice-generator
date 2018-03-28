@@ -932,7 +932,7 @@
     });
 
     $(document.body)
-      .after($('<ib-span class="ib_invoicebus_fineprint">Receive online payments through your invoices at <ib-span onclick="window.open(\'https://invoicebus.com\', \'_blank\')">invoicebus.com</ib-span></ib-span>'));
+      .after($('<ib-span class="ib_invoicebus_fineprint">Receive online payments for your invoices at <a href="https://invoicebus.com">invoicebus.com</a></ib-span>'));
 
     if(!JSON.parse(ib_data.invoicebus_fineprint))
       $('.ib_invoicebus_fineprint').css('visibility', 'hidden');

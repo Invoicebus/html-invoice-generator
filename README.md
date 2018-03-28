@@ -8,12 +8,18 @@ To see the Invoice Generator in action check out working version of a [sample in
 
 ## Setup
 
-To make changes to the generator you'll need Node.js with npm so make sure it is installed on your machine. After this install grunt command line tool globally with:
+Because we use [Sass](http://sass-lang.com/) and [Compass](http://compass-style.org/) for the styles, we'll need to make sure we have [Ruby](https://www.ruby-lang.org/en/) installed on our system. Make sure the `ruby` command is available in your command line terminal.
 
+After the Ruby setup, install Sass with:
+`gem install sass`
+
+And Compass with:
+`gem install compass`
+
+To make changes to the generator you'll need Node.js with npm so make sure it is installed on your machine. After this install grunt command line tool globally with:
 `npm install -g grunt-cli`
 
 And from the project's root install the dependencies with:
-
 `npm install`
 
 ### Development
@@ -43,4 +49,4 @@ If you found bugs please submit them [here](https://github.com/Invoicebus/html-i
 
 ## License
 
-The Invoice Generator is under MIT license. See the [LICENSE](https://github.com/Invoicebus/html-invoice-generator/blob/master/LICENSE).
+The Invoice Generator is under [MIT](https://github.com/Invoicebus/html-invoice-generator/blob/master/LICENSE) license.
