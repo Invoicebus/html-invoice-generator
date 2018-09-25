@@ -3,6 +3,7 @@ node_modules
 
 dist
 rackspace-cloudfiles.json
+package-lock.json
 promo*.html
 
 *.sublime-workspace
